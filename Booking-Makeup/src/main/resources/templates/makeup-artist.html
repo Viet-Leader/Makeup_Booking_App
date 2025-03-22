@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/reset.css"/>
+    <link rel="stylesheet" href="./assets/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <title>Makeup-Artist</title>
+</head>
+<body>
+     <!-- header-->
+     <header th:fragment="layout_header" class="header">
+        <div class="content">
+            <div class="navbar">
+                <!--logo-->
+                <a href="./home.html">
+                <div class="logo-container">
+                    <img src="./image/logo.png" alt="logo" class="logo"/>
+                    <span class="brand-name">Booking-Makeup</span>
+                </div>
+                </a>
+                <!--navigation-->
+                <ul class="nav-menu">
+                    <li><a href="services.html">Dịch vụ</a></li>
+                    <li><a href="./makeup-artist.html">Nghệ sĩ trang điểm</a></li>
+                    <li><a href="/schedule.html">Đặt lịch</a></li>
+                </ul>
+
+                <!--action-->
+                <div class="action">
+                    <!-- Khi chưa đăng nhập -->
+                <div id="auth-buttons">
+                    <a href="./register.html" class="action-link" id="register-btn">Đăng ký</a>
+                    <a href="./login.html" class="btn-login" id="login-btn">Đăng nhập</a>
+                </div>
+
+                    <!-- Khi đã đăng nhập -->
+                <div id="user-info" class="hidden">
+                    <img src="./image/user-avatar.jpg" alt="Avatar" class="avatar">
+                    <span class="username">Xin chào, User</span>
+                    <a href="#!" id="logout-btn">Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </header>
+    <!--header-->
+    <!--Hero-->
+    <div class = " hero">
+        <div class = "container">
+            <div class = "box-0">
+                <div class = "box-1">
+                    <h1>Tỏa sáng cùng dịch vụ trang điểm chuyên nghiệp</h1>
+                </div>
+                <div class = "box-2">
+                    <p>Đặt lịch ngay hôm nay để trải nghiệm các chuyên gia trang điểm hàng đầu</p>
+                </div>
+                <div class = "box-3">
+                    <button class = "hero-btn">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <a href ="!#">Đặt lịch ngay</a>
+                    </button>
+                    <button class = "hero-btn-1">
+                        <a href = "!#">Xem dịch vụ</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--Hero-->
+<!--Content-->
+<div class = "artists" >
+    <div class="grid_row">
+        <div class="grid_row1-3">              
+            <img src="image/mu_dutiec.jpg" alt="makeup dự tiệc">
+            <div class = "wrap">
+                <div class = "avatar">
+                    
+                    <img src="image/HaMY_cvmudutiec.jpg" alt="ảnh đại diện chuên viên trang điểm">
+                
+                </div>
+                <div class = "rate">
+                    <p>Hà My</p>
+                    <div class = "rate_start">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <p>1028 review</p>
+                    </div>
+                </div>
+            </div>  
+            <div class = "wrap_two">
+                <div class ="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Thủ Đức</p>
+               </div>
+                <div class ="price">
+                    <p> 700.000 VND</p>
+                    <button class ="view_info">
+                    <a href="#!">Xem thông tin chi tiết </a>
+                 </button>
+                </div>                    
+            </div>
+        </div>
+        <div class="grid_row1-3">              
+            <img src="image/mu_kiyeu.jpg" alt="makeup kỉ yếu">
+            <div class = "wrap">
+                <div class = "avatar">
+                    <img src="image/KieuDiem_cvmukiyeu.jpg" alt="ảnh đại diện chuên viên trang điểm">
+                </div>
+                <div class = "rate">
+                    <p>Kiều Diễm</p>
+                    <div class="rate_start">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <p>1323 review</p>
+                    </div>
+                </div>
+            </div>  
+            <div class = "wrap_two">
+                <div class ="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Quận 1</p>
+               </div>
+                <div class ="price">
+                    <p> 2.500.000 VND</p>
+                    <button class ="view_info">
+                    <a href="#!">Xem thông tin chi tiết </a>
+                 </button>
+                </div>                    
+            </div>
+        </div>
+        <div class="grid_row1-3">              
+            <img src="image/mu_codau.jpg" alt="makeup cô dâu">
+            <div class = "wrap">
+                <div class = "avatar">
+                    <img src="image/NgocNga_cvmucodau.jpg" alt="ảnh đại diện chuên viên trang điểm">
+                </div>
+                <div class = "rate">
+                    <p>Ngọc Ngà</p>
+                    <div class="rate_start">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <p>1892 review</p>
+                    </div>
+                </div>
+            </div>  
+            <div class = "wrap_two">
+                <div class ="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Quận Bình Thạnh</p>
+               </div>
+                <div class ="price">
+                    <p> 1.500.000 VND</p>
+                    <button class ="view_info">
+                    <a href="#!">Xem thông tin chi tiết </a>
+                 </button>
+                </div>                    
+            </div>
+        </div>
+    </div>           
+</div>
+<!--End Content-->
+<!--Content-->
+<div class = "artists" >
+    <div class="grid_row">
+        <div class="grid_row1-3">              
+            <img src="image/mu_dutiec.jpg" alt="makeup dự tiệc">
+            <div class = "wrap">
+                <div class = "avatar">
+                    
+                    <img src="image/HaMY_cvmudutiec.jpg" alt="ảnh đại diện chuên viên trang điểm">
+                
+                </div>
+                <div class = "rate">
+                    <p>Hà My</p>
+                    <div class = "rate_start">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <p>1028 review</p>
+                    </div>
+                </div>
+            </div>  
+            <div class = "wrap_two">
+                <div class ="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Thủ Đức</p>
+               </div>
+                <div class ="price">
+                    <p> 700.000 VND</p>
+                    <button class ="view_info">
+                    <a href="#!">Xem thông tin chi tiết </a>
+                 </button>
+                </div>                    
+            </div>
+        </div>
+        <div class="grid_row1-3">              
+            <img src="image/mu_kiyeu.jpg" alt="makeup kỉ yếu">
+            <div class = "wrap">
+                <div class = "avatar">
+                    <img src="image/KieuDiem_cvmukiyeu.jpg" alt="ảnh đại diện chuên viên trang điểm">
+                </div>
+                <div class = "rate">
+                    <p>Kiều Diễm</p>
+                    <div class="rate_start">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <p>1323 review</p>
+                    </div>
+                </div>
+            </div>  
+            <div class = "wrap_two">
+                <div class ="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Quận 1</p>
+               </div>
+                <div class ="price">
+                    <p> 2.500.000 VND</p>
+                    <button class ="view_info">
+                    <a href="#!">Xem thông tin chi tiết </a>
+                 </button>
+                </div>                    
+            </div>
+        </div>
+        <div class="grid_row1-3">              
+            <img src="image/mu_codau.jpg" alt="makeup cô dâu">
+            <div class = "wrap">
+                <div class = "avatar">
+                    <img src="image/NgocNga_cvmucodau.jpg" alt="ảnh đại diện chuên viên trang điểm">
+                </div>
+                <div class = "rate">
+                    <p>Ngọc Ngà</p>
+                    <div class="rate_start">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <p>1892 review</p>
+                    </div>
+                </div>
+            </div>  
+            <div class = "wrap_two">
+                <div class ="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Quận Bình Thạnh</p>
+               </div>
+                <div class ="price">
+                    <p> 1.500.000 VND</p>
+                    <button class ="view_info">
+                    <a href="#!">Xem thông tin chi tiết </a>
+                 </button>
+                </div>                    
+            </div>
+        </div>
+    </div>           
+</div>
+<!--End Content-->
+ <!--footer-->
+ <div class="footer">
+    <div class="content">
+        <div class="grid__row">
+            <div class="grid__colum">
+                <div class="colum_2-4">
+                    <h1>Booking-Makeup</h1>
+                    <ul>
+                        <li>Hệ thống đặt lịch trang điểm chuyên nghiệp, giúp bạn luôn tỏa sáng trong mọi dịp đặc biệt.</li>
+                        <li><i class="fa-brands fa-facebook"></i> 
+                             <i class="fa-brands fa-square-instagram"></i>
+                             <i class="fa-brands fa-facebook-messenger"></i></li>
+                    </ul>
+
+                </div>
+                <div class="colum_2-4">
+                    <h1>Dịch vụ</h1>
+                    <ul>
+                        <li>Trang điểm dự tiệc</li>
+                        <li>Trang điểm cô dâu</li>
+                        <li>Trang điểm nhẹ nhà</li>
+                        <li>Xem tất cả dịch vụ</li>
+                    </ul>
+                </div>
+                <div class="colum_2-4">
+                    <h1>Liên kết</h1>
+                    <ul>
+                        <li>Về chúng tôi</li>
+                        <li>Chi nhánh</li>
+                        <li>Nghệ sĩ trang điểm</li>
+                        <li>Đặt lịch</li>
+                        <li>Liên hệ</li>
+                    </ul>
+                </div>
+                <div class="colum_2-4">
+                    <h1>Liên hệ</h1>
+                    <ul>
+                        <li><i class="fa-solid fa-location-pin"></i> 123 Lê Lợi, Quận 1, TP.HCM</li>
+                        <li><i class="fa-solid fa-phone"></i> 028-1234-5678</li>
+                        <li><i class="fa-solid fa-envelope"></i> contact@glamschedule.com</li>
+                        <li><i class="fa-solid fa-calendar-days"></i> Thứ 2 - Chủ nhật</li>
+                        <li><i class="fa-solid fa-clock"></i> 09:00 - 20:00</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="grid__row">
+            <hr/>
+            <p>© 2025 Booking-Makeup. Bản quyền thuộc về chúng tôi.</p>
+        </div>
+    </div>
+</div>
+<!--footer-->
+     <script src="/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1000 @@
+/* Reset link styles */
+html {
+    font-size: 62.5%;
+}
+a {
+    text-decoration: none;
+}
+
+body {
+    font-size: 17px;
+    font-family: 'Times New Roman', Times, serif;
+}
+/*Common*/
+.content {
+    width: 1667px;
+    max-width: calc(100% - 48px);
+    margin-left: auto;
+    margin-right: auto;
+}
+.header {
+    height:80px;
+    background-color: white;
+}
+.logo-container {
+    text-align: center;
+}
+.logo {
+    width: 40px;
+    height: auto;
+}
+.brand-name {
+    font-size: 40px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding-top: 28px;
+    font-size: 20px;
+}
+.navbar ul {
+    display: flex;
+}
+.navbar .action {
+    margin-left: auto;
+}
+.navbar ul a {
+    padding: 8px 25px;
+}
+.navbar .nav-menu{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+.navbar .action{
+    display: inline-block;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+    
+    
+}
+.navbar .btn-login{
+    min-width: 95px;
+    height: 20px;
+    border-radius: 8px;
+    background-color: black;
+    color:white;
+    padding: 5px 20px;
+}
+.navbar .action-link
+{
+    min-width: 95px;
+    height: 20px;
+    padding: 5px 20px;
+    border-radius: 8px;
+    border: 1px solid ;
+    margin-right: 18px;
+}
+.navbar .action-link:hover {
+    box-shadow: 5px 10px #666565;
+}
+.navbar .btn-login:hover {
+    box-shadow: 5px 10px #666565;
+}
+.navbar ul a:hover {
+    color:rgb(229, 30, 63);
+}
+.hidden {
+    display: none;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.username {
+    font-weight: bold;
+    color: black;
+    margin-right: 10px;
+}
+
+#logout-btn {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+#logout-btn:hover {
+    background-color: darkred;
+}
+
+/* Footer*/
+.footer .grid__colum .colum_2-4 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 25%;
+}
+.footer .grid__colum {
+    display: flex;
+}
+.footer .grid__colum h1 {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 60px 0 30px;
+}
+.footer .grid__colum ul li{
+    margin-bottom: 20px;
+}
+hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin-bottom: 10px;
+}
+.footer .grid__row p{
+    text-align: center;
+    margin: 25px 0 25px;
+}
+/*Content*/
+.hero {
+    padding: 16px;
+    outline: none;
+    background-image: url('../image/bgc1.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    justify-content: center;
+    align-items: center;
+    width:auto;
+    height:550px;
+}
+.hero .container .box-0{
+    padding-right: 50%;
+    justify-content: center;
+    align-items: center;
+    color: #5d4037;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 160px;
+    margin-left: 70px;
+}
+.hero .container .box-0 .box-1 {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+.hero .container .box-0 .box-2 {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+.hero .box-3{
+    display: flex;
+    
+}
+.hero .box-3 .hero-btn {
+    display: flex;
+    width: 180px;
+    height: 40px;
+    align-items: center;
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    gap: 8px; /* Khoảng cách giữa ảnh và chữ */
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-right: 15px;
+}
+
+.hero .box-3 .hero-btn img {
+    width: 20px; /* Điều chỉnh kích thước ảnh */
+    height: 20px;
+}
+
+.hero .box-3 .hero-btn a {
+    color: #ffff !important;
+    text-decoration: none; /* Bỏ gạch chân nếu cần */
+    font-weight: 600;
+}
+.hero .box-3 .hero-btn-1{
+    background: transparent;
+    border: 2px solid rgba(255,255,255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0,0,0, .2);
+    border-radius: 5px;
+    padding:0 10px;
+    height: 40px;
+    width: 140px;
+}
+.hero .box-3 .hero-btn-1 a {
+    color: #151414 !important;
+    text-decoration: none; /* Bỏ gạch chân nếu cần */
+    font-weight: 600;
+    font-size: 16px;
+}
+.section-1{
+    padding: 64px 0 ;
+    background: #F9FAFB;
+}
+.section-1 .container{
+    padding: 0 16px;
+}
+.section-1 .body-1 h2 {
+    color:#09090B;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+}
+.section-1 .body-1 .display-item {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cột có kích thước bằng nhau */
+    gap: 20px; /* Khoảng cách giữa các ô */
+}
+.section-1 .display-item .item-1 {
+    padding : 24px;
+    text-align: center;
+    border: 2px solid rgba(255,255,255, .2);
+    background:transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0, .2);
+}
+.section-1 .item-1 .icon img {
+    width:56px;
+    height:56px;
+    border-radius: 100%;
+}
+.section-1 .item-1 h3{
+    font-size:20px;
+    margin: 0 0 8px;
+} 
+.section-1 .item-1 p{
+    font-size: 16px;
+    color: #4B5563;
+}
+.section-1 .body-2 .display-item { 
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 15px;
+}
+.section-1 .body-2 .display-item .item-2{
+    width: 30%;
+    /*box-shadow: 22px 16px 25px -6px rgba(0,0,0,0.29);*/
+    border: 2px solid black;
+    border-radius: 20px;
+    gap:20px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden; 
+}
+.section-1 {
+     padding-top: 50px;
+     padding-bottom: 0;
+}
+.section-1 .body-2 .ctn {
+    display: flex;
+    justify-content: space-between; /* Đẩy hai phần tử ra hai bên */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    padding: 0 0 32px;
+    margin-top: 0;
+}
+.section-1 .ctn h2{
+    color:#09090B; 
+    margin-bottom: 40px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.section-1 .body-2 .ctn .section-btn {
+    padding: 8px 16px;
+    margin:0;
+    border-radius: 10px;
+    background-color: #f4f6f7;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+
+}
+.section-1 .body-2 .ctn .section-btn a {
+    color: #09090B !important;
+    text-decoration: none; /* Bỏ gạch chân nếu cần */
+    font-weight: 600;
+    font-size: 16px;
+}
+.section-1 .display-item .item-2 .image {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: flex-start; /* Căn giữa theo chiều dọc */
+    height: 300px;
+
+}
+.section-1 .display-item .item-2 .image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position:top center;
+}
+
+.section-1 .item-2 .content-1 {
+    padding: 16px;
+}
+.section-1 .item-2 .content-1 h3 {
+    margin: 0;
+}
+.section-1 .item-2 .content-1 img {
+    width:18px;
+    height:18px;
+    margin-right: 5px;
+    border-radius: 100%;
+}
+.section-1 .content-1 .time {
+    display:flex;
+    margin : 6px 0 0;
+}
+.section-1 .time span {
+    color :#71717A;
+    font-size: 16px;
+}
+.section-1 .item-2 .content-2 {
+    padding: 0 16px 16px;
+}
+.section-1 .content-2 p {
+    margin : 0;
+    font-size: 16px;
+    color: #71717A;
+}
+.section-1 .content-3 {
+    display: flex;
+    justify-content: space-between; /* Đẩy hai phần tử ra hai bên */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-top: auto;
+    padding : 0 16px 16px;
+}
+.section-1 .content-3 span{
+    color:red;
+    font-size:18px;
+}
+.section-1 .content-3 .ctn-btn {
+    min-width: 80px;
+    height: 40px;
+    padding: 8px 16px;
+    background: #18181B;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.section-1 .content-3 a {
+    color: #fcfcff;
+    text-decoration: none; /* Bỏ gạch chân nếu cần */
+    font-weight: 60;
+    font-size: 14px;
+}
+.section-1 .body-3 .display-item { 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cột có kích thước bằng nhau */
+    grid-template-rows: repeat(2, auto);  /* 2 hàng có chiều cao tự động */
+    gap: 20px; /* Khoảng cách giữa các ô */
+}
+.section-1 .body-3 .ctn-1 {
+    display: flex;
+    justify-content: space-between; /* Đẩy hai phần tử ra hai bên */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    padding: 0 0 32px;
+    margin-top: auto;}
+.section-1 .body-3 .ctn-1 h2{
+    color:#09090B; 
+    margin-bottom: 40px;
+    font-size: 40px;
+    font-weight: bold;
+}
+.section-1 .body-3 .ctn-1 .section-btn-1 {
+    padding: 8px 16px;
+    margin:0;
+    border-radius: 10px;
+    background-color: #f4f6f7;
+    border: 2px solid rgba(255,255,255, .2);
+}
+.section-1 .body-3 .ctn-1 .section-btn-1 a {
+    color: #09090B !important;
+    text-decoration: none; /* Bỏ gạch chân nếu cần */
+    font-weight: 600;
+    font-size: 16px;
+}
+.section-1 .body-3 .item-3 .line-1 {
+    padding:16px;
+}
+.section-1 .body-3 .item-3 .line-1 h3 {
+    margin :0;
+    font-size: 20px;
+    color:#09090B;
+}
+.section-1 .body-3 .item-3 .line-2 {
+    padding:0 16px 16px;
+}
+.section-1 .body-3 .item-3 .line-2 .info {
+    display:flex;
+    margin: 10px;
+}
+.section-1 .body-3 .item-3 .line-2 .info img {
+    width: 18px;
+    height:18px;
+    margin-right: 5px;
+}
+.section-1 .body-3 .item-3 .line-2 .info p {
+    font-size: 16px;
+    color:#71717A;
+    margin:0;
+}
+.section-1 .body-3 .item-3 {
+    border: 2px solid rgba(255,255,255, .2);
+    background:transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0, .2);
+}
+.section-1 .body-3 .item-3 .line-3 {
+    padding:0 16px 16px;
+    text-align: center;
+}
+.section-1 .body-3 .item-3 .line-3 .line-3-btn {
+    border-radius: 5px;
+    padding :8px 16px;
+    background-color:#FFFF;
+    border: 2px solid rgba(255,255,255, .2);
+    box-shadow: 0 0 10px rgba(0,0,0, .2);
+}
+.section-1 .body-3 .item-3 .line-3 .line-3-btn a{
+    color: #09090B !important;
+    text-decoration: none; /* Bỏ gạch chân nếu cần */
+    font-weight: 600;
+    font-size: 16px;
+}
+.section-2 {
+    padding:64px;
+    width: auto;
+    height:200px;
+    background-color: #FFDEE9;
+    background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+}
+.section-2 .container {
+    padding: 0 16px ;
+}
+.section-2 .container .box-text {
+    display :block;
+    text-align: center;
+    color :#5d4037;
+}
+.section-2 .box-text h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin : 0 0 16px;
+}
+.section-2 .box-text p {
+    margin : 0 276px 32px;
+    font-size: 20px;
+}
+.section-2 .box-text .box-btn {
+    border-radius: 5px;
+    padding :8px 16px;
+    background:#FFFF;
+    border: 2px solid rgba(255,255,255, .2);
+    box-shadow: 0 0 10px rgba(0,0,0, .2);
+} 
+.section-2 .box-text .box-btn a {
+    color: #5d4037 !important;
+    text-decoration: none; /* Bỏ gạch chân nếu cần */
+    font-weight: 600;
+    font-size: 16px;
+}
+.section-1 .display-item .line-2 .info p {
+    margin: 0 10px !important;
+}
+
+/*end content*/
+
+/*SEVICES*/
+.container-hero h1{
+    font-size: 50px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+.container-hero {
+    text-align: center;
+    background-color: rgb(249, 224, 228);
+    height: 200px;
+    width: auto;
+    align-items: center;
+    padding-top: 100px;
+}
+.content{
+    width: 1667px;
+    max-width: calc(100% - 48px);
+    margin-left: auto;
+    margin-right: auto;
+}
+.services .grid_row .grid_column1-3 .grid_1-3{
+    width: 30%;
+    box-shadow: 22px 16px 25px -6px rgba(0,0,0,0.29);
+    border-radius: 20px;
+    overflow: hidden;
+    border:2px solid;
+}
+.services .grid_row .grid_column1-3{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+
+}
+.services .grid_1-3 img{
+
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: top left;
+    display: block;
+    
+}
+.services .grid_1-3 .grid_1-3-1{
+    display: flex;
+    justify-content: space-between;
+}
+.services .grid_1-3 h2{
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 0;
+    margin-left: 10px;
+}
+.services .grid_1-3 p{
+    padding: 8px 0;
+    margin-left: 10px;
+}
+.services .grid_1-3-1 .bnt1-3{
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(248, 136, 155);
+    border: 1px;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-weight: bold;
+    color: white;
+}
+.services .grid_1-3-1 p{
+    color: rgb(243, 77, 105);
+    font-weight: bold;
+    margin-left: 10px;
+}
+.services .bnt1-3 a{
+    color: white;
+    text-decoration:none;
+}
+   /*END SEVICES*/
+   /*MAKEUP-ARTIST*/
+   .artists .content .content-hero{
+    font-size: 30px ;
+    color :rgb(246, 71, 100);
+    background: #f4bbbb;
+   padding: 10px;
+   margin-bottom: 100px;
+ }
+.artists .grid_row .grid_row1-3{
+    width : 30%;
+    height : 450px;
+    border : 3px solid #f4d3d3;
+    margin-left: auto;
+    margin-right: auto;
+   border-radius: 10px;
+   overflow: hidden;
+ }
+ .artists .grid_row {
+    display :flex;
+    gap : 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+ }
+ .artists .grid_row .grid_row1-3 img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position:center center;
+ }
+ .artists .grid_row .grid_row1-3 .wrap .avatar img {
+   width: 50px;
+   height: 50px;
+   border-radius: 999px;
+   margin-top: 10px;
+   margin-left: 15px;
+}
+.artists .grid_row .grid_row1-3 .wrap {
+    display: flex;
+   align-items: center;
+}
+.artists .grid_row .grid_row1-3 .wrap .rate .rate_start {
+   display: flex;
+   align-items: center;
+}
+.artists .grid_row .grid_row1-3 .wrap_two .location {
+   display: flex;
+   align-items: center;
+   margin-left: 10px;
+   margin-top: 20px;
+}
+.artists .grid_row .grid_row1-3 .wrap_two .price  {
+   display: flex;
+   align-items: center;
+   margin-left: 10px;
+}
+.artists .grid_row .grid_row1-3 .wrap_two .price .view_info{
+margin-left: auto;
+margin-right: 5px;
+border-radius: 999px;
+color : rgb(4, 1, 1);
+background: #eae5e5;
+padding : 10px 10px ;
+}
+.artists .grid_row .grid_row1-3 .wrap .rate :first-child{
+   margin-left: 20px;
+}
+.artists .grid_row .grid_row1-3 .wrap_two .price .view_info a{
+   padding : 10px 20px ;
+}
+   /*END MAKEUP-ARTIST*/
+/* Start Đặt lịch*/
+.cld .container {
+    padding :0 16px;
+}
+.cld .container .wallpaper {
+    text-align: center;
+    background-image: url(../image/wall.jpg) ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    min-height: 100vh;
+    outline:none;
+    margin: 30px 0;
+}
+.cld .container .wallpaper .box-cld {  
+    display:block;
+    background: transparent;
+    border: 2px solid rgba(255,255,255, .2);
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+    padding:30px 0;
+    box-shadow: 0 0 10px rgba(0,0,0, .2);
+}
+.cld .container .wallpaper .box-cld .box-cld-1 h1 {
+    padding:0 16px 16px;
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    color: #5d4037;
+}
+.cld .container .wallpaper .box-cld .box-cld-2 h2 {
+    padding : 16px;
+    font-size: 36px;
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bold;
+    color: #5d4037;
+}
+.cld .container .wallpaper .box-cld .box-cld-3-display {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 cột có kích thước bằng nhau */
+    grid-template-rows: repeat(1, auto);  /* 2 hàng có chiều cao tự động */
+    gap: 20px; /* Khoảng cách giữa các ô */
+    padding: 0 16px;
+}
+.cld .container .wallpaper .box-cld .box-cld-3-display .tb-1 span  {
+    display:flex;
+    justify-content: space-between;
+    padding:16px;
+    font-size: 16px;
+    color: #5d4037;
+    font-family:'Times New Roman', Times, serif;
+}
+.cld .container .wallpaper .box-cld .box-cld-3-display .tb-1 select {
+   width:100%; 
+}
+.cld .container .wallpaper .box-cld .box-cld-btn-1 {
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Căn giữa chữ */
+    border: 1px solid #ffff;
+    border-radius: 5px;
+    background-color: #FBAB7E;
+    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+    margin: 0;
+    padding:0;
+    width: auto;
+    height:32px;
+}
+.cld .container .wallpaper .box-cld .box-cld-btn a {
+    width: 100%; /* Mở rộng hết vùng button */
+    height: 100%;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    padding: 32px 32px;
+}
+.cld .container .wallpaper .box-cld .box-cld-btn button:hover{
+    box-shadow: 10px 10px 5px 0 rgba(182,201,104,0.75);
+-webkit-box-shadow: 10px 10px 5px 0 rgba(182,201,104,0.75);
+-moz-box-shadow: 10px 10px 5px 0 rgba(182,201,104,0.75);
+}
+/* End Đặt lịch*/
+/* login css */
+/* Thiết lập toàn bộ trang */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('../image/nenmakeup.jpg') no-repeat center center/cover;
+    position: relative;
+}
+
+/* Lớp phủ mờ nền */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Điều chỉnh độ tối */
+    z-index: 1;
+}
+
+/* Container chứa form đăng nhập */
+.login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(245, 244, 244, 0.15); /* Làm trong suốt */
+    padding: 25px;
+    border-radius: 25px;
+    /* backdrop-filter: blur(15px); Hiệu ứng mờ */
+    color: white;
+    text-align: center;
+    z-index: 2;
+    width: 350px;
+}
+
+/* Tiêu đề và văn bản */
+.login-container h1,
+.login-container p,
+.login-container label,
+.login-container a {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+/* Form đăng nhập */
+.column-log {
+    margin-bottom: 15px;
+}
+
+/* Ô nhập liệu */
+.user-field{
+    height: 50px;
+    width: 95%;
+    padding-left: 15px;
+    margin: 5px 0 5px 0;
+    border: none;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.2); /* Trong suốt */
+    color: white;
+    outline: none;
+    font-size: 15px;
+    transition: 0.3s;
+}
+.pass-field {
+    height: 50px;
+    width: 95%;
+    padding-left: 15px;
+    margin: 10px 0 5px 0;
+    border: none;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.2); /* Trong suốt */
+    color: white;
+    outline: none;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+/* Placeholder */
+.user-field::placeholder,
+.pass-field::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Hiệu ứng khi focus */
+.user-field:focus,
+.pass-field:focus {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Nút đăng nhập */
+.btn-log {
+    width: 99%;
+    height: 45px;
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 30px;
+    background: rgba(255, 204, 188, 0.8);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+/* Hiệu ứng khi hover vào nút đăng nhập */
+.btn-log:hover {
+    background: rgba(255, 255, 255);
+    box-shadow: 0 0 10px rgba(255, 204, 188, 0.7);
+}
+
+/* Checkbox và quên mật khẩu */
+.forgot-pass {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+}
+
+.forgot-pass a {
+    color: white;
+    transition: 0.3s;
+    margin-right: 20px;
+}
+
+.forgot-pass a:hover {
+    text-decoration: underline;
+    color: #ffccbc;
+}
+
+.non-log a{
+    text-decoration: underline;
+    transition: 0.3s;
+    color: pink;
+}
+
+.non-log a:hover{
+    color: rgb(241, 37, 211);
+}
+
+/* tự động điền account bằng nút */
+.demo-accounts {
+    text-align: center;
+    margin-top: 20px;
+    color: rgb(189, 180, 180);
+}
+
+.demo-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    margin: auto;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.demo-buttons button {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.demo-buttons button{
+    background: rgb(246, 243, 243);
+    color: #000000;
+
+}
+
+.demo-buttons button:hover {
+    background: #ec73b5;
+}
+
+.full-width {
+    grid-column: span 2; /* Để nút Khách hàng chiếm cả hàng */
+}
+/* login css */
+/* regis css */
+
+.regis-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: url('../image/nenmakeup.jpg') no-repeat center center/cover;
+}
+.regis-container .regis-form {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgb(255, 245, 245);
+    width: 350px;
+    text-align: center;
+    border: 1px solid rgb(185, 176, 176);
+    backdrop-filter: blur(15px);
+}
+.regis-container .regis-name {
+    display: flex;
+    gap: 10px;
+}
+.regis-container .regis-name input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    backdrop-filter: blur(15px);
+}
+.regis-container .regis-form input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    display: block;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    backdrop-filter: blur(15px);
+}
+.regis-container input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+.regis-container button {
+    width: 100%;
+    padding: 10px;
+    background: #c14096;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.regis-container button:hover {
+    background: #940374;
+}
+.regis-container .login-link {
+    text-align: center;
+    margin-top: 10px;
+    color: white;
+}
+.regis-container .regis-form h2{
+    color:white;
+}
+.regis-container .login-link a{
+    color: #c14096;
+}
+/* end regis.css */

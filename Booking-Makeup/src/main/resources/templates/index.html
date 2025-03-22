@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="../assets/reset.css"/>
+    <link rel="stylesheet" th:href="../assets/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <title>Booking-Makeup</title>
+</head>
+<body>
+<!-- Header -->
+<header th:fragment="layout_header" class="header">
+    <div class="content">
+        <div class="navbar">
+            <!-- Logo -->
+            <a href="./index.html">
+                <div class="logo-container">
+                    <img src="/image/logo.jpg" alt="logo" class="logo"/>
+                    <span class="brand-name">Booking-Makeup</span>
+                </div>
+            </a>
+            <!-- Navigation -->
+            <ul class="nav-menu">
+                <li><a href="./services.html">Dịch vụ</a></li>
+                <li><a href="./makeup-artist.html">Nghệ sĩ trang điểm</a></li>
+                <li><a href="./schedule.html">Đặt lịch</a></li>
+            </ul>
+
+            <!-- User Actions -->
+            <div class="action">
+                <!-- Khi chưa đăng nhập -->
+                <div id="auth-buttons">
+                    <a href="./register.html" class="action-link" id="register-btn">Đăng ký</a>
+                    <a href="./login.html" class="btn-login" id="login-btn">Đăng nhập</a>
+                </div>
+
+                <!-- Khi đã đăng nhập -->
+                <div id="user-info" style="display: none;">
+                    <img src="./image/user-avatar.jpg" alt="Avatar" class="avatar">
+                    <span class="username">Xin chào, User</span>
+                    <a href="#" id="logout-btn">Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<div class="hero">
+    <div class="container">
+        <div class="box-0">
+            <div class="box-1">
+                <h1>Tỏa sáng cùng dịch vụ trang điểm chuyên nghiệp</h1>
+            </div>
+            <div class="box-2">
+                <p>Đặt lịch ngay hôm nay để trải nghiệm các chuyên gia trang điểm hàng đầu</p>
+            </div>
+            <div class="box-3">
+                <button class="hero-btn">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <a href="#">Đặt lịch ngay</a>
+                </button>
+                <button class="hero-btn-1">
+                    <a href="#">Xem dịch vụ</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section 1: Tại sao chọn chúng tôi -->
+<div class="section-1">
+    <div class="container">
+        <div class="body-1">
+            <h2>Tại sao chọn chúng tôi?</h2>
+            <div class="display-item">
+                <div class="item-1">
+                    <div class="icon">
+                        <img src="./image/ngoisao.jpg" alt="icon"/>
+                    </div>
+                    <h3>Chuyên Gia Hàng Đầu</h3>
+                    <p>Đội ngũ nghệ sĩ trang điểm có nhiều năm kinh nghiệm và được đào tạo chuyên sâu.</p>
+                </div>
+                <div class="item-1">
+                    <div class="icon">
+                        <img src="./image/diadiem.jpg" alt="icon"/>
+                    </div>
+                    <h3>Nhiều chi nhánh</h3>
+                    <p>Hệ thống chi nhánh rộng khắp, thuận tiện cho việc lựa chọn địa điểm gần nhất.</p>
+                </div>
+                <div class="item-1">
+                    <div class="icon">
+                        <img src="./image/dongho.png" alt="icon"/>
+                    </div>
+                    <h3>Đặt lịch dễ dàng</h3>
+                    <p>Hệ thống đặt lịch trực tuyến nhanh chóng, tiện lợi và linh hoạt.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section 2: Dịch vụ nổi bật -->
+<div class="section-1">
+    <div class="container">
+        <div class="body-2">
+            <div class="ctn">
+                <h2>Dịch vụ nổi bật</h2>
+                <button class="section-btn">
+                    <a href="#">Xem tất cả</a>
+                </button>
+            </div>
+            <div class="display-item">
+                <div class="item-2">
+                    <div class="image">
+                        <img src="./image/tiec.jpg" alt="Trang điểm dự tiệc"/>
+                    </div>
+                    <h3>Trang điểm dự tiệc</h3>
+                    <span>500.000 VNĐ</span>
+                    <button class="ctn-btn"><a href="#">Đặt lịch</a></button>
+                </div>
+                <div class="item-2">
+                    <div class="image">
+                        <img src="./image/codau.jpg" alt="Trang điểm cô dâu"/>
+                    </div>
+                    <h3>Trang điểm cô dâu</h3>
+                    <span>1.500.000 VNĐ</span>
+                    <button class="ctn-btn"><a href="#">Đặt lịch</a></button>
+                </div>
+                <div class="item-2">
+                    <div class="image">
+                        <img src="./image/ngaythuong.jpg" alt="Trang điểm nhẹ nhàng"/>
+                    </div>
+                    <h3>Trang điểm nhẹ nhàng</h3>
+                    <span>300.000 VNĐ</span>
+                    <button class="ctn-btn"><a href="#">Đặt lịch</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="content">
+        <div class="grid__row">
+            <div class="grid__colum">
+                <h1>Booking-Makeup</h1>
+                <p>Hệ thống đặt lịch trang điểm chuyên nghiệp, giúp bạn luôn tỏa sáng trong mọi dịp đặc biệt.</p>
+            </div>
+            <div class="grid__colum">
+                <h1>Dịch vụ</h1>
+                <ul>
+                    <li>Trang điểm dự tiệc</li>
+                    <li>Trang điểm cô dâu</li>
+                    <li>Trang điểm nhẹ nhàng</li>
+                    <li>Xem tất cả dịch vụ</li>
+                </ul>
+            </div>
+            <div class="grid__colum">
+                <h1>Liên hệ</h1>
+                <p><i class="fa-solid fa-location-pin"></i> 123 Lê Lợi, Quận 1, TP.HCM</p>
+                <p><i class="fa-solid fa-phone"></i> 028-1234-5678</p>
+                <p><i class="fa-solid fa-envelope"></i> contact@glamschedule.com</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<scrip>scr ="/js/scritp"</scrip>
+</body>
+</html>

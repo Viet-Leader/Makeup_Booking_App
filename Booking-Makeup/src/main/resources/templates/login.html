@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="login-page">
+<div class="overlay"></div> <!-- Lớp phủ làm mờ nền -->
+<div class="login-container">
+    <form id="loginForm">
+        <h1>Đăng Nhập</h1>
+        <input type="text" id="email" class="user-field" placeholder="Email"><br>
+        <input type="password" id="password" class="pass-field" placeholder="Mật khẩu"><br>
+        <button type="submit" id="login-btn" class="btn-log">Đăng Nhập</button>
+    </form>
+    <div class="forgot-pass">
+        <input type="checkbox" id="remember"><label for="remember">Lưu đăng nhập</label>
+        <a href="#">Quên Mật Khẩu?</a>
+    </div>
+    <div class="non-log">
+        <p>Chưa có tài khoản? <a href="register.html">Đăng Ký</a></p>
+    </div>
+    <div class="demo-accounts">
+        <p>Demo accounts:</p>
+        <div class="demo-buttons">
+            <button onclick="fillDemoAccount('owner')">Chủ cửa hàng</button>
+            <button onclick="fillDemoAccount('manager')">Quản lý</button>
+            <button onclick="fillDemoAccount('receptionist')">Lễ tân</button>
+            <button onclick="fillDemoAccount('artist')">Nghệ sĩ</button>
+            <button onclick="fillDemoAccount('customer')" class="full-width">Khách hàng</button>
+        </div>
+    </div>
+</div>
+
+<!-- Import script -->
+<script src="/js/script.js"></script>
+</body>
+</html>
