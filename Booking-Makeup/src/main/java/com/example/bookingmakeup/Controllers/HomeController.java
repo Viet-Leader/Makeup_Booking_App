@@ -8,7 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
-
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
     @GetMapping("/home.html")
     public String homePage() {
         return "home"; // Trả về trang home.html
