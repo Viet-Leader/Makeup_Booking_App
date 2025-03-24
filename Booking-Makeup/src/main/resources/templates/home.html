@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/reset.css"/>
+    <link rel="stylesheet" th:href="@{/assets/reset.css}"/>
     <link rel="stylesheet" href="/assets/style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
     <title>Booking-Makeup</title>
 </head>
 <body>
-<header th:fragment="layout_header" class="header">
+<header class="header">
     <div class="content">
         <div class="navbar">
             <!--logo-->
-            <a href="/home.html">
+            <a href="./home.html">
                 <div class="logo-container">
                     <img src="/image/logo.jpg" alt="logo" class="logo"/>
                     <span class="brand-name">Booking-Makeup</span>
@@ -21,17 +21,17 @@
             </a>
             <!--navigation-->
             <ul class="nav-menu">
-                <li><a href="/services.html">Dịch vụ</a></li>
-                <li><a href="/makeup-artist.html">Nghệ sĩ trang điểm</a></li>
-                <li><a href="/schedule.html">Đặt lịch</a></li>
+                <li><a href="/templates/services.html">Dịch vụ</a></li>
+                <li><a href="/templates/makeup-artist.html">Nghệ sĩ trang điểm</a></li>
+                <li><a href="/templates/schedule.html">Đặt lịch</a></li>
             </ul>
 
             <!--action-->
             <div class="action">
                 <!-- Khi chưa đăng nhập -->
                 <div id="auth-buttons">
-                    <a href="/register.html" class="action-link" id="register-btn">Đăng ký</a>
-                    <a href="/login.html" class="btn-login" id="login-btn">Đăng nhập</a>
+                    <a href="/templates/register.html" class="action-link" id="register-btn">Đăng ký</a>
+                    <a href="/templates/login.html" class="btn-login" id="login-btn">Đăng nhập</a>
                 </div>
 
                 <!-- Khi đã đăng nhập -->
