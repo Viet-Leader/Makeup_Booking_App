@@ -1,34 +1,38 @@
+//start Login
 document.addEventListener("DOMContentLoaded", function () {
     const authButtons = document.getElementById("auth-buttons");
     const userInfo = document.getElementById("user-info");
     const usernameSpan = document.querySelector(".email");
     const logoutBtn = document.getElementById("logout-btn");
 
-    // ✅ Kiểm tra trạng thái đăng nhập từ session
+    // ✅ Kiểm tra trạng thái đăng nhập từ API
     fetch("/auth/status")
         .then(response => response.json())
         .then(data => {
             if (data.status === "logged_in") {
-                sessionStorage.setItem("email", data.email); // Lưu vào sessionStorage
+                localStorage.setItem("email", data.email);
                 authButtons.classList.add("hidden");
                 userInfo.classList.remove("hidden");
                 usernameSpan.textContent = `Xin chào, ${data.email}`;
             } else {
-                sessionStorage.removeItem("email");
+                localStorage.removeItem("email");
                 authButtons.classList.remove("hidden");
                 userInfo.classList.add("hidden");
             }
         });
+    // --- THÊM SCRIPT ĐỂ TẠO GẠCH CHÂN MÀU VÀNG DƯỚI TRANG HIỆN TẠI ---
+    document.addEventListener("DOMContentLoaded", function () {
+        const links = document.querySelectorAll(".nav-link");
+        const currentPage = window.location.pathname.split("/").pop(); // Lấy tên file hiện tại
 
-    // ✅ Lưu trang hiện tại trước khi đăng nhập
-    const loginNavLinks = document.querySelectorAll(".login-link");
-    loginNavLinks.forEach(link => {
-        link.addEventListener("click", function () {
-            sessionStorage.setItem("redirectAfterLogin", window.location.pathname);
+        links.forEach(link => {
+            if (link.getAttribute("href").endsWith(currentPage)) {
+                link.classList.add("active"); // Thêm class "active" vào trang hiện tại
+            }
         });
     });
 
-    // ✅ Xử lý đăng nhập
+    // ✅ Xử lý khi đăng nhập
     const loginForm = document.getElementById("loginForm");
     if (loginForm) {
         loginForm.addEventListener("submit", function (event) {
@@ -45,14 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === "success") {
-                        sessionStorage.setItem("email", data.email);
+                        localStorage.setItem("email", data.email);
                         alert("Đăng nhập thành công!");
-
-                        // ✅ Chuyển về trang trước đó
-                        const redirectUrl = sessionStorage.getItem("redirectAfterLogin") || "/home.html";
-                        sessionStorage.removeItem("redirectAfterLogin");
-
-                        window.location.replace(redirectUrl);
+                        window.location.href="/home.html";
                     } else {
                         alert("Sai tài khoản hoặc mật khẩu!");
                     }
@@ -61,22 +60,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // ✅ Chặn truy cập trang đặt lịch nếu chưa đăng nhập
-    if (window.location.pathname === "/schedule.html") {
-        const email = sessionStorage.getItem("email");
-        if (!email) {
-            sessionStorage.setItem("redirectAfterLogin", "/schedule.html");
-            window.location.href = "/login.html";
-        }
-    }
-
-    // ✅ Xử lý đăng xuất
+    // ✅ Xử lý khi nhấn nút "Đăng xuất"
     if (logoutBtn) {
         logoutBtn.addEventListener("click", function () {
             fetch("/auth/logout", { method: "POST" })
                 .then(response => response.json())
                 .then(() => {
-                    sessionStorage.removeItem("email");
+                    localStorage.removeItem("email");
                     alert("Đăng xuất thành công!");
                     window.location.reload();
                 })
@@ -84,13 +74,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // ✅ Tài khoản demo
+    // ✅ Điền tài khoản demo vào ô đăng nhập
     window.fillDemoAccount = function (role) {
         const demoAccounts = {
             owner: { email: "owner@example.com", password: "123456" },
             manager: { email: "manager1@example.com", password: "123456" },
             receptionist: { email: "receptionist1@example.com", password: "123456" },
-            artist: { email: "artist1@example.com", password: "123456" },
+            artist: { email: "arartist1@example.com", password: "123456" },
             customer: { email: "customer1@example.com", password: "123456" }
         };
 
@@ -100,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // ✅ Xử lý nút demo
+    // ✅ Xử lý nút bấm demo
     document.querySelectorAll(".demo-buttons button").forEach(button => {
         button.addEventListener("click", function () {
             const role = this.getAttribute("data-role");
@@ -108,3 +98,50 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+//End Login
+//Star Register
+async function register() {
+    const nameAccount = document.getElementById("nameAccount").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+    const message = document.getElementById("message");
+
+    // ✅ Kiểm tra định dạng email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        message.textContent = "Email không hợp lệ! Vui lòng nhập đúng định dạng email.";
+        message.style.color = "red";
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        message.textContent = "Mật khẩu không khớp!";
+        message.style.color = "red";
+        return;
+    }
+
+    const account = { nameAccount, email, password };
+
+    try {
+        const response = await fetch("/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(account),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert("🎉 Đăng ký thành công! Vui lòng đăng nhập.");
+            window.location.href = "login.html"; // Chuyển hướng đến trang login
+        } else {
+            message.textContent = result.message;
+            message.style.color = "red";
+        }
+    } catch (error) {
+        message.textContent = "Lỗi kết nối đến server!";
+        message.style.color = "red";
+    }
+}
+//EndRegister
