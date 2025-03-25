@@ -8,16 +8,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
 
     @GetMapping("/home.html")
     public String homePage() {
         return "home"; // Trả về trang home.html
     }
 
-    @GetMapping("/makeup-artist.html")
-    public String makeupArtistPage() {
-        return "makeup-artist"; // Trả về trang makeup-artist.html
-    }
 
     @GetMapping("/schedule.html")
     public ModelAndView schedulePage(HttpSession session) {
