@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
 </head>
 <body>
      <!-- header-->
-     <header th:fragment="layout_header" class="header">
+     <header     class="header">
         <div class="content">
             <div class="navbar">
                 <!--logo-->
@@ -23,7 +23,7 @@
                 <!--navigation-->
                 <ul class="nav-menu">
                     <li><a href="/services.html">Dịch vụ</a></li>
-                    <li><a href="/makeup-artist.html">Nghệ sĩ trang điểm</a></li>
+                    <li><a href="/makeup-artists">Nghệ sĩ trang điểm</a></li>
                     <li><a href="/schedule.html">Đặt lịch</a></li>
                 </ul>
 
@@ -37,7 +37,7 @@
 
                     <!-- Khi đã đăng nhập -->
                 <div id="user-info" class="hidden">
-                    <img src="/image/user-avatar.jpg" alt="Avatar" class="avatar">
+                    <img th:src="@{/image/user-avatar.jpg}" alt="Avatar" class="avatar">
                     <span class="username">Xin chào, User</span>
                     <a href="#!" id="logout-btn">Đăng xuất</a>
                 </div>
@@ -70,182 +70,41 @@
     </div>
 <!--Hero-->
 <!--Content-->
-<div class = "artists" >
-    <div class="grid_row">
-        <div class="grid_row1-3">              
-            <img src="/image/mu_dutiec.jpg" alt="makeup dự tiệc">
-            <div class = "wrap">
-                <div class = "avatar">
-                    
-                    <img src="/image/HaMY_cvmudutiec.jpg" alt="ảnh đại diện chuên viên trang điểm">
-                
-                </div>
-                <div class = "rate">
-                    <p>Hà My</p>
-                    <div class = "rate_start">
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <p>1028 review</p>
-                    </div>
-                </div>
-            </div>  
-            <div class = "wrap_two">
-                <div class ="location">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <p>Thủ Đức</p>
-               </div>
-                <div class ="price">
-                    <p> 700.000 VND</p>
-                    <button class ="view_info">
-                    <a href="#!">Xem thông tin chi tiết </a>
-                 </button>
-                </div>                    
-            </div>
-        </div>
-        <div class="grid_row1-3">              
-            <img src="/image/mu_kiyeu.jpg" alt="makeup kỉ yếu">
-            <div class = "wrap">
-                <div class = "avatar">
-                    <img src="/image/KieuDiem_cvmukiyeu.jpg" alt="ảnh đại diện chuên viên trang điểm">
-                </div>
-                <div class = "rate">
-                    <p>Kiều Diễm</p>
-                    <div class="rate_start">
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <p>1323 review</p>
-                    </div>
-                </div>
-            </div>  
-            <div class = "wrap_two">
-                <div class ="location">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <p>Quận 1</p>
-               </div>
-                <div class ="price">
-                    <p> 2.500.000 VND</p>
-                    <button class ="view_info">
-                    <a href="#!">Xem thông tin chi tiết </a>
-                 </button>
-                </div>                    
-            </div>
-        </div>
-        <div class="grid_row1-3">              
-            <img src="/image/mu_codau.jpg" alt="makeup cô dâu">
-            <div class = "wrap">
-                <div class = "avatar">
-                    <img src="/image/NgocNga_cvmucodau.jpg" alt="ảnh đại diện chuên viên trang điểm">
-                </div>
-                <div class = "rate">
-                    <p>Ngọc Ngà</p>
-                    <div class="rate_start">
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <p>1892 review</p>
-                    </div>
-                </div>
-            </div>  
-            <div class = "wrap_two">
-                <div class ="location">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <p>Quận Bình Thạnh</p>
-               </div>
-                <div class ="price">
-                    <p> 1.500.000 VND</p>
-                    <button class ="view_info">
-                    <a href="#!">Xem thông tin chi tiết </a>
-                 </button>
-                </div>                    
-            </div>
-        </div>
-    </div>           
-</div>
+     <div class="artists">
+         <div class="grid_row">
+
+             <!-- Lặp qua danh sách nghệ sĩ trang điểm -->
+             <div class="grid_row1-3" th:each="artists : ${artists}">
+                 <img th:src="${artists.featureWork}" alt="Hình makeup">
+                 <div class="wrap">
+                     <div class="avatar">
+                         <img th:src="${artists.accountMakeup.avatar}" alt="Ảnh đại diện">
+                     </div>
+                     <div class="rate">
+                         <p th:text="${artists.accountMakeup.nameAccount}">Tên nghệ sĩ</p>
+                         <div class="rate_start">
+                             <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                             <p th:text="${artists.accountMakeup.rating}">Rating</p>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="wrap_two">
+                     <div class="location">
+                         <i class="fa-solid fa-location-dot"></i>
+                         <p th:text="${artists.accountMakeup.address}">Địa chỉ</p>
+                     </div>
+                     <div class="price">
+                         <p th:text="${#numbers.formatInteger(artists.price,3,'POINT')} + ' VND'">Giá</p>
+                         <button class="view_info">
+                             <a href="#!">Xem thông tin chi tiết</a>
+                         </button>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
 <!--End Content-->
-<!--Content-->
-<div class = "artists" >
-    <div class="grid_row">
-        <div class="grid_row1-3">              
-            <img src="/image/mu_dutiec.jpg" alt="makeup dự tiệc">
-            <div class = "wrap">
-                <div class = "avatar">
-                    
-                    <img src="/image/HaMY_cvmudutiec.jpg" alt="ảnh đại diện chuên viên trang điểm">
-                
-                </div>
-                <div class = "rate">
-                    <p>Hà My</p>
-                    <div class = "rate_start">
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <p>1028 review</p>
-                    </div>
-                </div>
-            </div>  
-            <div class = "wrap_two">
-                <div class ="location">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <p>Thủ Đức</p>
-               </div>
-                <div class ="price">
-                    <p> 700.000 VND</p>
-                    <button class ="view_info">
-                    <a href="#!">Xem thông tin chi tiết </a>
-                 </button>
-                </div>                    
-            </div>
-        </div>
-        <div class="grid_row1-3">              
-            <img src="/image/mu_kiyeu.jpg" alt="makeup kỉ yếu">
-            <div class = "wrap">
-                <div class = "avatar">
-                    <img src="/image/KieuDiem_cvmukiyeu.jpg" alt="ảnh đại diện chuên viên trang điểm">
-                </div>
-                <div class = "rate">
-                    <p>Kiều Diễm</p>
-                    <div class="rate_start">
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <p>1323 review</p>
-                    </div>
-                </div>
-            </div>  
-            <div class = "wrap_two">
-                <div class ="location">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <p>Quận 1</p>
-               </div>
-                <div class ="price">
-                    <p> 2.500.000 VND</p>
-                    <button class ="view_info">
-                    <a href="#!">Xem thông tin chi tiết </a>
-                 </button>
-                </div>                    
-            </div>
-        </div>
-        <div class="grid_row1-3">              
-            <img src="/image/mu_codau.jpg" alt="makeup cô dâu">
-            <div class = "wrap">
-                <div class = "avatar">
-                    <img src="/image/NgocNga_cvmucodau.jpg" alt="ảnh đại diện chuên viên trang điểm">
-                </div>
-                <div class = "rate">
-                    <p>Ngọc Ngà</p>
-                    <div class="rate_start">
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <p>1892 review</p>
-                    </div>
-                </div>
-            </div>  
-            <div class = "wrap_two">
-                <div class ="location">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <p>Quận Bình Thạnh</p>
-               </div>
-                <div class ="price">
-                    <p> 1.500.000 VND</p>
-                    <button class ="view_info">
-                    <a href="#!">Xem thông tin chi tiết </a>
-                 </button>
-                </div>                    
-            </div>
-        </div>
-    </div>           
-</div>
+
 <!--End Content-->
  <!--footer-->
  <div class="footer">
