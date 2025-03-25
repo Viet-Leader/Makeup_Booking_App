@@ -9,6 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
+
     @GetMapping("/home.html")
     public String homePage() {
         return "home"; // Trả về trang home.html
@@ -38,8 +43,5 @@ public class HomeController {
     public String loginPage() {
         return "login"; // Trả về trang login.html
     }
-    @GetMapping("/services.html")
-    public String servicesPage() {
-        return "services";
-    }
+
 }
