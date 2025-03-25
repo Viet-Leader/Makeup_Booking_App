@@ -8,6 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
 
     @GetMapping("/")
     public String home() {
@@ -19,10 +23,6 @@ public class HomeController {
         return "home"; // Trả về trang home.html
     }
 
-    @GetMapping("/makeup-artist.html")
-    public String makeupArtistPage() {
-        return "makeup-artist"; // Trả về trang makeup-artist.html
-    }
 
     @GetMapping("/schedule.html")
     public ModelAndView schedulePage(HttpSession session) {

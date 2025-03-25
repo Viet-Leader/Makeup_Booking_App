@@ -611,77 +611,128 @@ hr {
 }
    /*END SEVICES*/
    /*MAKEUP-ARTIST*/
-   .artists .content .content-hero{
-    font-size: 30px ;
-    color :rgb(246, 71, 100);
+/* MAKEUP-ARTIST */
+.artists .content .content-hero {
+    font-size: 30px;
+    color: rgb(246, 71, 100);
     background: #f4bbbb;
-   padding: 10px;
-   margin-bottom: 100px;
- }
-.artists .grid_row .grid_row1-3{
-    width : 30%;
-    height : 450px;
-    border : 3px solid #f4d3d3;
-    margin-left: auto;
-    margin-right: auto;
-   border-radius: 10px;
-   overflow: hidden;
- }
- .artists .grid_row {
-    display :flex;
-    gap : 10px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
- }
- .artists .grid_row .grid_row1-3 img{
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    object-position:center center;
- }
- .artists .grid_row .grid_row1-3 .wrap .avatar img {
-   width: 50px;
-   height: 50px;
-   border-radius: 999px;
-   margin-top: 10px;
-   margin-left: 15px;
+    padding: 10px;
+    margin-bottom: 40px; /* Giảm khoảng cách xuống 40px */
+    text-align: center;
 }
+
+.artists .grid_row {
+    display: flex; /* Sử dụng flexbox thay vì grid */
+    flex-wrap: wrap; /* Cho phép các item xuống dòng nếu không đủ chỗ */
+    gap: 20px;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.artists .grid_row .grid_row1-3 {
+    width: calc(33.333% - 20px); /* Chia đều 3 cột, trừ khoảng cách giữa */
+    max-width: 350px; /* Giới hạn chiều rộng */
+    height: auto; /* Tự động co giãn theo nội dung */
+    border: 3px solid #f4d3d3;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.artists .grid_row .grid_row1-3:hover {
+    transform: translateY(-5px); /* Hiệu ứng hover nâng lên nhẹ */
+}
+
+.artists .grid_row .grid_row1-3 img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center center;
+}
+
 .artists .grid_row .grid_row1-3 .wrap {
     display: flex;
-   align-items: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
 }
+
+.artists .grid_row .grid_row1-3 .wrap .avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #f4bbbb;
+}
+
+.artists .grid_row .grid_row1-3 .wrap .rate {
+    display: flex;
+    flex-direction: column;
+}
+
 .artists .grid_row .grid_row1-3 .wrap .rate .rate_start {
-   display: flex;
-   align-items: center;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
 }
+
+.artists .grid_row .grid_row1-3 .wrap_two {
+    padding: 10px;
+}
+
 .artists .grid_row .grid_row1-3 .wrap_two .location {
-   display: flex;
-   align-items: center;
-   margin-left: 10px;
-   margin-top: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    gap: 5px;
+    color: #333;
 }
-.artists .grid_row .grid_row1-3 .wrap_two .price  {
-   display: flex;
-   align-items: center;
-   margin-left: 10px;
+
+.artists .grid_row .grid_row1-3 .wrap_two .price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
 }
-.artists .grid_row .grid_row1-3 .wrap_two .price .view_info{
-margin-left: auto;
-margin-right: 5px;
-border-radius: 999px;
-color : rgb(4, 1, 1);
-background: #eae5e5;
-padding : 10px 10px ;
+
+.artists .grid_row .grid_row1-3 .wrap_two .price .view_info {
+    border-radius: 20px;
+    color: white;
+    background: #f24646;
+    padding: 8px 15px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
 }
-.artists .grid_row .grid_row1-3 .wrap .rate :first-child{
-   margin-left: 20px;
+
+.artists .grid_row .grid_row1-3 .wrap_two .price .view_info:hover {
+    background: #d13333;
 }
-.artists .grid_row .grid_row1-3 .wrap_two .price .view_info a{
-   padding : 10px 20px ;
+
+/* Đáp ứng cho màn hình nhỏ hơn */
+@media (max-width: 1024px) {
+    .artists .grid_row {
+        justify-content: center;
+    }
+
+    .artists .grid_row .grid_row1-3 {
+        width: calc(50% - 20px);
+    }
 }
-   /*END MAKEUP-ARTIST*/
+
+@media (max-width: 768px) {
+    .artists .grid_row .grid_row1-3 {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+/*END MAKEUP-ARTIST*/
 /* Start Đặt lịch*/
 .cld .container {
     padding :0 16px;
