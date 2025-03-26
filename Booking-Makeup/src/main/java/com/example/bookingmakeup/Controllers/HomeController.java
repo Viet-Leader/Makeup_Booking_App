@@ -12,15 +12,21 @@ public class HomeController {
     public String home() {
         return "home";
     }
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
+
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
+
     @GetMapping("/home.html")
     public String homePage() {
         return "home"; // Trả về trang home.html
     }
 
-    @GetMapping("/makeup-artist.html")
-    public String makeupArtistPage() {
-        return "makeup-artist"; // Trả về trang makeup-artist.html
-    }
 
     @GetMapping("/schedule.html")
     public ModelAndView schedulePage(HttpSession session) {
@@ -41,8 +47,5 @@ public class HomeController {
     public String loginPage() {
         return "login"; // Trả về trang login.html
     }
-    @GetMapping("/services.html")
-    public String servicesPage() {
-        return "services";
-    }
+
 }

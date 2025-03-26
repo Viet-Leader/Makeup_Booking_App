@@ -10,7 +10,7 @@ public class MakeupArtist {
     private Integer id;
 
     @MapsId
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.EAGER, optional = false) // Đổi LAZY thành EAGER
     @JoinColumn(name = "user_id", nullable = false)
     private Account accountMakeup;
 
@@ -21,6 +21,26 @@ public class MakeupArtist {
     @Lob
     @Column(name = "describes")
     private String describes;
+
+    @Column(name = "age")
+    private Integer age;
+
+    @Column(name = "price")
+    private Double price;
+
+    @Column(name = "feature_work")
+    private String featureWork;
+
+    public MakeupArtist() {}
+
+    public MakeupArtist(Integer id, String specialization, String describes, Integer age, Double price, String featureWork) {
+        this.id = id;
+        this.specialization = specialization;
+        this.describes = describes;
+        this.age = age;
+        this.price = price;
+        this.featureWork = featureWork;
+    }
 
     public Integer getId() {
         return id;
@@ -52,6 +72,30 @@ public class MakeupArtist {
 
     public void setDescribes(String describes) {
         this.describes = describes;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getFeatureWork() {
+        return featureWork;
+    }
+
+    public void setFeatureWork(String featureWork) {
+        this.featureWork = featureWork;
     }
 
 }
