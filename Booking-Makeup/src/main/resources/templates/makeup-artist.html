@@ -22,17 +22,17 @@
                 </a>
                 <!--navigation-->
                 <ul class="nav-menu">
-                    <li><a href="/services.html">Dịch vụ</a></li>
+                    <li><a href="/services">Dịch vụ</a></li>
                     <li><a href="/makeup-artists">Nghệ sĩ trang điểm</a></li>
-                    <li><a href="/schedule.html">Đặt lịch</a></li>
+                    <li><a href="/schedule">Đặt lịch</a></li>
                 </ul>
 
                 <!--action-->
                 <div class="action">
                     <!-- Khi chưa đăng nhập -->
                 <div id="auth-buttons">
-                    <a href="./register.html" class="action-link" id="register-btn">Đăng ký</a>
-                    <a href="./login.html" class="btn-login" id="login-btn">Đăng nhập</a>
+                    <a href="/register" class="action-link" id="register-btn">Đăng ký</a>
+                    <a href="/login" class="btn-login" id="login-btn">Đăng nhập</a>
                 </div>
 
                     <!-- Khi đã đăng nhập -->
@@ -96,7 +96,7 @@
                      <div class="price">
                          <p th:text="${#numbers.formatInteger(artists.price,3,'POINT')} + ' VND'">Giá</p>
                          <button class="view_info">
-                             <a href="#!">Xem thông tin chi tiết</a>
+                             <a th:href="@{'/makeup-artists/' + ${artists.makeupArtistId}}">Xem thông tin chi tiết</a>
                          </button>
                      </div>
                  </div>

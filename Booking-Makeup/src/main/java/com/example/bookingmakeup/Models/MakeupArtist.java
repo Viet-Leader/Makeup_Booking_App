@@ -6,8 +6,9 @@ import jakarta.persistence.*;
 @Table(name = "makeup_artists")
 public class MakeupArtist {
     @Id
-    @Column(name = "user_id", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "makeup_artist_id", nullable=false)
+    private Long makeupArtistId;
 
     @MapsId
     @OneToOne(fetch = FetchType.EAGER, optional = false) // Đổi LAZY thành EAGER
@@ -23,7 +24,7 @@ public class MakeupArtist {
     private String describes;
 
     @Column(name = "age")
-    private Integer age;
+    private Long age;
 
     @Column(name = "price")
     private Double price;
@@ -33,21 +34,13 @@ public class MakeupArtist {
 
     public MakeupArtist() {}
 
-    public MakeupArtist(Integer id, String specialization, String describes, Integer age, Double price, String featureWork) {
-        this.id = id;
+    public MakeupArtist( String specialization, String describes, Long age, Double price, String featureWork, Long makeupArtistId) {
         this.specialization = specialization;
         this.describes = describes;
         this.age = age;
         this.price = price;
         this.featureWork = featureWork;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+        this.makeupArtistId = makeupArtistId;
     }
 
     public Account getAccountMakeup() {
@@ -74,11 +67,11 @@ public class MakeupArtist {
         this.describes = describes;
     }
 
-    public Integer getAge() {
+    public Long getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(Long age) {
         this.age = age;
     }
 
@@ -96,6 +89,13 @@ public class MakeupArtist {
 
     public void setFeatureWork(String featureWork) {
         this.featureWork = featureWork;
+    }
+
+    public Long getMakeupArtistId() {
+        return makeupArtistId;
+    }
+    public void setMakeupArtistId(Long makeupArtistId) {
+        this.makeupArtistId = makeupArtistId;
     }
 
 }

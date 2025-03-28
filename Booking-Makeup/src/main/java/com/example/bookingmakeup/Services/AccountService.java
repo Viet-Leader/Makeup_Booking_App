@@ -1,8 +1,10 @@
 package com.example.bookingmakeup.Services;
 
 import com.example.bookingmakeup.Models.Account;
+import com.example.bookingmakeup.Models.Customer;
 import com.example.bookingmakeup.Repositories.IAccountRepository;
-import com.example.bookingmakeup.Services.IAccountService;
+import com.example.bookingmakeup.Repositories.ICustomerRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +15,37 @@ public class AccountService implements IAccountService {
 
     @Autowired
     private IAccountRepository accountRepository;
+    @Autowired
+    private ICustomerRepository customerRepository;
 
     @Override
+    @Transactional
     public String register(Account account) {
         Optional<Account> existingAccount = accountRepository.findByEmail(account.getEmail());
         if (existingAccount.isPresent()) {
             return "Email đã tồn tại!";
         }
-        accountRepository.save(account);
+
+        // ✅ Lưu tài khoản vào bảng account trước
+        account = accountRepository.save(account);
+
+        // ✅ Nếu tài khoản có role "customer", kiểm tra trong bảng customers
+        if ("customer".equalsIgnoreCase(account.getRole())) {
+            // 🔹 Truy vấn theo user_id thay vì account object
+            Optional<Customer> existingCustomer = customerRepository.findById(account.getUserId());
+
+            if (existingCustomer.isEmpty()) {
+                Customer customer = new Customer();
+                customer.setUser(account);
+                customerRepository.save(customer);
+            }
+        }
+
         return "Đăng ký thành công!";
     }
+
+
+
 
     @Override
     public String login(String email, String password) {

@@ -21,11 +21,11 @@ public class MakeupArtistService implements IMakeupArtistService {
         return artists;
     }
 
-
     @Override
-    public Optional<MakeupArtist> getMakeupArtistById(Integer id) {
-        return IMakeupArtistRepository.findById(id);
+    public Optional<MakeupArtist> getMakeupArtistByMakeupArtistId(Long makeupArtistId) {
+        return IMakeupArtistRepository.findById(makeupArtistId);
     }
+
 
     @Override
     public void saveMakeupArtist(MakeupArtist makeupArtist) {
@@ -33,7 +33,8 @@ public class MakeupArtistService implements IMakeupArtistService {
     }
 
     @Override
-    public void deleteMakeupArtist(Integer id) {
+    public void deleteMakeupArtist(Long id) {
         IMakeupArtistRepository.deleteById(id);
     }
+
 }

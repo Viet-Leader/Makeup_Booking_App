@@ -38,12 +38,12 @@ public class HomeController {
     }
 
 
-    @GetMapping("/register.html")
+    @GetMapping("/register")
     public String registerPage() {
         return "register"; // Trả về trang register.html
     }
 
-    @GetMapping("/login.html")
+    @GetMapping("/login")
     public String loginPage() {
         return "login"; // Trả về trang login.html
     }

@@ -134,7 +134,7 @@ async function register() {
 
         if (response.ok) {
             alert("🎉 Đăng ký thành công! Vui lòng đăng nhập.");
-            window.location.href = "login.html"; // Chuyển hướng đến trang login
+            window.location.href = "/login"; // Chuyển hướng đến trang login
         } else {
             message.textContent = result.message;
             message.style.color = "red";
