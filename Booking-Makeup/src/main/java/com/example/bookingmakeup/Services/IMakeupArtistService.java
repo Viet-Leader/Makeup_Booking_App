@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface IMakeupArtistService {
     List<MakeupArtist> getAllMakeupArtists();
-    Optional<MakeupArtist> getMakeupArtistById(Integer id);
+    Optional<MakeupArtist> getMakeupArtistByMakeupArtistId(Long makeupArtistId);
     void saveMakeupArtist(MakeupArtist makeupArtist);
-    void deleteMakeupArtist(Integer id);
+    void deleteMakeupArtist(Long makeupArtistId);
 }

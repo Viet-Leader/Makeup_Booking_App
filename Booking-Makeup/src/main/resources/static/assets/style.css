@@ -526,63 +526,79 @@ hr {
     margin-left: auto;
     margin-right: auto;
 }
-.services .grid_row .grid_column1-3 .grid_1-3{
-    width: 30%;
-    box-shadow: 22px 16px 25px -6px rgba(0,0,0,0.29);
-    border-radius: 20px;
-    overflow: hidden;
-    border:2px solid;
-}
-.services .grid_row .grid_column1-3{
+.services .grid_row {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     gap: 20px;
-    padding: 20px;
-
+    justify-content: space-between;
 }
-.services .grid_1-3 img{
 
+.services .grid_column1-3 {
+    width: calc(33.33% - 20px); /* Hiển thị 3 cột */
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    border:2px solid ;
+}
+
+.services .grid_column1-3:hover {
+    transform: translateY(-5px);
+}
+
+.services .grid_1-3 img {
     width: 100%;
     height: 400px;
     object-fit: cover;
     object-position: top left;
     display: block;
-    
 }
-.services .grid_1-3 .grid_1-3-1{
+
+.services .grid_1-3 h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 15px;
+}
+
+.services .grid_1-3 p {
+    font-size: 14px;
+    color: #666;
+    margin: 0 15px 15px;
+}
+
+.services .grid_1-3-1 {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-top: 1px solid #ddd;
 }
-.services .grid_1-3 h2{
-    font-size: 15px;
+
+.services .grid_1-3-1 p {
+    color: rgb(243, 77, 105);
     font-weight: bold;
-    padding: 10px 0;
-    margin-left: 10px;
 }
-.services .grid_1-3 p{
-    padding: 8px 0;
-    margin-left: 10px;
-}
-.services .grid_1-3-1 .bnt1-3{
-    margin-right: 10px;
-    margin-bottom: 10px;
+
+.services .bnt1-3 {
     background-color: rgb(248, 136, 155);
-    border: 1px;
+    border: none;
     border-radius: 20px;
     padding: 8px 15px;
     font-weight: bold;
     color: white;
+    cursor: pointer;
+    transition: background 0.3s;
 }
-.services .grid_1-3-1 p{
-    color: rgb(243, 77, 105);
-    font-weight: bold;
-    margin-left: 10px;
+
+.services .bnt1-3:hover {
+    background-color: rgb(220, 100, 120);
 }
-.services .bnt1-3 a{
+
+.services .bnt1-3 a {
     color: white;
-    text-decoration:none;
-}
-   /*END SEVICES*/
+    text-decoration: none;
+}/*End Service*/
    /*MAKEUP-ARTIST*/
 /* MAKEUP-ARTIST */
 .artists .content .content-hero {
@@ -1049,3 +1065,121 @@ hr {
     color: #c14096;
 }
 /* end regis.css */
+/*ArtistDetails*/
+.d-sesion-1 {
+    margin : 48px 0;
+}
+.d-sesion-1 .d-container {
+    padding: 0 16px;
+}
+.d-sesion-1 .d-container .d-box-item{
+    display:flex;
+    width:auto;
+    height: 500px;
+    border: 10px solid #ff50f5;
+    border-radius: 10px;
+}
+.d-sesion-1 .d-container .d-box-item img {
+    margin-right: 20px;
+}
+.d-sesion-1 .d-container .d-box-item .d-box {
+    display:block;
+}
+.d-sesion-1 .d-container .d-box-item .d-box .box-info{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+}
+.d-sesion-1 .d-container .d-box-item .d-box .d-box-tb img {
+    width: 200px; /* Đảm bảo ảnh không vượt quá khung chứa */
+    height: 100px; /* Duy trì tỷ lệ ảnh */
+    display: block; /* Đảm bảo ảnh không bị ảnh hưởng bởi các phần tử inline khác */
+}
+.d-sesion-1 .d-container .d-box-item .d-box .d-box-tb {
+    max-width: 300px; /* Điều chỉnh theo ý muốn */
+    overflow: hidden;
+}
+
+.d-sesion-1 .d-container .d-box-item .d-box .d-box-tb .d-img {
+    width: 191px; /* Co dãn theo kích thước của div cha */
+    height: 100%;
+    object-fit: contain; /* Đảm bảo ảnh không bị méo */
+}
+.d-sesion-1 .d-container H2 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 44px;
+    margin-bottom: 20px;
+    color: rgb(169, 82, 133);
+}
+.d-sesion-1 .d-container .d-box-item .d-box p {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+.d-sesion-2{
+    margin: 20px 0;
+}
+.d-sesion-2 .d-container {
+    padding:16px;
+}
+.d-sesion-2 .d-container h2 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 36px;
+    color: rgb(169, 82, 133);
+    margin-bottom: 20px;
+}
+.d-sesion-2 .d-container .d-box-comment .d-comment .u-comment {
+    display: flex;
+    margin: 20px;
+}
+.d-sesion-2 .d-container .d-box-comment{
+    width:auto;
+    border: 10px solid #ff50f5;
+    border-radius: 10px;
+}
+.d-sesion-2 .d-container .d-box-comment .d-comment .u-comment img {
+    width : 70px;
+}
+.d-sesion-2 .d-container .d-box-comment .m-comment input {
+    width:1360px;
+    height: 50px;
+}
+.d-sesion-2 .d-container .d-box-comment .m-comment button {
+    width :60px;
+    height:50px;
+    background-color: pink;
+    padding:0;
+    margin:0;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.d-sesion-2 .d-container .d-box-comment .m-comment button:hover{
+    transform: translateY(-5px);
+}
+.d-sesion-2 .d-container .d-box-comment .m-comment a{
+    padding:15px;
+}
+.d-sesion-2 .d-container .d-box-comment .d-comment {
+    max-height: 250px; /* Giới hạn chiều cao */
+    overflow-y: auto;  /* Thêm thanh cuộn dọc */
+    padding-right: 10px; /* Tạo khoảng trống cho thanh cuộn */
+}
+.d-sesion-2 .d-container .btn-cmt{
+    border : 1px solid;
+    width:150px;
+    height:50px;
+    margin-top: 20px;
+    border-radius: 50px;
+    background-color: #D9AFD9;
+    background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+}
+.d-sesion-2 .d-container .btn-cmt:hover{
+    transform: translateY(-5px);
+}
+.d-sesion-2 .d-container a {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    margin:0;
+    padding: 10px 30px;
+}
+/*ArtistDetails*/

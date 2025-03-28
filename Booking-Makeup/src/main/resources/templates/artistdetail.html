@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/style.css"/>
     <link rel="stylesheet" href="/assets/reset.css"/>
+    <link rel="stylesheet" href="/assets/style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
-    <title>Dịch vụ</title>
+    <title>Chi tiết nghệ sĩ</title>
 </head>
 <body>
 <!-- header-->
-<header class="header">
+<header th:fragment="layout_header" class="header">
     <div class="content">
         <div class="navbar">
             <!--logo-->
@@ -31,66 +31,76 @@
             <div class="action">
                 <!-- Khi chưa đăng nhập -->
                 <div id="auth-buttons">
-                    <a href="/register.html" class="action-link" id="register-btn">Đăng ký</a>
-                    <a href="/login.html" class="btn-login" id="login-btn">Đăng nhập</a>
+                    <a href="/register" class="action-link" id="register-btn">Đăng ký</a>
+                    <a href="/login" class="btn-login" id="login-btn">Đăng nhập</a>
                 </div>
 
                 <!-- Khi đã đăng nhập -->
                 <div id="user-info" class="hidden">
                     <img src="/image/user-avatar.jpg" alt="Avatar" class="avatar">
                     <span class="username">Xin chào, User</span>
-                    <a href="#" id="logout-btn">Đăng xuất</a>
+                    <a href="#!" id="logout-btn">Đăng xuất</a>
                 </div>
             </div>
         </div>
     </div>
 </header>
 <!--header-->
-<!--Hero-->
-<div class = " hero">
-    <div class = "container">
-        <div class = "box-0">
-            <div class = "box-1">
-                <h1>Tỏa sáng cùng dịch vụ trang điểm chuyên nghiệp</h1>
-            </div>
-            <div class = "box-2">
-                <p>Đặt lịch ngay hôm nay để trải nghiệm các chuyên gia trang điểm hàng đầu</p>
-            </div>
-            <div class = "box-3">
-                <button class = "hero-btn">
-                    <i class="fa-solid fa-calendar-days"></i>
-                    <a href ="!#">Đặt lịch ngay</a>
-                </button>
-                <button class = "hero-btn-1">
-                    <a href = "!#">Xem dịch vụ</a>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--Hero-->
 <!--content-->
-<div class="content">
-    <div class="services">
-        <div class="grid_row">
-            <!-- Duyệt qua danh sách dịch vụ từ Controller -->
-            <div th:each="services : ${services}" class="grid_column1-3">
-                <div class="grid_1-3">
-                    <img th:src="${services.image}" alt="Makeup Service">
-                    <h2 th:text="${services.name}"></h2>
-                    <p th:text="${services.description}"></p>
-                    <div class="grid_1-3-1">
-                        <p th:text="'Giá: ' + ${services.price} + ' VNĐ'"></p>
-                        <button class="bnt1-3">
-                            <a href="/schedule.html">Đặt lịch</a>
-                        </button>
-                    </div>
+<div class = "d-sesion-1">
+    <div class = "d-container">
+        <H2>THÔNG TIN CHI TIẾT</H2>
+        <div class = "d-box-item">
+            <img th:src = "${artistDetail.accountMakeup.avatar}"/><!--lấy từ cột avatar bảng:mạkeup_artist->account_makeup-->
+            <div class ="d-box" >
+                <div class = "box-info">
+                    <p th:text="'Tên: ' + ${artistDetail.accountMakeup.nameAccount}"></p><!--lấy từ cột name_account bảng:mạkeup_artist->account_makeup-->
+                    <p th:text="'Tuổi: ' + ${artistDetail.age}"></p><!--lấy từ cột age bảng:mạkeup_artist-->
+                    <p th:text ="'Mô tả: '+ ${artistDetail.describes}"></p><!--lấy từ cột describes bảng:mạkeup_artist-->
+                    <p th:text="'Chuyên về: ' + ${artistDetail.specialization}"></p><!--lấy từ cột specialization bảng:mạkeup_artist-->
+                </div>
+                <div class = "d-box-tb">
+                    <p> Tác phẩm tiêu biểu:</p>
+                    <img class = "d-img" th:src = "${artistDetail.featureWork}"/><!--lấy từ cột feature_work bảng:mạkeup_artist-->
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--END CONTENT-->
+<div class="d-sesion-2">
+    <div class="d-container">
+        <h2>Đánh giá</h2>
+        <div class="d-box-comment">
+            <div class="d-comment">
+                <!-- Lặp qua danh sách bình luận -->
+                <th:block th:each="comment : ${comments}">
+                    <div class="u-comment">
+                        <img class="u-ava" th:src="${comment.customer?.user?.avatar} ?: '/image/default-avatar.jpg'" />
+                        <div class="ten">
+                            <p th:text="${comment.customer?.user?.nameAccount} ?: 'Ẩn danh'">Tên người dùng</p>
+                            <p th:text="${comment.cmt}">Nội dung bình luận</p>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+
+            <!-- Form nhập bình luận -->
+            <div class="m-comment">
+                <form>
+                    <input type="hidden" name="makeupArtistId" th:value="${artistDetail.makeupArtistId}" />
+                    <input type="text" name="cmt" placeholder="Viết bình luận tại đây" required />
+                    <button type="submit">Gửi</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Nút quay lại -->
+        <button class="btn-cmt">
+            <a href="/makeup-artists">Trở về</a>
+        </button>
+    </div>
+</div>
+<!--content-->
 <!--footer-->
 <div class="footer">
     <div class="content">
@@ -145,5 +155,6 @@
 </div>
 <!--footer-->
 <script src="/js/script.js"></script>
+<script src = "/js/artist.js"></script>
 </body>
 </html>
