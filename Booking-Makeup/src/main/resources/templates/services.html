@@ -69,41 +69,41 @@
     </div>
 </div>
 <!--Hero-->
-<!--content-->
-<div class="content">
-    <div class="services">
-        <div class="grid_row">
-            <!-- Duyệt qua danh sách dịch vụ từ Controller -->
-            <div th:each="services : ${services}" class="grid_column1-3">
-                <div class="grid_1-3">
-                    <img th:src="${services.image}" alt="Makeup Service">
-                    <h2 th:text="${services.name}"></h2>
-                    <p th:text="${services.description}"></p>
-                    <div class="grid_1-3-1">
-                        <p th:text="'Giá: ' + ${services.price} + ' VNĐ'"></p>
-                        <button class="bnt1-3">
-                            <a href="/schedule.html">Đặt lịch</a>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--END CONTENT-->
-<!--footer-->
-<div class="footer">
-    <div class="content">
-        <div class="grid__row">
-            <div class="grid__colum">
-                <div class="colum_2-4">
-                    <h1>Booking-Makeup</h1>
-                    <ul>
-                        <li>Hệ thống đặt lịch trang điểm chuyên nghiệp, giúp bạn luôn tỏa sáng trong mọi dịp đặc biệt.</li>
-                        <li><i class="fa-brands fa-facebook"></i>
-                            <i class="fa-brands fa-square-instagram"></i>
-                            <i class="fa-brands fa-facebook-messenger"></i></li>
-                    </ul>
+    <!--content-->
+  <div class="content">
+      <div class="services">
+          <div class="grid_row">
+              <!-- Duyệt qua danh sách dịch vụ từ Controller -->
+              <div th:each="services : ${services}" class="grid_column1-3">
+                  <div class="grid_1-3">
+                      <img th:src="${services.image}" alt="Makeup Service">
+                      <h2 th:text="${services.name}"></h2>
+                      <p th:text="${services.description}"></p>
+                      <div class="grid_1-3-1">
+                          <p th:text="'Giá: ' + ${services.price} + ' VNĐ'"></p>
+                          <button class="bnt1-3">
+                              <a href="/schedule.html">Đặt lịch</a>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    <!--END CONTENT-->
+     <!--footer-->
+     <div class="footer">
+        <div class="content">
+            <div class="grid__row">
+                <div class="grid__colum">
+                    <div class="colum_2-4">
+                        <h1>Booking-Makeup</h1>
+                        <ul>
+                            <li>Hệ thống đặt lịch trang điểm chuyên nghiệp, giúp bạn luôn tỏa sáng trong mọi dịp đặc biệt.</li>
+                            <li><i class="fa-brands fa-facebook"></i> 
+                                 <i class="fa-brands fa-square-instagram"></i>
+                                 <i class="fa-brands fa-facebook-messenger"></i></li>
+                        </ul>
 
                 </div>
                 <div class="colum_2-4">
