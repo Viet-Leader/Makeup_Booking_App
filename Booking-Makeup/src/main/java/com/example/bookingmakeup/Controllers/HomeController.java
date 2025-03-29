@@ -12,15 +12,6 @@ public class HomeController {
     public String home() {
         return "home";
     }
-    @GetMapping("/")
-    public String home() {
-        return "home";
-    }
-
-    @GetMapping("/")
-    public String home() {
-        return "home";
-    }
 
     @GetMapping("/home.html")
     public String homePage() {
@@ -34,7 +25,7 @@ public class HomeController {
         if (session.getAttribute("user") == null) {
             return new ModelAndView("redirect:/login.html"); // Chuyển hướng nếu chưa đăng nhập
         }
-        return new ModelAndView("schedule"); // Hiển thị trang nếu đã đăng nhập
+        return new ModelAndView("redirect:/schedule.html/new"); // Hiển thị trang nếu đã đăng nhập
     }
 
 
