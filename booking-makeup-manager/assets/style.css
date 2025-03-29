@@ -1,0 +1,440 @@
+/* Reset link styles */
+* {
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+}
+a {
+    text-decoration: none;
+}
+
+body {
+    font-size: 17px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.banner h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color:rgb(204 35 109);
+}
+.box_1_2_1 {
+    width: 224px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+.box_1_2_1:focus {
+    background-color: blue;
+}
+.col_1_2 {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+.box_1 {
+    width: 17%;
+
+}
+.box_2 {
+    width: 83%;
+}
+.box_1_1 {
+    width: 100%;
+    height: 80px;
+    padding:16px;
+    border-bottom: 1px solid black;
+}
+.box_1_2 {
+    width: 100%;
+    height: 312px;
+    padding:8px;
+}
+.box_1_3 {
+    margin-top: auto; /* Đẩy nút xuống cuối */
+    padding: 16px;
+    margin-top:230px;
+    text-align: center;
+}
+.btn-logout {
+    width: 224px;
+    height: 40px;
+    border-radius: 7px;
+    padding:0px;
+}
+.btn-logout a {
+    padding:10px 80px;
+}
+.header_row {
+    height: 60px;
+    width: 100%;
+    padding: 16px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.nav_menu a {
+    padding:7px 114px 13px 0;
+    color:rgb(55 65 81);
+}
+.box_2_2 {
+    width: 100%;
+    height: 100vh;
+    background-color: #f3f4f6;
+    background-repeat: no-repeat;
+    padding: 16px;
+}
+/*Box 2 content*/
+.content h1 {
+    font-size: 30px;
+    font-weight: bolder;
+    margin-top: 30px;
+    margin-bottom:30px ;
+}
+.row_1_4 {
+    display: flex;
+}
+.col_1_4 {
+    width: 20%;
+    height: 122px;
+    border:1px solid;
+    margin:auto;
+    background-color: #ffff;
+    border-radius:10px;
+    padding: 20px;
+    font-size: 18px;
+    align-items: center;  /* Căn giữa theo chiều dọc */
+    justify-content: space-between; /* Đẩy p và icon về 2 phía */}
+.row_1_4_1 {
+    display: flex;
+}
+.row_1_4_1 .dashboard_icon {
+    margin-left: auto;
+}
+.row_1_4_1 p {
+    padding-top: 8px;
+}
+.row_1_4_2 p {
+    padding-top: 20px;
+    font-size: 29px;
+    font-weight: bold;
+}
+.row_1_2 {
+    display: flex;
+}
+.col_2_1_2 {
+    width: 45%;
+    height: 295px;
+    border: 1px solid;
+    margin:auto;
+    margin-top:30px;
+    padding:24px;
+    border-radius:10px ;
+}
+.row_1_2 .col_2_1_2 .head_2 {
+    font-size: 29px;
+    font-weight: bold;
+    width: 100%;
+    height: 72px;
+}
+.row_1_2 .col_2_1_2 .box_branch {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    border-top: 1px solid ;
+    padding-top: 10px;
+}
+.row_1_2 .col_2_1_2 .box_branch p:last-child {
+    margin-left: auto;
+}
+.row_1_2 .col_2_1_2 .box_branch .box_branch_1 p:first-child {
+    font-size: 17px;
+    font-weight: bold;
+}
+/*Staff*/
+.staff-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.staff-table thead {
+    background-color: #f1f3f5;
+}
+
+.staff-table th, .staff-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.staff-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.staff-table td i {
+    margin-right: 8px;
+    color: #adb5bd;
+    font-size: 20px;
+}
+
+.role {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.role.owner { background: #ffcccc; color: #b30000; }
+.role.manager { background: #cce5ff; color: #004085; }
+.role.receptionist { background: #d4f8d4; color: #155724; }
+.role.specialist { background: #f3e5f5; color: #6f42c1; }
+/*end staff */
+/*branch*/
+.branch-container {
+    width: 100%;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.box_add {
+    display:flex;
+    align-items: center;
+}
+.btn-primary {
+    margin-left: auto;
+    width: 125px;
+    height: 32px;
+    background-color: black;
+    color:#ffff;
+    border-radius: 10px;
+}
+.hidden {
+    display: none;
+}
+/* Form popup */
+.form-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 450px;
+    max-width: 90%;
+    z-index: 1000;
+}
+
+/* Tiêu đề form */
+.form-popup h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Input fields */
+.form-popup input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Nhóm giờ mở cửa & đóng cửa */
+.time-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.time-group input {
+    flex: 1;
+}
+
+/* Nút hành động */
+.form-popup .btn-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn {
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+}
+
+/* Nút hủy */
+.btn-cancel {
+    background: white;
+    border: 1px solid #ddd;
+    color: black;
+}
+
+.btn-cancel:hover {
+    background: #f1f1f1;
+}
+
+/* Nút cập nhật */
+.btn-update {
+    width: 50px;
+    height: 50px;
+    background: black;
+    color: white;
+}
+
+.btn-update:hover {
+    background: #333;
+}
+
+
+.branch-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.branch-container th, .branch-container td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.branch-container th {
+    background-color: #f1f1f1;
+
+}
+
+.branch-container td i {
+    margin-right: 8px;
+}
+
+.branch-container button {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.branch-container .edit-btn {
+    background-color: #fff;
+    color: black;
+    border: 1px solid #ccc;
+}
+
+.branch-container .delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.branch-container .delete-btn:hover {
+    background-color: #c82333;
+}
+
+.branch-container .edit-btn:hover {
+    background-color: #e0e0e0;
+}
+/*end branch*/
+/*setting*/
+.box_2_2 #title-1-1 h1 {
+    font-size: 36px;
+    margin-bottom:10px;
+}
+.box_2_2 #title-1-1 p {
+    font-size: 20px;
+    color:#615c5c;
+}
+.box_2_2 #title-1-1 {
+    margin-bottom: 25px;
+}
+.box_2_2 .content-1-1{
+    display:block;
+}
+.box_2_2 .content-1-1 h2{
+    font-size: 26px;
+}
+.box_2_2 .content-1-1 h3{
+    font-size: 20px;
+    margin: 20px 0;
+    font-weight: bold;
+    
+}
+.box_2_2 .content-1-1 p {
+    font-size: 16px;
+    margin: 20px 0;
+    color:#615c5c
+}
+.box_2_2 .content-1-1 #avatar :last-child {
+    color:Black;
+}
+
+.box_2_2 .content-1-1 .container_setting-1-1 #avatar {
+    text-align: center;
+    margin :20px;
+    background-color: #004085;
+    width: 25%;
+    height:450px;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+.box_2_2 .content-1-1 .container_setting-1-1 #avatar img {
+    width:150px;
+    height:150px;
+    border: 1px solid white;
+    border-radius: 100%;
+    margin: 20px 0;
+}
+.box_2_2 .content-1-1 .container_setting-1-1{
+    display:flex;
+}
+.box_2_2 .content-1-1 .container_setting-1-1 .box-info-1 .box-if{
+    display:flex;
+    background-color:aqua;
+}
+.box_2_2 .content-1-1 .container_setting-1-1 .box-info-1 .box-if .if-1{
+    background-color: #adb5bd;
+    margin:20px;
+    width:45%;
+}
+.box_2_2 .content-1-1 .container_setting-1-1 .box-info-1 .box-if .if-1 #ht {
+    width: 100%;
+    height:40px;
+}
+.box_2_2 .content-1-1 .container_setting-1-1 .box-info-1 .box-if .if-1 #email {
+    width: 100%;
+    height:40px;
+}
+.box_2_2 .content-1-1 .container_setting-1-1 .box-info-1 .box-if .if-1 #phone {
+    width: 100%;
+    height:40px;
+}
+.box_2_2 .content-1-1 .container_setting-1-1 .box-info-1 #address {
+    width: 100%;
+    height:40px;
+}
+.box_2_2 .content-1-1 .container_setting-1-1 .box-info-1{
+    background-color: #d4f8d4;
+    border-radius: 10px;
+    border:1px solid White;
+    width:100%;
+}
+.box_2_2 .content-1-1 .container_setting-1-1 .box-info-1 .i1-1{
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+/*end setting*/
