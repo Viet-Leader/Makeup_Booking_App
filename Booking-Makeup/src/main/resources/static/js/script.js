@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (data.status === "success") {
                         localStorage.setItem("email", data.email);
                         alert("Đăng nhập thành công!");
-                        window.location.href="/home.html";
+                        window.location.href = document.referrer || "/";
                     } else {
                         alert("Sai tài khoản hoặc mật khẩu!");
                     }
