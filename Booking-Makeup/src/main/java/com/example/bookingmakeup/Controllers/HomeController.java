@@ -8,14 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
-    @GetMapping("/")
-    public String home() {
-        return "home";
-    }
-    @GetMapping("/")
-    public String home() {
-        return "home";
-    }
 
     @GetMapping("/")
     public String home() {
