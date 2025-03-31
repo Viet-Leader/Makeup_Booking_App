@@ -1,0 +1,143 @@
+/* Reset link styles */
+* {
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+}
+a {
+    text-decoration: none;
+}
+
+body {
+    font-size: 17px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.banner h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color:rgb(204 35 109);
+}
+.box_1_2_1 {
+    width: 224px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+.box_1_2_1:focus {
+    background-color: blue;
+}
+.col_1_2 {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+.box_1 {
+    width: 17%;
+
+}
+.box_2 {
+    width: 83%;
+}
+.box_1_1 {
+    width: 100%;
+    height: 80px;
+    padding:16px;
+    border-bottom: 1px solid black;
+}
+.box_1_2 {
+    width: 100%;
+    height: 312px;
+    padding:8px;
+}
+.box_1_3 {
+    margin-top: auto; /* Đẩy nút xuống cuối */
+    padding: 16px;
+    margin-top:230px;
+    text-align: center;
+}
+.btn-logout {
+    width: 224px;
+    height: 40px;
+    border-radius: 7px;
+    padding:0px;
+}
+.btn-logout a {
+    padding:10px 80px;
+}
+.header_row {
+    height: 60px;
+    width: 100%;
+    padding: 16px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.nav_menu a {
+    padding:7px 114px 13px 0;
+    color:rgb(55 65 81);
+}
+.box_2_2 {
+    width: 100%;
+    height: 100vh;
+    background-color: #f3f4f6;
+    background-repeat: no-repeat;
+    padding: 16px;
+}
+.box_2 .box_2_1 .header_row h1{
+    font-size: 30px;
+    font-weight: bold;
+    
+}
+/* start index.html */
+.content .cotainer-1 {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 90px;
+    display: flex;
+    gap: 30px;
+}
+.content .cotainer-1 .card-1{
+    width :30%;
+    border :1px solid black;
+    border-radius: 10px;
+    width: 366px;
+    height: 182px;
+    gap: 10px;
+    margin-top: 20px;
+    padding-left: 15px;
+    padding-top: 25px;
+}
+.content .cotainer-1 .card-1 .card-1-1{
+    display: flex;
+    padding-bottom: 20px;
+}
+.content .cotainer-1 .card-1 .card-1-1 h3{
+    margin-right: 200px;
+    font-size: 16px;
+    font-weight:bold;
+}
+.content .cotainer-1 .card-1 .card-1-2 {
+    font-size: 16px;
+    padding-bottom: 25px;
+}
+.content .cotainer-1 .card-1 .card-1-2 .number{
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+.content .cotainer-1 .card-1 button{
+    width: 95%;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s
+}
+
+/* end index.html */
+
+
