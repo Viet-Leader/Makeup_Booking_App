@@ -38,36 +38,55 @@ document.addEventListener("DOMContentLoaded", function() {
         filterAppointmentsByStatus(selectedStatus);
     });
 
+    // Hàm ánh xạ trạng thái từ tiếng Việt về tiếng Anh (database)
+    function mapVietnameseToDbStatus(vietnameseStatus) {
+        switch (vietnameseStatus) {
+            case "Chờ xác nhận": return "pending";
+            case "Đã xác nhận": return "confirmed";
+            case "Hoàn thành": return "completed";
+            case "Đã hủy": return "cancelled";
+            default: return vietnameseStatus; // Giữ nguyên nếu không khớp
+        }
+    }
+
     // Xử lý nút "Chi tiết"
     document.querySelectorAll(".detail").forEach(button => {
         button.addEventListener("click", function() {
             const row = this.closest("tr");
-            selectedAppointmentId = this.dataset.id; // Lấy ID từ data-id
+            selectedAppointmentId = this.dataset.id;
 
             const dateTime = row.cells[0].innerText;
             const branch = row.cells[1].innerText;
             const service = row.cells[3].innerText;
-            const status = row.cells[4].innerText.trim();
+            const vietnameseStatus = row.cells[4].innerText.trim(); // Trạng thái hiển thị tiếng Việt
+            const dbStatus = mapVietnameseToDbStatus(vietnameseStatus); // Trạng thái gốc trong DB
 
+            // Lấy dữ liệu từ data-* attributes
+            const makeupartist = this.dataset.makeupartist; // Tên chuyên viên
+            const servicePrice = parseFloat(this.dataset.servicePrice) || 0; // Giá dịch vụ
+            const makeupartistPrice = parseFloat(this.dataset.makeupartistPrice) || 0; // Giá chuyên viên
+            const totalPrice = servicePrice + makeupartistPrice; // Tổng giá
+
+            // Gán dữ liệu vào modal
             document.getElementById("appointmentDateTime").innerText = dateTime;
             document.getElementById("appointmentBranch").innerText = branch;
             document.getElementById("appointmentService").innerText = service;
-            document.getElementById("appointmentStaff").innerText = "Chưa cập nhật";
-            document.getElementById("appointmentPrice").innerText = "300.000"; // Có thể thay bằng dữ liệu thực tế
-            document.getElementById("appointmentStatus").innerText = status;
+            document.getElementById("appointmentStaff").innerText = makeupartist; // Hiển thị chuyên viên
+            document.getElementById("appointmentPrice").innerText = totalPrice.toLocaleString('vi-VN'); // Hiển thị tổng giá
+            document.getElementById("appointmentStatus").innerText = vietnameseStatus;
 
             // Ẩn tất cả nút trước khi kiểm tra trạng thái
             confirmBtn.classList.add("hidden");
             cancelBtn.classList.add("hidden");
             completeBtn.classList.add("hidden");
 
-            // Hiển thị nút dựa trên trạng thái
-            if (status === "Chờ xác nhận") {
-                confirmBtn.classList.remove("hidden");
-                cancelBtn.classList.remove("hidden");
-            } else if (status === "Đã xác nhận") {
-                completeBtn.classList.remove("hidden");
-                cancelBtn.classList.remove("hidden");
+            // Hiển thị nút dựa trên trạng thái gốc (dbStatus)
+            if (dbStatus === "pending") {
+                confirmBtn.classList.remove("hidden"); // Nút "Xác nhận"
+                cancelBtn.classList.remove("hidden");  // Nút "Hủy"
+            } else if (dbStatus === "confirmed") {
+                completeBtn.classList.remove("hidden"); // Nút "Hoàn thành"
+                cancelBtn.classList.remove("hidden");   // Nút "Hủy"
             }
 
             modal.classList.remove("hidden");
@@ -88,11 +107,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // Hàm lọc theo ngày
     function filterAppointmentsByDate(dateStr) {
         const rows = document.querySelectorAll("tbody tr");
-        const selectedDate = new Date(dateStr.split("/").reverse().join("-")); // Chuyển "dd/mm/yyyy" thành định dạng Date
+        const selectedDate = new Date(dateStr.split("/").reverse().join("-"));
 
         rows.forEach(row => {
             const dateTimeText = row.cells[0].innerText; // "dd/MM/yyyy - HH:mm"
-            const rowDateStr = dateTimeText.split(" - ")[0]; // Lấy phần ngày "dd/MM/yyyy"
+            const rowDateStr = dateTimeText.split(" - ")[0];
             const rowDate = new Date(rowDateStr.split("/").reverse().join("-"));
 
             if (rowDate.toDateString() === selectedDate.toDateString()) {
@@ -110,8 +129,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         rows.forEach(row => {
             const dateTimeText = row.cells[0].innerText; // "dd/MM/yyyy - HH:mm"
-            const rowDateStr = dateTimeText.split(" - ")[0]; // Lấy phần ngày
-            const rowTimeStr = dateTimeText.split(" - ")[1]; // Lấy phần giờ
+            const rowDateStr = dateTimeText.split(" - ")[0];
+            const rowTimeStr = dateTimeText.split(" - ")[1];
             const rowDateTime = new Date(rowDateStr.split("/").reverse().join("-") + "T" + rowTimeStr);
 
             if (filterType === "Sắp tới") {
@@ -126,8 +145,9 @@ document.addEventListener("DOMContentLoaded", function() {
     function filterAppointmentsByStatus(selectedStatus) {
         const rows = document.querySelectorAll("tbody tr");
         rows.forEach(row => {
-            const status = row.cells[4].innerText.trim();
-            if (selectedStatus === "all" || status === selectedStatus) {
+            const vietnameseStatus = row.cells[4].innerText.trim();
+            const dbStatus = mapVietnameseToDbStatus(vietnameseStatus);
+            if (selectedStatus === "all" || dbStatus === selectedStatus) {
                 row.style.display = "";
             } else {
                 row.style.display = "none";
@@ -150,21 +170,21 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(response => response.text())
             .then(message => {
                 alert(message);
-                location.reload(); // Tải lại trang để cập nhật dữ liệu
+                location.reload();
             })
             .catch(error => console.error("Lỗi cập nhật trạng thái:", error));
     }
 
     // Gắn sự kiện cho các nút trong modal
     confirmBtn.addEventListener("click", function() {
-        updateAppointmentStatus("Đã xác nhận");
+        updateAppointmentStatus("confirmed"); // Chuyển sang "Đã xác nhận"
     });
 
     cancelBtn.addEventListener("click", function() {
-        updateAppointmentStatus("Đã hủy");
+        updateAppointmentStatus("cancelled"); // Chuyển sang "Đã hủy"
     });
 
     completeBtn.addEventListener("click", function() {
-        updateAppointmentStatus("Hoàn thành");
+        updateAppointmentStatus("completed"); // Chuyển sang "Hoàn thành"
     });
 });

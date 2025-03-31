@@ -84,12 +84,26 @@
                     <tr th:each="appointment : ${appointments}" th:data-date="${appointment.appointmentDate}">
                         <td th:text="${#temporals.format(appointment.appointmentDate, 'dd/MM/yyyy - HH:mm')}"></td>
                         <td th:text="${appointment.branch?.name} ?: 'Không có thông tin'"></td>
-                        <td th:text="${appointment.makeupArtist != null ? appointment.makeupArtist.nameAccount : 'Không có thông tin'}"></td>
+                        <td th:text="${appointment.customer != null ? appointment.customer.nameAccount : 'Không có thông tin'}"></td>
                         <td th:text="${appointment.service?.name} ?: 'Không có thông tin'"></td>
                         <td>
-                            <span th:class="'status ' + ${appointment.status}" th:text="${appointment.status}"></span>
+                            <span th:class="'status ' + ${appointment.status}">
+                                <span th:switch="${appointment.status}">
+                                    <span th:case="'pending'">Chờ xác nhận</span>
+                                    <span th:case="'confirmed'">Đã xác nhận</span>
+                                    <span th:case="'completed'">Hoàn thành</span>
+                                    <span th:case="'cancelled'">Đã hủy</span>
+                                    <span th:case="*">[[${appointment.status}]]</span>
+                                </span>
+                            </span>
                         </td>
-                        <td><button class="detail" th:data-id="${appointment.appointmentId}">Chi tiết</button></td>
+                        <td><button class="detail"
+                                    th:data-id="${appointment.appointmentId}"
+                                    th:data-makeupartist="${appointment.makeupArtist.accountMakeup.nameAccount} ?: 'Chưa cập nhật'"
+                                    th:data-service-price="${appointment.service.price} ?: 0"
+                                    th:data-makeupartist-price="${appointment.makeupArtist.price} ?: 0">
+                            Chi tiết
+                        </button></td>
                     </tr>
                     </tbody>
                 </table>
@@ -116,7 +130,7 @@
         </div>
     </div>
 </div>
-        <script src="/admin/js/script.js" defer></script>
-        <script src = "/manager/js/mjs.js" defer></script>
+<script src="/admin/js/script.js" defer></script>
+<script src = "/manager/js/mjs.js" defer></script>
 </body>
 </html>

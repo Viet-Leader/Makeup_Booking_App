@@ -17,7 +17,7 @@ public class Appointment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "makeup_artist_id")
-    private Account makeupArtist;
+    private MakeupArtist makeupArtist;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branch_id")
@@ -52,11 +52,11 @@ public class Appointment {
         this.customer = customer;
     }
 
-    public Account getMakeupArtist() {
+    public MakeupArtist getMakeupArtist() {
         return makeupArtist;
     }
 
-    public void setMakeupArtist(Account makeupArtist) {
+    public void setMakeupArtist(MakeupArtist makeupArtist) {
         this.makeupArtist = makeupArtist;
     }
 

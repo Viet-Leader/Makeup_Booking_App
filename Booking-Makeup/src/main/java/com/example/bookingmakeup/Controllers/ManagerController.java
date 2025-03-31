@@ -6,6 +6,7 @@ import com.example.bookingmakeup.Models.MakeupArtist;
 import com.example.bookingmakeup.Services.IAccountService;
 import com.example.bookingmakeup.Services.IAppointmentService;
 import jakarta.servlet.http.HttpSession;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,12 @@ public class ManagerController {
     @GetMapping("/appointment")
     public String appointmentPage(Model model) {
         List<Appointment> appointments = appointmentService.getAllAppointments();
+        appointments.forEach(appointment -> {
+            Hibernate.initialize(appointment.getMakeupArtist());
+            Hibernate.initialize(appointment.getService());
+            System.out.println("MakeupArtist: " + appointment.getMakeupArtist());
+            System.out.println("Service: " + appointment.getService());
+        });
         System.out.println("Appointments: " + appointments);
         model.addAttribute("appointments", appointments);
         return "manager/appointment";
