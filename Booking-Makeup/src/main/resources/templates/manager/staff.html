@@ -39,7 +39,7 @@
     <div class="box_2">
         <div class="box_2_1">
             <div class="header_row">
-                <h1>Admin Dashboard</h1>
+                <h1>Manager Dashboard</h1>
             </div>
         </div>
         <div class="box_2_2">
@@ -57,35 +57,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><i class="fa-solid fa-circle-user"></i> Admin User</td>
-                        <td><span class="role owner">Chủ salon</span></td>
-                        <td>admin@example.com</td>
-                        <td>Tất cả chi nhánh</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-solid fa-circle-user"></i> Branch Manager</td>
-                        <td><span class="role manager">Quản lý</span></td>
-                        <td>manager@example.com</td>
-                        <td>Chi nhánh Quận 1</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-solid fa-circle-user"></i> Front Desk</td>
-                        <td><span class="role receptionist">Lễ tân</span></td>
-                        <td>receptionist@example.com</td>
-                        <td>Chi nhánh Quận 1</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-solid fa-circle-user"></i> Mai Linh</td>
-                        <td><span class="role specialist">Chuyên viên</span></td>
-                        <td>artist1@example.com</td>
-                        <td>Chi nhánh Quận 1</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-solid fa-circle-user"></i> Hương Trang</td>
-                        <td><span class="role specialist">Chuyên viên</span></td>
-                        <td>artist2@example.com</td>
-                        <td>Chi nhánh Quận 3</td>
+                    <tr th:each="staff : ${staffList}">
+                        <td><i class="fa-solid fa-circle-user"></i> <span th:text="${staff.nameAccount}"></span></td>
+                        <td><span class="role" th:text="${staff.role}"></span></td>
+                        <td th:text="${staff.email}"></td>
+                        <td th:text="${staff.branch.name}"></td>
                     </tr>
                     </tbody>
                 </table>

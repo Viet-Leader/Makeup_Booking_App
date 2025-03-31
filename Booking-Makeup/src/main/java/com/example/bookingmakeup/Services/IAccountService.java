@@ -13,4 +13,5 @@ public interface IAccountService {
     List<Account> getAllAccounts();
     Optional<Account> findById(Long userId);
     void update(Account account);
+    List<Account> getAccountsByBranch(Long userId);
 }

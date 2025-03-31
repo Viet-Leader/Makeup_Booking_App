@@ -81,49 +81,35 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr data-date="2023-07-15">
-                        <td>15/07/2023 - 10:00</td>
-                        <td>Chi nhánh Quận 1</td>
-                        <td>Thu Thủy</td>
-                        <td>Trang điểm dự tiệc</td>
-                        <td><span class="status completed">Hoàn thành</span></td>
-                        <td><button class="detail">Chi tiết</button></td>
-                    </tr>
-                    <tr data-date="2023-07-20">
-                        <td>20/07/2023 - 14:00</td>
-                        <td>Chi nhánh Quận 3</td>
-                        <td>Thu Thủy</td>
-                        <td>Trang điểm nhẹ nhàng</td>
-                        <td><span class="status confirmed">Đã xác nhận</span></td>
-                        <td><button class="detail">Chi tiết</button></td>
-                    </tr>
-                    <tr data-date="2023-07-22">
-                        <td>22/07/2023 - 16:00</td>
-                        <td>Chi nhánh Quận 5</td>
-                        <td>Ngọc Anh</td>
-                        <td>Trang điểm cô dâu</td>
-                        <td><span class="status pending">Chờ xác nhận</span></td>
-                        <td><button class="detail">Chi tiết</button></td>
+                    <tr th:each="appointment : ${appointments}" th:data-date="${appointment.appointmentDate}">
+                        <td th:text="${#temporals.format(appointment.appointmentDate, 'dd/MM/yyyy - HH:mm')}"></td>
+                        <td th:text="${appointment.branch?.name} ?: 'Không có thông tin'"></td>
+                        <td th:text="${appointment.makeupArtist != null ? appointment.makeupArtist.nameAccount : 'Không có thông tin'}"></td>
+                        <td th:text="${appointment.service?.name} ?: 'Không có thông tin'"></td>
+                        <td>
+                            <span th:class="'status ' + ${appointment.status}" th:text="${appointment.status}"></span>
+                        </td>
+                        <td><button class="detail" th:data-id="${appointment.appointmentId}">Chi tiết</button></td>
                     </tr>
                     </tbody>
                 </table>
-            </div>
-            <div id="appointmentDetailModal" class="modal-overlay hidden">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <p>Chi tiết lịch hẹn</p>
-                    <p>Ngày & Giờ: <span id="appointmentDateTime"></span></p>
-                    <p>Chi nhánh: <span id="appointmentBranch"></span></p>
-                    <p>Dịch vụ: <span id="appointmentService"></span></p>
-                    <p>Chuyên viên: <span id="appointmentStaff"></span></p>
-                    <p>Giá: <span id="appointmentPrice"></span></p>
-                    <p>Trạng thái: <span id="appointmentStatus"></span></p>
 
-                    <!-- Nút xác nhận/hủy/hoàn thành -->
-                    <div id="modalActions">
-                        <button id="confirmBtn" class="hidden">Xác nhận</button>
-                        <button id="completeBtn" class="hidden">Hoàn thành</button>
-                        <button id="cancelBtn" class="hidden">Hủy</button>
+                <div id="appointmentDetailModal" class="modal-overlay hidden">
+                    <div class="modal-content">
+                        <span class="close">×</span>
+                        <p>Chi tiết lịch hẹn</p>
+                        <p>Ngày & Giờ: <span id="appointmentDateTime"></span></p>
+                        <p>Chi nhánh: <span id="appointmentBranch"></span></p>
+                        <p>Dịch vụ: <span id="appointmentService"></span></p>
+                        <p>Chuyên viên: <span id="appointmentStaff"></span></p>
+                        <p>Giá: <span id="appointmentPrice"></span></p>
+                        <p>Trạng thái: <span id="appointmentStatus"></span></p>
+
+                        <div id="modalActions">
+                            <button id="confirmBtn" class="hidden">Xác nhận</button>
+                            <button id="completeBtn" class="hidden">Hoàn thành</button>
+                            <button id="cancelBtn" class="hidden">Hủy</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,6 +117,6 @@
     </div>
 </div>
         <script src="/admin/js/script.js" defer></script>
-        <script src = "/manager/js/mjs.js"></script>
+        <script src = "/manager/js/mjs.js" defer></script>
 </body>
 </html>

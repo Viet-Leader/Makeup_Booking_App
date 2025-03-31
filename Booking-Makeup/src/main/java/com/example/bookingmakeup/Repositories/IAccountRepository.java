@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface IAccountRepository extends JpaRepository<Account, Long> {
     Optional<Account> findByEmail(String email);
+    List<Account> findByBranch_BranchId(Long branchId);
 }

@@ -1,17 +1,25 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Kích hoạt Flatpickr
+    // Khai báo biến
+    const modal = document.getElementById("appointmentDetailModal");
+    const closeModal = document.querySelector(".close");
+    const confirmBtn = document.getElementById("confirmBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const completeBtn = document.getElementById("completeBtn");
+    let selectedAppointmentId = null;
+
+    // Kích hoạt Flatpickr cho lịch
     flatpickr("#datepicker", {
         inline: true,
         dateFormat: "d/m/Y",
         defaultDate: "today",
         locale: "vn",
-        onChange: function(selectedDates, dateStr, instance) {
+        onChange: function(selectedDates, dateStr) {
             console.log("Ngày được chọn:", dateStr);
             filterAppointmentsByDate(dateStr);
         }
     });
 
-    // Xử lý khi nhấn vào tab "Sắp tới" hoặc "Tất cả"
+    // Xử lý tab "Sắp tới" và "Tất cả"
     document.querySelectorAll(".tabs button").forEach(button => {
         button.addEventListener("click", function() {
             document.querySelectorAll(".tabs button").forEach(btn => btn.classList.remove("active"));
@@ -23,45 +31,37 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Xử lý khi thay đổi bộ lọc trạng thái
+    // Xử lý bộ lọc trạng thái
     document.querySelector("#status").addEventListener("change", function() {
         const selectedStatus = this.value;
         console.log("Trạng thái được chọn:", selectedStatus);
         filterAppointmentsByStatus(selectedStatus);
     });
 
-    // Lấy modal và nút đóng
-    const modal = document.getElementById("appointmentDetailModal");
-    const closeModal = document.querySelector(".close");
-
-    // Lấy các nút xác nhận, hủy, hoàn thành
-    const confirmBtn = document.getElementById("confirmBtn");
-    const cancelBtn = document.getElementById("cancelBtn");
-    const completeBtn = document.getElementById("completeBtn");
-
-    // Xử lý khi nhấn vào nút chi tiết
+    // Xử lý nút "Chi tiết"
     document.querySelectorAll(".detail").forEach(button => {
         button.addEventListener("click", function() {
             const row = this.closest("tr");
+            selectedAppointmentId = this.dataset.id; // Lấy ID từ data-id
+
             const dateTime = row.cells[0].innerText;
             const branch = row.cells[1].innerText;
             const service = row.cells[3].innerText;
-            const status = row.cells[4].innerText.trim(); // Lấy trạng thái
+            const status = row.cells[4].innerText.trim();
 
-            // Hiển thị thông tin trong modal
             document.getElementById("appointmentDateTime").innerText = dateTime;
             document.getElementById("appointmentBranch").innerText = branch;
             document.getElementById("appointmentService").innerText = service;
             document.getElementById("appointmentStaff").innerText = "Chưa cập nhật";
-            document.getElementById("appointmentPrice").innerText = "300.000";
+            document.getElementById("appointmentPrice").innerText = "300.000"; // Có thể thay bằng dữ liệu thực tế
             document.getElementById("appointmentStatus").innerText = status;
 
-            // Ẩn tất cả các nút trước khi kiểm tra trạng thái
+            // Ẩn tất cả nút trước khi kiểm tra trạng thái
             confirmBtn.classList.add("hidden");
             cancelBtn.classList.add("hidden");
             completeBtn.classList.add("hidden");
 
-            // Kiểm tra trạng thái và hiển thị nút phù hợp
+            // Hiển thị nút dựa trên trạng thái
             if (status === "Chờ xác nhận") {
                 confirmBtn.classList.remove("hidden");
                 cancelBtn.classList.remove("hidden");
@@ -70,68 +70,64 @@ document.addEventListener("DOMContentLoaded", function() {
                 cancelBtn.classList.remove("hidden");
             }
 
-            modal.classList.remove("hidden"); // Hiển thị modal
+            modal.classList.remove("hidden");
         });
     });
 
-    // Đóng modal khi bấm vào nút đóng
+    // Đóng modal
     closeModal.addEventListener("click", function() {
         modal.classList.add("hidden");
     });
 
-    // Đóng modal khi nhấn vào overlay
     modal.addEventListener("click", function(event) {
         if (event.target === modal) {
             modal.classList.add("hidden");
         }
     });
 
-    // Xử lý nút xác nhận
-    confirmBtn.addEventListener("click", function() {
-        alert("Đã xác nhận lịch hẹn!");
-        modal.classList.add("hidden");
-    });
+    // Hàm lọc theo ngày
+    function filterAppointmentsByDate(dateStr) {
+        const rows = document.querySelectorAll("tbody tr");
+        const selectedDate = new Date(dateStr.split("/").reverse().join("-")); // Chuyển "dd/mm/yyyy" thành định dạng Date
 
-    // Xử lý nút hủy
-    cancelBtn.addEventListener("click", function() {
-        alert("Lịch hẹn đã bị hủy!");
-        modal.classList.add("hidden");
-    });
+        rows.forEach(row => {
+            const dateTimeText = row.cells[0].innerText; // "dd/MM/yyyy - HH:mm"
+            const rowDateStr = dateTimeText.split(" - ")[0]; // Lấy phần ngày "dd/MM/yyyy"
+            const rowDate = new Date(rowDateStr.split("/").reverse().join("-"));
 
-    // Xử lý nút hoàn thành
-    completeBtn.addEventListener("click", function() {
-        alert("Lịch hẹn đã hoàn thành!");
-        modal.classList.add("hidden");
-    });
+            if (rowDate.toDateString() === selectedDate.toDateString()) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
 
-    // Hàm lọc lịch hẹn theo tab
+    // Hàm lọc "Sắp tới" và "Tất cả"
     function filterAppointments(filterType) {
         const rows = document.querySelectorAll("tbody tr");
-        const today = new Date();
-        today.setHours(0, 0, 0, 0); // Đặt giờ về 00:00:00.000
+        const now = new Date();
 
         rows.forEach(row => {
-            const rowDate = new Date(row.dataset.date);
+            const dateTimeText = row.cells[0].innerText; // "dd/MM/yyyy - HH:mm"
+            const rowDateStr = dateTimeText.split(" - ")[0]; // Lấy phần ngày
+            const rowTimeStr = dateTimeText.split(" - ")[1]; // Lấy phần giờ
+            const rowDateTime = new Date(rowDateStr.split("/").reverse().join("-") + "T" + rowTimeStr);
+
             if (filterType === "Sắp tới") {
-                if (rowDate >= today) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            } else {
-                row.style.display = ""; // "Tất cả" hiển thị tất cả
+                row.style.display = rowDateTime > now ? "" : "none";
+            } else if (filterType === "Tất cả") {
+                row.style.display = "";
             }
         });
     }
 
-    // Hàm lọc lịch hẹn theo ngày được chọn trên lịch
-    function filterAppointmentsByDate(selectedDateStr) {
+    // Hàm lọc theo trạng thái
+    function filterAppointmentsByStatus(selectedStatus) {
         const rows = document.querySelectorAll("tbody tr");
-        const selectedDate = parseDate(selectedDateStr); // Chuyển đổi sang đối tượng Date
-
         rows.forEach(row => {
-            const rowDate = parseDate(row.dataset.date.split("-").reverse().join("/")); // Chuyển đổi sang đối tượng Date
-            if (rowDate.getTime() === selectedDate.getTime()) {
+            const status = row.cells[4].innerText.trim();
+            if (selectedStatus === "all" || status === selectedStatus) {
                 row.style.display = "";
             } else {
                 row.style.display = "none";
@@ -139,35 +135,36 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Hàm chuyển đổi chuỗi ngày sang đối tượng Date
-    function parseDate(dateStr) {
-        const parts = dateStr.split("/");
-        return new Date(parts[2], parts[1] - 1, parts[0]);
+    // Hàm cập nhật trạng thái
+    function updateAppointmentStatus(newStatus) {
+        if (!selectedAppointmentId) {
+            alert("Không tìm thấy cuộc hẹn!");
+            return;
+        }
+
+        fetch("/manager/update-status", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `appointmentId=${selectedAppointmentId}&status=${newStatus}`
+        })
+            .then(response => response.text())
+            .then(message => {
+                alert(message);
+                location.reload(); // Tải lại trang để cập nhật dữ liệu
+            })
+            .catch(error => console.error("Lỗi cập nhật trạng thái:", error));
     }
-    // Hàm lọc lịch hẹn theo trạng thái
-    function filterAppointmentsByStatus(status) {
-        const rows = document.querySelectorAll("tbody tr");
 
-        rows.forEach(row => {
-            const rowStatus = row.querySelector(".status").innerText.trim().toLowerCase(); // Lấy trạng thái từ cột trạng thái
+    // Gắn sự kiện cho các nút trong modal
+    confirmBtn.addEventListener("click", function() {
+        updateAppointmentStatus("Đã xác nhận");
+    });
 
-            // Chuyển đổi trạng thái hiển thị sang giá trị tương ứng
-            let normalizedStatus = "";
-            if (rowStatus === "chờ xác nhận") {
-                normalizedStatus = "pending";
-            } else if (rowStatus === "đã xác nhận") {
-                normalizedStatus = "confirmed";
-            } else if (rowStatus === "hoàn thành") {
-                normalizedStatus = "completed";
-            } else if (rowStatus === "đã hủy") {
-                normalizedStatus = "cancelled";
-            }
+    cancelBtn.addEventListener("click", function() {
+        updateAppointmentStatus("Đã hủy");
+    });
 
-            if (status === "all" || normalizedStatus === status) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-        });
-    }
+    completeBtn.addEventListener("click", function() {
+        updateAppointmentStatus("Hoàn thành");
+    });
 });
