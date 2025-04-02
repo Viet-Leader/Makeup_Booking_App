@@ -10,4 +10,7 @@ public interface IAccountService {
     String login(String email, String password);
 
     Optional<Account> findByEmail(String email);
+
+    List<Account> getAllCustomers();
+
 }

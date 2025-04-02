@@ -58,10 +58,10 @@
                         </thead>
                         <tbody>
                         <tr th:each="customer : ${customers}">
-                            <td th:text="${customer.account.nameAccount}"></td>
-                            <td th:text="${customer.account.phone}"></td>
-                            <td th:text="${customer.account.email}"></td>
-                            <td th:text="${customer.account.address}"></td>
+                            <td th:text="${customer.nameAccount}"></td>  <!-- Name -->
+                            <td th:text="${customer.phone}"></td>  <!-- Phone -->
+                            <td th:text="${customer.email}"></td>  <!-- Email -->
+                            <td th:text="${customer.address}"></td>  <!-- Address -->
                         </tr>
                         </tbody>
                     </table>
