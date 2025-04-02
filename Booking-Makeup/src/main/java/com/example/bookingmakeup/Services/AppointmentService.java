@@ -30,4 +30,9 @@ public class AppointmentService implements IAppointmentService {
         }
         return false;
     }
+
+    @Override
+    public long getTotalActiveAppointments() {
+        return appointmentRepository.countActiveAppointments();
+    }
 }

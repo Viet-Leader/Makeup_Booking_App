@@ -50,11 +50,11 @@
                 <div class="row_1_4">
                     <div class="col_1_4">
                         <div class="row_1_4_1">
-                            <p>Tổng nhân viên</p>
+                            <p>Tổng nhân viên chi nhánh</p>
                             <div class="dashboard_icon"> <i class="fa-solid fa-circle-user" style="color: #74C0FC; font-size: 35px;"></i></div>
                         </div>
                         <div class="row_1_4_2">
-                            <p>5</p>
+                            <p th:text="${totalStaffs}">5</p>
                         </div>
                     </div>
                     <div class="col_1_4">
@@ -68,11 +68,11 @@
                     </div>
                     <div class="col_1_4">
                         <div class="row_1_4_1">
-                            <p>Tổng dịch vụ</p>
+                            <p>Tổng dịch vụ chi nhánh</p>
                             <div class="dashboard_icon"> <i class="fa-solid fa-server" style="color: #74C0FC;font-size: 35px;"></i></div>
                         </div>
                         <div class="row_1_4_2">
-                            <p>3</p>
+                            <p>2</p>
                         </div>
                     </div>
                     <div class="col_1_4">
@@ -81,7 +81,7 @@
                             <div class="dashboard_icon"> <i class="fa-solid fa-calendar" style="color: #74C0FC;font-size: 35px;"></i></div>
                         </div>
                         <div class="row_1_4_2">
-                            <p>2</p>
+                            <p th:text="${totalAppointments}">2</p>
                         </div>
                     </div>
                 </div>

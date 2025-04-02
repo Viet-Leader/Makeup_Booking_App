@@ -98,4 +98,9 @@ public class AccountService implements IAccountService {
         }
         return Collections.emptyList();
     }
+
+    @Override
+    public long countStaffByBranch(Long branchId) {
+        return accountRepository.countStaffByBranch(branchId);
+    }
 }

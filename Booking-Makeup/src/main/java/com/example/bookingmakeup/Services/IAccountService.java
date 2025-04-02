@@ -14,4 +14,5 @@ public interface IAccountService {
     Optional<Account> findById(Long userId);
     void update(Account account);
     List<Account> getAccountsByBranch(Long userId);
+    long countStaffByBranch(Long branchId);
 }

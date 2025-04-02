@@ -25,9 +25,31 @@ public class ManagerController {
     public String mainPage() {
         return "manager/index";
     }
+
     @GetMapping("/index")
-    public String indexPage() {
-        return "manager/index";
+    public String indexPage(Model model, HttpSession session) {
+        // Lấy userId từ session
+        Long userId = (Long) session.getAttribute("userId");
+
+        if (userId == null) {
+            return "redirect:/login"; // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+        }
+
+        // Lấy thông tin tài khoản từ userId
+        Account account = accountService.findById(userId).orElse(null);
+
+        if (account == null || account.getBranch() == null) {
+            model.addAttribute("totalStaffs", 0);
+        } else {
+            Long branchId = account.getBranch().getBranchId();
+            System.out.println("Branch ID: " + branchId); // Kiểm tra branchId
+            model.addAttribute("totalStaffs", accountService.countStaffByBranch(branchId)); // Đếm nhân viên
+        }
+
+        // Lấy tổng số lịch hẹn
+        model.addAttribute("totalAppointments", appointmentService.getTotalActiveAppointments());
+
+        return "manager/index"; // Trả về trang Thymeleaf
     }
     @GetMapping("/appointment")
     public String appointmentPage(Model model) {

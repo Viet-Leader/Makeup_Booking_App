@@ -7,4 +7,5 @@ import java.util.List;
 public interface IAppointmentService {
     List<Appointment> getAllAppointments();
     boolean updateAppointmentStatus(Long appointmentId, String newStatus);
+    long getTotalActiveAppointments();
 }
