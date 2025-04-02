@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/style.css"/>
-    <link rel="stylesheet" href="./assets/reset.css"/>
+    <link rel="stylesheet" th:href="@{./assets/style.css}"/>
+    <link rel="stylesheet" th:href="@{./assets/reset.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
     <title>Booking-Makeup-Admin-index</title>
 </head>
@@ -13,9 +13,7 @@
     <div class="box_1">
         <div class="box_1_1">
             <div class="banner">
-                <h2>
-                    GlamSchedule
-                </h2>
+                <h2>GlamSchedule</h2>
                 <p>Admin user</p>
             </div>
         </div>
@@ -50,29 +48,38 @@
             </div>
             <div class="content">
                 <div class="cotainer-1">
-                    <div class ="card-1">
+                    <!-- Today's Appointments -->
+                    <div class="card-1">
                         <div class="card-1-1">
                             <h3>Lịch hẹn hôm nay</h3>
                             <i class="fa-solid fa-clock"></i>
                         </div>
                         <div class="card-1-2">
-                            <p class="number">0</p>
-                            <p class="description">Không có lịch hẹn</p>
+                            <p class="number" th:text="${todayAppointments != null ? #lists.size(todayAppointments) : 0}">0</p>
+                            <p class="description" th:text="${todayAppointments != null and !#lists.isEmpty(todayAppointments) ? 'Có lịch hẹn hôm nay' : 'Không có lịch hẹn'}">Không có lịch hẹn</p>
+                            <ul th:if="${todayAppointments != null and !#lists.isEmpty(todayAppointments)}" th:each="appointment : ${todayAppointments}">
+                                <li th:text="${appointment.customer.username} + ' - ' + ${appointment.appointmentDate} + ' (' + ${appointment.status} + ')'"></li>
+                            </ul>
                         </div>
                         <button class="card-buttong">Xem chi tiết</button>
                     </div>
-                    <div class ="card-1">
+                    <!-- Upcoming Appointments -->
+                    <div class="card-1">
                         <div class="card-1-1">
                             <h3>Lịch hẹn sắp tới</h3>
                             <i class="fa-solid fa-calendar"></i>
                         </div>
                         <div class="card-1-2">
-                            <p class="number">0</p>
-                            <p class="description">Không có lịch hẹn</p>
+                            <p class="number" th:text="${upcomingAppointments != null ? #lists.size(upcomingAppointments) : 0}">0</p>
+                            <p class="description" th:text="${upcomingAppointments != null and !#lists.isEmpty(upcomingAppointments) ? 'Có lịch hẹn sắp tới' : 'Không có lịch hẹn'}">Không có lịch hẹn</p>
+                            <ul th:if="${upcomingAppointments != null and !#lists.isEmpty(upcomingAppointments)}" th:each="appointment : ${upcomingAppointments}">
+                                <li th:text="${appointment.customer.username} + ' - ' + ${appointment.appointmentDate} + ' (' + ${appointment.status} + ')'"></li>
+                            </ul>
                         </div>
                         <button class="card-buttong">Xem lịch làm việc</button>
                     </div>
-                    <div class ="card-1">
+                    <!-- Personal Info -->
+                    <div class="card-1">
                         <div class="card-1-1">
                             <h3>Thông tin cá nhân</h3>
                             <i class="fa-solid fa-star"></i>
@@ -88,6 +95,6 @@
         </div>
     </div>
 </div>
-    <script src="./js/script.js" defer></script>
+<script th:src="@{/js/script.js}" defer></script>
 </body>
 </html>
