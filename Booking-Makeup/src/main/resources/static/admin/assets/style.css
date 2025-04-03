@@ -193,11 +193,10 @@ body {
     font-weight: bold;
     display: inline-block;
 }
-
 .role.owner { background: #ffcccc; color: #b30000; }
-.role.manager { background: #cce5ff; color: #004085; }
+.role.branch_manager { background: #cce5ff; color: #004085; }
 .role.receptionist { background: #d4f8d4; color: #155724; }
-.role.specialist { background: #f3e5f5; color: #6f42c1; }
+.role.makeup_artist { background: #f3e5f5; color: #6f42c1; }
 /*end staff */
 /*branch*/
 .branch-container {

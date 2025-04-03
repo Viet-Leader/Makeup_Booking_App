@@ -7,8 +7,12 @@ import com.example.bookingmakeup.Models.BranchStaff;
 import org.springframework.beans.factory.annotation.Autowired;
 >>>>>>> Stashed changes
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -33,7 +37,6 @@ public class AdminController {
         return "admin/index";
     }
 
-    // Các mapping khác giữ nguyên
     @GetMapping("/index.html")
     public String showAdminDashboard(Model model) {
         // Fetch total counts
@@ -56,33 +59,31 @@ public class AdminController {
 
         return "admin/index";
     }
-    // Quản lý cuộc hẹn
+
     @GetMapping("/appointment.html")
     public String appointmentManagement() {
         return "admin/appointment";
     }
 
-    // Quản lý chi nhánh
     @GetMapping("/branch.html")
     public String branchManagement() {
         return "admin/branch";
     }
 
-    // Quản lý dịch vụ
     @GetMapping("/service.html")
     public String serviceManagement() {
         return "admin/service";
     }
 
-    // Quản lý cài đặt
     @GetMapping("/setting.html")
     public String settingManagement() {
         return "admin/setting";
     }
 
-    // Quản lý nhân viên
     @GetMapping("/staff.html")
-    public String staffManagement() {
+    public String staffManagement(Model model) {
+        List<BranchStaff> staffList = branchStaffService.getAllBranchStaff();
+        model.addAttribute("staffList", staffList != null ? staffList : Collections.emptyList());
         return "admin/staff";
     }
 }

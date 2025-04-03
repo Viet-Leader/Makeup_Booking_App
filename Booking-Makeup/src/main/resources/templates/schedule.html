@@ -1,228 +1,227 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/reset.css"/>
-    <link rel="stylesheet" href="/assets/style.css"/>
+    <!-- Sử dụng Thymeleaf để load CSS (đường dẫn tuyệt đối) -->
+    <link rel="stylesheet" th:href="@{/assets/reset.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/style.css}"/>
+    <!-- Font Awesome (CDN - không cần Thymeleaf) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
     <title>Đặt lịch</title>
 </head>
 <body>
-    <!-- header-->
-    <header th:fragment="layout_header" class="header">
-        <div class="content">
-            <div class="navbar">
-                <!--logo-->
-                <a href="/home.html">
+<!-- header-->
+<header th:fragment="layout_header" class="header">
+    <div class="content">
+        <div class="navbar">
+            <!--logo-->
+            <a href="./index.html">
                 <div class="logo-container">
-                    <img src="/image/logo.jpg" alt="logo" class="logo"/>
+                    <img src="./image/logo.png" alt="logo" class="logo"/>
                     <span class="brand-name">Booking-Makeup</span>
                 </div>
-                </a>
-                <!--navigation-->
-                <ul class="nav-menu">
-                    <li><a href="/services.html">Dịch vụ</a></li>
-                    <li><a href="/makeup-artist.html">Nghệ sĩ trang điểm</a></li>
-                    <li><a href="/schedule.html">Đặt lịch</a></li>
-                </ul>
+            </a>
+            <!--navigation-->
+            <ul class="nav-menu">
+                <li><a href="./sevices.html">Dịch vụ</a></li>
+                <li><a href="./makeup-artist.html">Nghệ sĩ trang điểm</a></li>
+                <li><a href="./schedule.html">Đặt lịch</a></li>
+            </ul>
 
-                <!--action-->
-                <div class="action">
-                    <!-- Khi chưa đăng nhập -->
+            <!--action-->
+            <div class="action">
+                <!-- Khi chưa đăng nhập -->
                 <div id="auth-buttons">
                     <a href="./register.html" class="action-link" id="register-btn">Đăng ký</a>
                     <a href="./login.html" class="btn-login" id="login-btn">Đăng nhập</a>
                 </div>
 
-                    <!-- Khi đã đăng nhập -->
+                <!-- Khi đã đăng nhập -->
                 <div id="user-info" class="hidden">
-                    <img src="/image/user-avatar.jpg" alt="Avatar" class="avatar">
+                    <img src="./image/user-avatar.jpg" alt="Avatar" class="avatar">
                     <span class="username">Xin chào, User</span>
                     <a href="#!" id="logout-btn">Đăng xuất</a>
                 </div>
             </div>
         </div>
-        </div>
-        </div>
-    </header>
-    <!--header-->
-    <!--Hero-->
-    <div class = " hero">
-        <div class = "container">
-            <div class = "box-0">
-                <div class = "box-1">
-                    <h1>Tỏa sáng cùng dịch vụ trang điểm chuyên nghiệp</h1>
-                </div>
-                <div class = "box-2">
-                    <p>Đặt lịch ngay hôm nay để trải nghiệm các chuyên gia trang điểm hàng đầu</p>
-                </div>
-                <div class = "box-3">
-                    <button class = "hero-btn">
-                        <i class="fa-solid fa-calendar-days"></i>
-                        <a href ="!#">Đặt lịch ngay</a>
-                    </button>
-                    <button class = "hero-btn-1">
-                        <a href = "!#">Xem dịch vụ</a>
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
+</header>
+<!--header-->
 <!--Hero-->
-    <!--content-->
-    <div class = "cld">
-        <div class = "container">
-            <div class = "wallpaper">
-                <div class = "box-cld">
-                    <div class = "box-cld-1">
-                        <h1>Booking-Makup</h1>
-                    </div>
-                    <div class = "box-cld-2">
-                        <h2>Đặt lịch</h2>
-                    </div>
-                    <div class = "box-cld-3-display">
-                        <table class = "tb-1">
-                            <tr>
-                                <th> </th>
-                                <th> </th>
-                            </tr>
-                            <tr>
-                                <td><span>Chi nhánh<p>:</p></span></td>
-                                <td>
-                                <select class="chs-box" name="chs-box">
-                                    <option value="">--Chọn chi nhánh--</option>
-                                    <option value="q">Quận 12</option>
-                                    <option value="q">Quận Thủ Đức</option>
-                                    <option value="q">Đại học Nông Lâm</option>
-                                </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span>Nghệ sĩ trang điểm<P>:</P> </span></td>
-                                <td>
-                                    <select id="chs-box" name="chs-box">
-                                        <option value="">--Chọn nghệ sĩ--</option>
-                                        <option value="ng">Trần Quốc Việt</option>
-                                        <option value="ng">Nguyễn Khánh Dương</option>
-                                        <option value="ng">Mai Huy Hoàng</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span>Loại dịch vụ<P>:</P></span>
-                                </td>
-                                <td>
-                                    <select class="chs-box" name="chs-box">
-                                        <option value="">--Chọn dịch vụ--</option>
-                                        <option value="dv">Trang điểm cô dâu</option>
-                                        <option value="dv">Trang điểm dự tiệc</option>
-                                        <option value="dv">Trang điểm nhẹ nhàng</option>
-                                        <option value="dv">Trang điểm biểu diễn</option>
-                                        <option value="dv">Trang điểm kỷ yếu</option>
-                                        <option value="dv">Trang điểm nhóm múa hát</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </table>
-                        <table class = "tb-1">
-                            <tr>
-                                <th> </th>
-                                <th> </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span>Địa chỉ khách hàng<P>:</P></span>
-                                </td>
-                                <td>
-                                    <div class = "input-box">
-                                        <input placeholder = "nhập địa chỉ cần trang điểm"/>
-                                    </div>    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span>Số điện thoại liên hệ<P>:</P></span>
-                                </td>
-                                <td>
-                                    <div class = "input-box">
-                                        <input type = "text" placeholder = "nhập số điện thoại liên hệ"/>
-                                    </div>    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span>Thời gian bắt đầu trang điểm<P>:</P></span>
-                                </td>
-                                <td>
-                                    <div class = "input-box">
-                                        <input type = "time" placeholder = "00:00"/>
-                                    </div>    
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class = "box-cld-btn">
-                        <button class = "box-cld-btn-1" type="submit" id = "box-cld-btn-1"><a href = "#!">Đặt lịch</a></button>
-                    </div>
-                </div>
+<div class="hero">
+    <div class="container">
+        <div class="box-0">
+            <div class="box-1">
+                <h1>Tỏa sáng cùng dịch vụ trang điểm chuyên nghiệp</h1>
+            </div>
+            <div class="box-2">
+                <p>Đặt lịch ngay hôm nay để trải nghiệm các chuyên gia trang điểm hàng đầu</p>
+            </div>
+            <div class="box-3">
+                <button class="hero-btn">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <a th:href="@{/appointments/new}">Đặt lịch ngay</a>
+                </button>
+                <button class="hero-btn-1">
+                    <a th:href="@{/services}">Xem dịch vụ</a>
+                </button>
             </div>
         </div>
     </div>
-    <!--end content-->
-       <!--footer-->
-       <div class="footer">
-        <div class="content">
-            <div class="grid__row">
-                <div class="grid__colum">
-                    <div class="colum_2-4">
-                        <h1>Booking-Makeup</h1>
-                        <ul>
-                            <li>Hệ thống đặt lịch trang điểm chuyên nghiệp, giúp bạn luôn tỏa sáng trong mọi dịp đặc biệt.</li>
-                            <li><i class="fa-brands fa-facebook"></i> 
-                                 <i class="fa-brands fa-square-instagram"></i>
-                                 <i class="fa-brands fa-facebook-messenger"></i></li>
-                        </ul>
+</div>
 
-                    </div>
-                    <div class="colum_2-4">
-                        <h1>Dịch vụ</h1>
-                        <ul>
-                            <li>Trang điểm dự tiệc</li>
-                            <li>Trang điểm cô dâu</li>
-                            <li>Trang điểm nhẹ nhà</li>
-                            <li>Xem tất cả dịch vụ</li>
-                        </ul>
-                    </div>
-                    <div class="colum_2-4">
-                        <h1>Liên kết</h1>
-                        <ul>
-                            <li>Về chúng tôi</li>
-                            <li>Chi nhánh</li>
-                            <li>Nghệ sĩ trang điểm</li>
-                            <li>Đặt lịch</li>
-                            <li>Liên hệ</li>
-                        </ul>
-                    </div>
-                    <div class="colum_2-4">
-                        <h1>Liên hệ</h1>
-                        <ul>
-                            <li><i class="fa-solid fa-location-pin"></i> 123 Lê Lợi, Quận 1, TP.HCM</li>
-                            <li><i class="fa-solid fa-phone"></i> 028-1234-5678</li>
-                            <li><i class="fa-solid fa-envelope"></i> contact@glamschedule.com</li>
-                            <li><i class="fa-solid fa-calendar-days"></i> Thứ 2 - Chủ nhật</li>
-                            <li><i class="fa-solid fa-clock"></i> 09:00 - 20:00</li>
-                        </ul>
-                    </div>
+<!-- Appointment Form -->
+<div class="cld">
+    <div class="container">
+        <div class="wallpaper">
+            <div class="box-cld">
+                <div class="box-cld-1">
+                    <h1>Booking-Makeup</h1>
                 </div>
-            </div>
-            <div class="grid__row">
-                <hr/>
-                <p>© 2025 Booking-Makeup. Bản quyền thuộc về chúng tôi.</p>
+                <div class="box-cld-2">
+                    <h2>Đặt lịch</h2>
+                </div>
+                <form th:action="@{/appointments/create}" method="post" class="box-cld-3-display">
+                    <table class="tb-1">
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td><span>Chi nhánh<p>:</p></span></td>
+                            <td>
+                                <select id="branch" name="branchId" class="chs-box">
+                                    <option value="">--Chọn chi nhánh--</option>
+                                    <option th:each="branch : ${branches}"
+                                            th:value="${branch.id}"
+                                            th:text="${branch.name}">
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span>Nghệ sĩ trang điểm<p>:</p></span></td>
+                            <td>
+                                <select id="artist" name="artistId" class="chs-box">
+                                    <option value="">--Chọn nghệ sĩ--</option>
+                                    <option th:each="artist : ${artists}"
+                                            th:value="${artist.id}"
+                                            th:text="${artist.accountMakeup.nameAccount}">
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span>Loại dịch vụ<p>:</p></span></td>
+                            <td>
+                                <select id="service" name="serviceId" class="chs-box">
+                                    <option value="">--Chọn dịch vụ--</option>
+                                    <option th:each="service : ${services}"
+                                            th:value="${service.serviceId}"
+                                            th:text="${service.name}">
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="tb-1">
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Số điện thoại liên hệ<p>:</p></span>
+                            </td>
+                            <td>
+                                <div class="input-box">
+                                    <input type="text" name="phone" placeholder="Nhập số điện thoại liên hệ" required/>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Ngày bắt đầu trang điểm<p>:</p></span>
+                            </td>
+                            <td>
+                                <div class="input-box">
+                                    <input type="date" name="appointmentDate" placeholder="mm/dd/yyyy" required/>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Thời gian bắt đầu trang điểm<p>:</p></span>
+                            </td>
+                            <td>
+                                <div class="input-box">
+                                    <input type="time" name="appointmentTime" placeholder="00:00" required/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="box-cld-btn">
+                        <button class="box-cld-btn-1" type="submit">Đặt lịch</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <!--footer-->
-    <script src="/js/script.js"></script>
+</div>
+<!--end content-->
+<!--footer-->
+<div class="footer">
+    <div class="content">
+        <div class="grid__row">
+            <div class="grid__colum">
+                <div class="colum_2-4">
+                    <h1>Booking-Makeup</h1>
+                    <ul>
+                        <li>Hệ thống đặt lịch trang điểm chuyên nghiệp, giúp bạn luôn tỏa sáng trong mọi dịp đặc biệt.</li>
+                        <li><i class="fa-brands fa-facebook"></i>
+                            <i class="fa-brands fa-square-instagram"></i>
+                            <i class="fa-brands fa-facebook-messenger"></i></li>
+                    </ul>
+
+                </div>
+                <div class="colum_2-4">
+                    <h1>Dịch vụ</h1>
+                    <ul>
+                        <li>Trang điểm dự tiệc</li>
+                        <li>Trang điểm cô dâu</li>
+                        <li>Trang điểm nhẹ nhà</li>
+                        <li>Xem tất cả dịch vụ</li>
+                    </ul>
+                </div>
+                <div class="colum_2-4">
+                    <h1>Liên kết</h1>
+                    <ul>
+                        <li>Về chúng tôi</li>
+                        <li>Chi nhánh</li>
+                        <li>Nghệ sĩ trang điểm</li>
+                        <li>Đặt lịch</li>
+                        <li>Liên hệ</li>
+                    </ul>
+                </div>
+                <div class="colum_2-4">
+                    <h1>Liên hệ</h1>
+                    <ul>
+                        <li><i class="fa-solid fa-location-pin"></i> 123 Lê Lợi, Quận 1, TP.HCM</li>
+                        <li><i class="fa-solid fa-phone"></i> 028-1234-5678</li>
+                        <li><i class="fa-solid fa-envelope"></i> contact@glamschedule.com</li>
+                        <li><i class="fa-solid fa-calendar-days"></i> Thứ 2 - Chủ nhật</li>
+                        <li><i class="fa-solid fa-clock"></i> 09:00 - 20:00</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="grid__row">
+            <hr/>
+            <p>© 2025 Booking-Makeup. Bản quyền thuộc về chúng tôi.</p>
+        </div>
+    </div>
+</div>
+<!--footer-->
 </body>
 </html>

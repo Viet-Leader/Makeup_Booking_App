@@ -47,6 +47,7 @@ public class AccountController {
 
         if ("Đăng nhập thành công!".equals(loginMessage)) {
             Optional<Account> account = accountService.findByEmail(email);
+            session.setAttribute("userId", account.get().getUserId());
             session.setAttribute("user", account.get()); // Lưu vào session
 
             response.put("status", "success");

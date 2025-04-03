@@ -8,7 +8,7 @@ public class Branch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "branch_id", nullable = false)
-    private Integer id;
+    private Long branchId;
 
     @Column(name = "name")
     private String name;
@@ -24,12 +24,12 @@ public class Branch {
     @JoinColumn(name = "manager_id")
     private Account manager;
 
-    public Integer getId() {
-        return id;
+    public Long getBranchId() {
+        return branchId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setBranchId(Long branchId) {
+        this.branchId = branchId;
     }
 
     public String getName() {
