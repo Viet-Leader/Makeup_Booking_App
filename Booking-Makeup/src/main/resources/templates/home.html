@@ -33,12 +33,27 @@
                     <a href="/register" class="action-link" id="register-btn">Đăng ký</a>
                     <a href="/login" class="btn-login" id="login-btn">Đăng nhập</a>
                 </div>
-
-                <!-- Khi đã đăng nhập -->
+                <!--Khi đã đăng nhập-->
                 <div id="user-info" class="hidden">
-                    <img src="/image/user-avatar.jpg" alt="Avatar" class="avatar">
-                    <span class="username">Xin chào, User</span>
-                    <a href="#" id="logout-btn">Đăng xuất</a>
+                    <div class="user-dropdown">
+                        <div class="user-avatar-container" id="dropdown-toggle">
+                            <img src="/image/avatar1.jpg" alt="Avatar" class="avatar">
+                            <div class="user-info-text">
+                                <p class="user-name">Admin User</p>
+                                <p class="user-email">admin@example.com</p>
+                            </div>
+                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                        <div class="dropdown-content" id="dropdown-content">
+                            <a href="./admin/index.html" class="dropdown-item">
+                                <i class="fa-solid fa-gear"></i> Quản lý hệ thống
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#!" id="logout-btn" class="dropdown-item">
+                                <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
