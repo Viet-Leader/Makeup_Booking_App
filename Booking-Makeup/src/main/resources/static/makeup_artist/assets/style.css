@@ -139,5 +139,232 @@ body {
 }
 
 /* end index.html */
+/*start infor.html*/
+
+.box_2 {
+    margin-left: 30px;
+    padding: 20px;
+}
+.box_2_1 .header_row h1{
+    font-size: 30px;
+    font-weight: bold;
+}
+.box_2_2 .content h2 {
+    font-size: 18px;
+    color: #777;
+    margin-bottom: 20px;
+}
+.box_2 .box_2_2 .content .cotainer {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+
+
+}
+.box_2 .box_2_2 .content .container .container-1 .container-1-1{
+    display: flex;
+    gap: 20px;
+}
+
+.content .container .container-1 .container-1-1 .tab-1 {
+    width: 350px;
+    padding: 20px;
+    border: 1px solid #f8f8f9;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.infor-normal{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.avatar {
+    text-align: center;
+}
+.rating{
+    text-align: center;
+    margin: 10px 0;
+}
+.rating .stars i {
+    color: #f1c40f;
+    font-size: 16px;
+}
+.rating span {
+    font-size: 14px;
+    color: #666;
+}
+.avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    margin-bottom: 10px;
+}
+.avatar h3{
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+.expertise {
+    margin-top: 20px;
+}
+.specialization {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+.specialization-tags span {
+    background-color: #e9ecef;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    color: #333;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+}
+.edit-link {
+    display: inline-block; /* hoặc inline-flex nếu bạn cần căn chỉnh icon */
+    margin-top: 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-size: 14px;
+    padding: 6px 12px;
+    background-color: #e6f0ff; /* thêm để thấy rõ border-radius */
+    transition: background-color 0.3s;
+    font-size: medium;
+    padding-left: 25px;
+}
+.edit-link i {
+    margin-right: 5px;
+}
+.edit-link:hover {
+    text-decoration: underline;
+}
+.tab-2  {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+.tab {
+    background-color: #f8f9fa;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+.tab.active {
+    background-color: #007bff;
+    color: #fff;
+}
+.information h2 {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+    margin: 20px 0 5px;
+}
+.information h3 {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+}
+.form-group {
+    margin-bottom: 15px;
+
+}
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+.form-group input {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f8f9fa;
+}
+.email-input {
+    position: relative;
+    width: fit-content;
+    padding-left: 35px; /* Tạo khoảng trống cho icon */
+}
+
+.email-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #666;
+}
+.phone-icon {
+    margin-right: 10px; /* Khoảng cách giữa biểu tượng và ô nhập liệu */
+    display: inline-flex; /* Đặt biểu tượng và ô nhập liệu trên cùng một hàng */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    transform: translateY(-50%); /* Dịch chuyển để căn giữa chính xác */
+    left: 10px;
+    top: 50%;
+}
+.update-btn{
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* strat chuyen mon */
+.tab {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+    color: #333;
+}
+
+.tab.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Định dạng cho textarea (dùng trong tab Chuyên môn) */
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Đảm bảo các input và textarea có kích thước phù hợp */
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    max-width: 500px; /* Điều chỉnh kích thước để khớp với hình */
+}
+/* end chuyen mon */
+/* end infor.html */
 
 

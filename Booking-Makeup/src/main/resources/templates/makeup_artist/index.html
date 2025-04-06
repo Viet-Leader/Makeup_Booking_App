@@ -57,9 +57,22 @@
                         <div class="card-1-2">
                             <p class="number" th:text="${todayAppointments != null ? #lists.size(todayAppointments) : 0}">0</p>
                             <p class="description" th:text="${todayAppointments != null and !#lists.isEmpty(todayAppointments) ? 'Có lịch hẹn hôm nay' : 'Không có lịch hẹn'}">Không có lịch hẹn</p>
-                            <ul th:if="${todayAppointments != null and !#lists.isEmpty(todayAppointments)}" th:each="appointment : ${todayAppointments}">
-                                <li th:text="${appointment.customer.username} + ' - ' + ${appointment.appointmentDate} + ' (' + ${appointment.status} + ')'"></li>
-                            </ul>
+                            <table th:if="${todayAppointments != null and !#lists.isEmpty(todayAppointments)}" class="appointment-table">
+                                <thead>
+                                <tr>
+                                    <th>Tên khách hàng</th>
+                                    <th>Ngày hẹn</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="appointment : ${todayAppointments}">
+                                    <td th:text="${appointment.customer.nameAccount}"></td>
+                                    <td th:with="formattedDate=${#temporals.format(appointment.appointmentDate, 'dd/MM/yyyy HH:mm')}" th:text="${formattedDate}"></td>
+                                    <td th:text="${appointment.status}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <button class="card-buttong">Xem chi tiết</button>
                     </div>
@@ -72,9 +85,22 @@
                         <div class="card-1-2">
                             <p class="number" th:text="${upcomingAppointments != null ? #lists.size(upcomingAppointments) : 0}">0</p>
                             <p class="description" th:text="${upcomingAppointments != null and !#lists.isEmpty(upcomingAppointments) ? 'Có lịch hẹn sắp tới' : 'Không có lịch hẹn'}">Không có lịch hẹn</p>
-                            <ul th:if="${upcomingAppointments != null and !#lists.isEmpty(upcomingAppointments)}" th:each="appointment : ${upcomingAppointments}">
-                                <li th:text="${appointment.customer.username} + ' - ' + ${appointment.appointmentDate} + ' (' + ${appointment.status} + ')'"></li>
-                            </ul>
+                            <table th:if="${upcomingAppointments != null and !#lists.isEmpty(upcomingAppointments)}" class="appointment-table">
+                                <thead>
+                                <tr>
+                                    <th>Tên khách hàng</th>
+                                    <th>Ngày hẹn</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="appointment : ${upcomingAppointments}">
+                                    <td th:text="${appointment.customer.nameAccount}"></td>
+                                    <td th:with="formattedDate=${#temporals.format(appointment.appointmentDate, 'dd/MM/yyyy HH:mm')}" th:text="${formattedDate}"></td>
+                                    <td th:text="${appointment.status}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <button class="card-buttong">Xem lịch làm việc</button>
                     </div>
