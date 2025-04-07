@@ -35,4 +35,9 @@ public class AppointmentService implements IAppointmentService {
     public long getTotalActiveAppointments() {
         return appointmentRepository.countActiveAppointments();
     }
+
+    @Override
+    public List<Appointment> getAppointmentByCustomerId(Long customerId) {
+        return appointmentRepository.findByCustomer_customerId(customerId);
+    }
 }

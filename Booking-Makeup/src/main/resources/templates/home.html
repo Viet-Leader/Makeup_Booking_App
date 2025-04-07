@@ -9,6 +9,10 @@
     <title>Booking-Makeup</title>
 </head>
 <body>
+<div id="alertBox" th:if="${session.accessDeniedMessage}" class="alert alert-danger">
+    <p th:text="${session.accessDeniedMessage}"></p>
+    <button onclick="closeAlert()">×</button>
+</div>
 <header class="header">
     <div class="content">
         <div class="navbar">
@@ -345,6 +349,26 @@
     </div>
 </div>
 <!--footer-->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var alertBox = document.getElementById("alertBox");
+
+        if (alertBox) {
+            // Ẩn thông báo sau 5 giây
+            setTimeout(function () {
+                alertBox.style.display = "none";
+            }, 5000);
+        }
+    });
+
+    function closeAlert() {
+        var alertBox = document.getElementById("alertBox");
+        if (alertBox) {
+            alertBox.style.display = "none";
+        }
+    }
+</script>
+
 <script src="/js/script.js"></script>
 </body>
 </html>

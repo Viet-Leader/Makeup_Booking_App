@@ -14,8 +14,15 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String homePage() {
-        return "home"; // Trả về trang home.html
+    public String homePage(HttpSession session, Model model) {
+        String message = (String) session.getAttribute("accessDeniedMessage");
+
+        if (message != null) {
+            model.addAttribute("accessDeniedMessage", message);
+            session.removeAttribute("accessDeniedMessage"); // Xóa sau khi hiển thị
+        }
+
+        return "home";
     }
 
 

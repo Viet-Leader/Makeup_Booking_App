@@ -3,6 +3,7 @@ package com.example.bookingmakeup.Repositories;
 import com.example.bookingmakeup.Models.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface IAppointmentRepository extends JpaRepository<Appointment, Long>
     List<Appointment> findAll();
     @Query("SELECT COUNT(a) FROM Appointment a WHERE a.status <> 'cancelled'")
     long countActiveAppointments();
+    @Query("SELECT a FROM Appointment a WHERE a.customer.customerId = :customerId")
+    List<Appointment> findByCustomerId(@Param("customerId") Long customerId);
 }

@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // ✅ Xử lý khi đăng nhập
+    //  Xử lý khi đăng nhập
     const loginForm = document.getElementById("loginForm");
     if (loginForm) {
         loginForm.addEventListener("submit", function (event) {
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // ✅ Xử lý khi nhấn nút "Đăng xuất"
+    // Xử lý khi nhấn nút "Đăng xuất"
     if (logoutBtn) {
         logoutBtn.addEventListener("click", function () {
             fetch("/auth/logout", { method: "POST" })
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // ✅ Điền tài khoản demo vào ô đăng nhập
+    // Điền tài khoản demo vào ô đăng nhập
     window.fillDemoAccount = function (role) {
         const demoAccounts = {
             owner: { email: "owner@example.com", password: "123456" },
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // ✅ Xử lý nút bấm demo
+    // Xử lý nút bấm demo
     document.querySelectorAll(".demo-buttons button").forEach(button => {
         button.addEventListener("click", function () {
             const role = this.getAttribute("data-role");
@@ -107,7 +107,7 @@ async function register() {
     const confirmPassword = document.getElementById("confirm-password").value;
     const message = document.getElementById("message");
 
-    // ✅ Kiểm tra định dạng email
+    // Kiểm tra định dạng email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
         message.textContent = "Email không hợp lệ! Vui lòng nhập đúng định dạng email.";

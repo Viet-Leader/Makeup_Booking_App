@@ -31,16 +31,16 @@ public class CommentController {
 
 
 
-    // 🔹 Thêm bình luận mới
     @PostMapping("/add")
     @ResponseBody
-    public Comment addComment(
+    public String addComment(
             @RequestParam("makeupArtistId") Long makeupArtistId,
             @RequestParam("cmt") String cmt,
             HttpSession session) {
+
         Long customerId = (Long) session.getAttribute("customerId");
         if (customerId == null) {
-            throw new RuntimeException("Bạn chưa đăng nhập.");
+            return "Bạn chưa đăng nhập.";  // Trả về thông báo nếu chưa đăng nhập
         }
 
         Optional<MakeupArtist> artistOpt = makeupArtistService.getMakeupArtistByMakeupArtistId(makeupArtistId);
@@ -51,15 +51,20 @@ public class CommentController {
             comment.setCmt(cmt);
             comment.setMakeupArtist(artistOpt.get());
             comment.setCustomer(customerOpt.get());
-            return commentService.saveComment(comment);
+
+            commentService.saveComment(comment);
+
+            return "Bạn đã bình luận thành công";  // Trả về thông báo thành công
         }
-        throw new RuntimeException("Không thể thêm bình luận.");
+
+        return "Không thể thêm bình luận.";  // Trả về thông báo nếu có lỗi
     }
 
 
 
 
-    // 🔹 Xóa bình luận (chỉ cho phép người đăng hoặc admin xóa)
+
+    //  Xóa bình luận (chỉ cho phép người đăng hoặc admin xóa)
     @PostMapping("/delete/{commentId}")
     public String deleteComment(@PathVariable("commentId") Long commentId, HttpSession session) {
         // Lấy ID người dùng từ session

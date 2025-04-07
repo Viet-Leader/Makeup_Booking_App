@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "/customer/if.css"/>
+    <link rel = "stylesheet" href = "/assets/reset.css"/>
+    <link rel = "stylesheet" href = "/assets/style.css"/>
+    <title>Thông tin cá nhân</title>
+</head>
+<body>
+<header class="header">
+    <div class="content">
+        <div class="navbar">
+            <!--logo-->
+            <a href="/home">
+                <div class="logo-container">
+                    <img src="/image/logo.jpg" alt="logo" class="logo"/>
+                    <span class="brand-name">Booking-Makeup</span>
+                </div>
+            </a>
+            <!--navigation-->
+            <ul class="nav-menu">
+                <li><a href="/services">Dịch vụ</a></li>
+                <li><a href="/makeup-artists">Nghệ sĩ trang điểm</a></li>
+                <li><a href="/schedule">Đặt lịch</a></li>
+            </ul>
+
+            <!--action-->
+            <div class="action">
+                <!-- Khi chưa đăng nhập -->
+                <div id="auth-buttons">
+                    <a href="/register" class="action-link" id="register-btn">Đăng ký</a>
+                    <a href="/login" class="btn-login" id="login-btn">Đăng nhập</a>
+                </div>
+
+                <!-- Khi đã đăng nhập -->
+                <div id="user-info" class="hidden">
+                    <img src="/image/user-avatar.jpg" alt="Avatar" class="avatar">
+                    <span class="username">Xin chào, User</span>
+                    <a href="#" id="logout-btn">Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class = "container-if">
+    <div class = "content">
+        <h2>Thông tin Cá nhân</h2>
+        <div class = "box-1">
+            <div class = "avatar">
+                <img th:src = "${loggedInAccount.avatar}"/>
+                <p th:text="${loggedInAccount.nameAccount}"></p>
+            </div>
+            <div class = "info">
+                <form id = "if" action="/customer/updateAccount" method="post">
+                    <input type="hidden" name="userId" th:value="${loggedInAccount.userId}">
+                    <p>Email</p>
+                    <input id="email" type="text" placeholder="email" th:value="${loggedInAccount.email}" readonly />
+                    <p>Số điện thoại</p>
+                    <input id="phone" name = "phone" type="text" placeholder="sdt" th:value="${loggedInAccount.phone}" />
+                    <p>Địa chỉ</p>
+                    <input id="address" name = "address" type="text" placeholder="diachi" th:value="${loggedInAccount.address}" />
+                    <div><button type = "submit">Cập nhật</button></div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <h2>Lịch hẹn</h2>
+
+        <div th:if="${noAppointments}">
+            <p>Không có cuộc hẹn nào!</p>
+        </div>
+
+        <div th:if="${appointments}">
+            <table>
+                <tr>
+                    <th>Nghệ sĩ</th>
+                    <th>Giá</th>
+                    <th>Trạng thái</th>
+                    <th>Thời gian</th>
+                    <th> </th>
+                </tr>
+                <tr th:each="appointment : ${appointments}">
+                    <td th:text="${appointment.makeupArtist.accountMakeup.nameAccount}">Tên nghệ sĩ</td>
+                    <td th:text="${#numbers.formatDecimal(appointment.makeupArtist.price + appointment.service.price, 0, 'POINT', ',', '.')}">Giá</td>
+                    <td th:text="${appointment.status}">Trạng thái</td>
+                    <td th:text="${#dates.format(appointment.appointmentDate, 'dd/MM/yyyy HH:mm')}">Thời gian</td>
+                    <td>
+                        <form action="/customer/cancelAppointment" method="post">
+                            <input type="hidden" name="appointmentId" th:value="${appointment.id}" />
+                            <button type="submit" id="cancel">Hủy</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<!--footer-->
+<div class="footer">
+    <div class="content">
+        <div class="grid__row">
+            <div class="grid__colum">
+                <div class="colum_2-4">
+                    <h1>Booking-Makeup</h1>
+                    <ul>
+                        <li>Hệ thống đặt lịch trang điểm chuyên nghiệp, giúp bạn luôn tỏa sáng trong mọi dịp đặc biệt.</li>
+                        <li><i class="fa-brands fa-facebook"></i>
+                            <i class="fa-brands fa-square-instagram"></i>
+                            <i class="fa-brands fa-facebook-messenger"></i></li>
+                    </ul>
+
+                </div>
+                <div class="colum_2-4">
+                    <h1>Dịch vụ</h1>
+                    <ul>
+                        <li>Trang điểm dự tiệc</li>
+                        <li>Trang điểm cô dâu</li>
+                        <li>Trang điểm nhẹ nhà</li>
+                        <li>Xem tất cả dịch vụ</li>
+                    </ul>
+                </div>
+                <div class="colum_2-4">
+                    <h1>Liên kết</h1>
+                    <ul>
+                        <li>Về chúng tôi</li>
+                        <li>Chi nhánh</li>
+                        <li>Nghệ sĩ trang điểm</li>
+                        <li>Đặt lịch</li>
+                        <li>Liên hệ</li>
+                    </ul>
+                </div>
+                <div class="colum_2-4">
+                    <h1>Liên hệ</h1>
+                    <ul>
+                        <li><i class="fa-solid fa-location-pin"></i> 123 Lê Lợi, Quận 1, TP.HCM</li>
+                        <li><i class="fa-solid fa-phone"></i> 028-1234-5678</li>
+                        <li><i class="fa-solid fa-envelope"></i> contact@glamschedule.com</li>
+                        <li><i class="fa-solid fa-calendar-days"></i> Thứ 2 - Chủ nhật</li>
+                        <li><i class="fa-solid fa-clock"></i> 09:00 - 20:00</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="grid__row">
+            <hr/>
+            <p>© 2025 Booking-Makeup. Bản quyền thuộc về chúng tôi.</p>
+        </div>
+    </div>
+</div>
+</div>
+<!--footer-->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var alertBox = document.getElementById("alertBox");
+
+        if (alertBox) {
+            // Ẩn thông báo sau 5 giây
+            setTimeout(function () {
+                alertBox.style.display = "none";
+            }, 5000);
+        }
+    });
+
+    function closeAlert() {
+        var alertBox = document.getElementById("alertBox");
+        if (alertBox) {
+            alertBox.style.display = "none";
+        }
+    }
+</script>
+<script>
+    function confirmCancel(appointmentId) {
+        if (confirm("Bạn có muốn hủy cuộc hẹn?")) {
+            fetch("/customer/update-status", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `appointmentId=${appointmentId}&status=Cancelled`
+            })
+                .then(response => response.text())
+                .then(result => {
+                    alert(result);
+                    location.reload(); // reload lại trang để thấy thay đổi
+                })
+                .catch(error => {
+                    console.error("Lỗi:", error);
+                    alert("Hủy thất bại!");
+                });
+        }
+    }
+</script>
+<script src="/js/script.js"></script>
+</body>
+</html>
