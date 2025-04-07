@@ -51,10 +51,8 @@ public class BranchStaffService implements IBranchStaffService {
     public void deleteBranchStaff(BranchStaffId id) {
         branchStaffRepository.deleteById(id);
     }
-<<<<<<< HEAD
+
     public long getTotalBranchesStaff() {
         return branchStaffRepository.count();
     }
-=======
->>>>>>> origin/master
 }
