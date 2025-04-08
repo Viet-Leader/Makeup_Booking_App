@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // DOM Elements
     const authButtons = document.getElementById("auth-buttons");
     const userInfo = document.getElementById("user-info");
     const usernameSpan = document.querySelector(".email");
@@ -10,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("loginForm");
     const currentPage = window.location.pathname.split("/").pop();
 
-    // 1. Kiểm tra trạng thái đăng nhập
     function checkAuthStatus() {
         fetch("/auth/status")
             .then(response => response.json())
@@ -22,8 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (usernameSpan) {
                         usernameSpan.textContent = `Xin chào, ${data.email}`;
                     }
-
-                    // Highlight active nav link
                     highlightActiveNavLink();
                 } else {
                     localStorage.removeItem("email");
@@ -34,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error("Error checking auth status:", error));
     }
 
-    // 2. Highlight active navigation link
     function highlightActiveNavLink() {
         const links = document.querySelectorAll(".nav-link, .nav-menu a");
         links.forEach(link => {
@@ -45,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 3. Xử lý dropdown khi click
     if (dropdownToggle && dropdownContent) {
         dropdownToggle.addEventListener("click", function(e) {
             e.stopPropagation();
@@ -55,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // Đóng dropdown khi click ra ngoài
         document.addEventListener("click", function() {
             dropdownContent.classList.remove("show");
             if (dropdownArrow) {
@@ -63,13 +56,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // Ngăn dropdown đóng khi click vào nội dung dropdown
         dropdownContent.addEventListener("click", function(e) {
             e.stopPropagation();
         });
     }
 
-    // 4. Xử lý đăng nhập
     if (loginForm) {
         loginForm.addEventListener("submit", function(e) {
             e.preventDefault();
@@ -87,11 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (data.status === "success") {
                         localStorage.setItem("email", data.email);
                         alert("Đăng nhập thành công!");
-<<<<<<< Updated upstream
-                        window.location.href="/home.html";
-=======
                         window.location.href = data.redirectUrl || "/home";
->>>>>>> Stashed changes
                     } else {
                         alert(data.message || "Sai tài khoản hoặc mật khẩu!");
                     }
@@ -103,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 5. Xử lý đăng xuất
     if (logoutBtn) {
         logoutBtn.addEventListener("click", function(e) {
             e.preventDefault();
@@ -124,7 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 6. Điền tài khoản demo
     window.fillDemoAccount = function(role) {
         const demoAccounts = {
             owner: { email: "owner@example.com", password: "123456" },
@@ -140,7 +125,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // 7. Xử lý nút bấm demo
     document.querySelectorAll(".demo-buttons button").forEach(button => {
         button.addEventListener("click", function() {
             const role = this.getAttribute("data-role");
@@ -148,12 +132,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Khởi chạy khi tải trang
     checkAuthStatus();
     highlightActiveNavLink();
 });
 
-// 8. Xử lý đăng ký
 async function register() {
     const nameAccount = document.getElementById("nameAccount").value;
     const email = document.getElementById("email").value;
@@ -180,11 +162,7 @@ async function register() {
 
         if (response.ok) {
             alert("🎉 Đăng ký thành công! Vui lòng đăng nhập.");
-<<<<<<< Updated upstream
-            window.location.href = "login.html"; // Chuyển hướng đến trang login
-=======
             window.location.href = "/login.html";
->>>>>>> Stashed changes
         } else {
             message.textContent = result.message || "Đăng ký thất bại!";
             message.style.color = "red";

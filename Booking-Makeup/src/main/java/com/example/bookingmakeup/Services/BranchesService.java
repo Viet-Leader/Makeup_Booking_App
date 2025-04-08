@@ -44,14 +44,24 @@ public class BranchesService implements IBranchesService {
     }
 
     @Override
-    public Branch findBranchById(Integer id) {
-        return null;
-    }
-
-    @Override
     public Branch findBranchById(Long id) {
-        Optional<Branch> branch = branchRepository.findById(id);
-        return branch.orElse(null);
+        // Kiểm tra tham số đầu vào
+        if (id == null) {
+            throw new IllegalArgumentException("ID của chi nhánh không được null");
+        }
+
+        try {
+            Optional<Branch> branch = branchRepository.findById(id);
+            if (branch.isEmpty()) {
+                // Log để debug
+                System.out.println("Không tìm thấy chi nhánh với ID: " + id);
+            }
+            return branch.orElse(null);
+        } catch (Exception e) {
+            // Log lỗi để debug
+            System.err.println("Lỗi khi tìm chi nhánh với ID " + id + ": " + e.getMessage());
+            throw new RuntimeException("Không thể tìm chi nhánh: " + e.getMessage(), e);
+        }
     }
 
     @Override
