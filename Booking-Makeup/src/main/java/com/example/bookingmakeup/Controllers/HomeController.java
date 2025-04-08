@@ -32,7 +32,7 @@ public class HomeController {
         if (session.getAttribute("user") == null) {
             return new ModelAndView("redirect:/login"); // Chuyển hướng nếu chưa đăng nhập
         }
-        return new ModelAndView("schedule"); // Hiển thị trang nếu đã đăng nhập
+        return new ModelAndView("redirect:/schedule.html/new"); // Hiển thị trang nếu đã đăng nhập
     }
 
 
