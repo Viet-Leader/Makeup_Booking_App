@@ -1,20 +1,16 @@
 package com.example.bookingmakeup.Controllers;
 
 import com.example.bookingmakeup.Models.Account;
-import com.example.bookingmakeup.Models.Customer;
-import com.example.bookingmakeup.Repositories.ICustomerRepository;
-import com.example.bookingmakeup.Services.CustomerService;
+import com.example.bookingmakeup.Models.Appointment;
 import com.example.bookingmakeup.Services.IAccountService;
-import com.example.bookingmakeup.Services.ICustomerService;
+import com.example.bookingmakeup.Services.IAppointmentService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/receptionist")
@@ -22,6 +18,9 @@ public class ReceptionistController {
 
     @Autowired
     private IAccountService accountService;
+
+    @Autowired
+    private IAppointmentService appointmentService;
 
     @GetMapping("")
     public String receptionistIndex() {
@@ -42,13 +41,38 @@ public class ReceptionistController {
     }
 
     @GetMapping("/checkin.html")
-    public String receptionistCheckin() {
+    public String checkinPage(Model model) {
+        List<Appointment> appointments = appointmentService.getAllAppointments();
+        appointments.forEach(appointment -> {
+            Hibernate.initialize(appointment.getMakeupArtist());
+            Hibernate.initialize(appointment.getService());
+            System.out.println("MakeupArtist: " + appointment.getMakeupArtist());
+            System.out.println("Service: " + appointment.getService());
+        });
+        System.out.println("Appointments: " + appointments);
+        model.addAttribute("appointments", appointments);
         return "receptionist/checkin";
     }
 
     @GetMapping("/appointment.html")
-    public String receptionistAppointment() {
+    public String appointmentPage(Model model) {
+        List<Appointment> appointments = appointmentService.getAllAppointments();
+        appointments.forEach(appointment -> {
+            Hibernate.initialize(appointment.getMakeupArtist());
+            Hibernate.initialize(appointment.getService());
+            System.out.println("MakeupArtist: " + appointment.getMakeupArtist());
+            System.out.println("Service: " + appointment.getService());
+        });
+        System.out.println("Appointments: " + appointments);
+        model.addAttribute("appointments", appointments);
         return "receptionist/appointment";
+    }
+
+    @PostMapping("/update-status")
+    @ResponseBody
+    public String updateAppointmentStatus(@RequestParam Long appointmentId, @RequestParam String status) {
+        boolean updated = appointmentService.updateAppointmentStatus(appointmentId, status);
+        return updated ? "Cập nhật thành công" : "Cuộc hẹn không tồn tại";
     }
 
 }

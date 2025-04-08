@@ -60,20 +60,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Thu Thủy</td>
-                                <td>Trang điểm dự tiệc</td>
-                                <td>Mai Linh</td>
-                                <td>15/07/2023 10:00 - 11:00</td>
-                                <td><span class="role manager">Hoàn thành</span></td>
-                                <td>500.000 đ</td>
-                            </tr>
-                            <tr>
-                                <td>Khánh Dương</td>
-                                <td>Trang điểm dự tiệc</td>
-                                <td>Mai Linh</td>
-                                <td>15/07/2023 10:00 - 11:00</td>
-                                <td><span class="role receptionist">Hoàn thành</span></td>
-                                <td>500.000 đ</td>
+                            <tr th:each="appointment : ${appointments}">
+                                <td th:text="${appointment.customer.nameAccount}"></td>  <!-- Name -->
+                                <td th:text="${appointment.service.name}"></td>  <!-- Phone -->
+                                <td th:text="${appointment.makeupArtist.accountMakeup.nameAccount}"></td>  <!-- Email -->
+                                <td th:text="${appointment.appointmentDate}"></td>
+                                <td th:text="${appointment.status}"></td>
+                                <td th:text="${appointment.service.price + appointment.makeupArtist.price}"></td>
                             </tr>
                         </tbody>
                     </table>
