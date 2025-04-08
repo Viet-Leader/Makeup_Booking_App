@@ -10,9 +10,5 @@ public interface IBranchStaffService {
     Optional<BranchStaff> getBranchStaffById(BranchStaffId id);
     BranchStaff saveBranchStaff(BranchStaff branchStaff);
     void deleteBranchStaff(BranchStaffId id);
-<<<<<<< HEAD
-
     long getTotalBranchesStaff();
-=======
->>>>>>> origin/master
 }

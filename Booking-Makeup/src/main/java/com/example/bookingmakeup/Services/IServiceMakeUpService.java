@@ -10,9 +10,6 @@ public interface IServiceMakeUpService {
     ServiceMakeUp createService(ServiceMakeUp service);
     ServiceMakeUp updateService(Integer id, ServiceMakeUp service);
     void deleteService(Integer id);
-<<<<<<< HEAD
-
     long getTotalSevice();
-=======
->>>>>>> origin/master
+
 }
