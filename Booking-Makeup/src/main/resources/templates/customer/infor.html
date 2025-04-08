@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href = "/customer/if.css"/>
-    <link rel = "stylesheet" href = "/assets/reset.css"/>
-    <link rel = "stylesheet" href = "/assets/style.css"/>
+    <link rel="stylesheet" href="/customer/if.css"/>
+    <link rel="stylesheet" href="/assets/reset.css"/>
+    <link rel="stylesheet" href="/assets/style.css"/>
     <title>Thông tin cá nhân</title>
 </head>
 <body>
@@ -44,61 +44,70 @@
         </div>
     </div>
 </header>
-<div class = "container-if">
-    <div class = "content">
+<div class="container-if">
+    <div class="content">
         <h2>Thông tin Cá nhân</h2>
-        <div class = "box-1">
-            <div class = "avatar">
-                <img th:src = "${loggedInAccount.avatar}"/>
+        <div class="box-1">
+            <div class="avatar">
+                <img th:src="${loggedInAccount.avatar}"/>
                 <p th:text="${loggedInAccount.nameAccount}"></p>
             </div>
-            <div class = "info">
-                <form id = "if" action="/customer/updateAccount" method="post">
+            <div class="info">
+                <form id="if" action="/customer/updateAccount" method="post">
                     <input type="hidden" name="userId" th:value="${loggedInAccount.userId}">
                     <p>Email</p>
                     <input id="email" type="text" placeholder="email" th:value="${loggedInAccount.email}" readonly />
                     <p>Số điện thoại</p>
-                    <input id="phone" name = "phone" type="text" placeholder="sdt" th:value="${loggedInAccount.phone}" />
+                    <input id="phone" name="phone" type="text" placeholder="sdt" th:value="${loggedInAccount.phone}" />
                     <p>Địa chỉ</p>
-                    <input id="address" name = "address" type="text" placeholder="diachi" th:value="${loggedInAccount.address}" />
-                    <div><button type = "submit">Cập nhật</button></div>
+                    <input id="address" name="address" type="text" placeholder="diachi" th:value="${loggedInAccount.address}" />
+                    <div><button type="submit">Cập nhật</button></div>
                 </form>
-
             </div>
         </div>
     </div>
     <div class="content">
         <h2>Lịch hẹn</h2>
 
-        <div th:if="${noAppointments}">
-            <p>Không có cuộc hẹn nào!</p>
-        </div>
-
-        <div th:if="${appointments}">
+        <div th:if="${appointments != null and !appointments.isEmpty()}">
             <table>
                 <tr>
                     <th>Nghệ sĩ</th>
                     <th>Giá</th>
                     <th>Trạng thái</th>
                     <th>Thời gian</th>
-                    <th> </th>
+                    <th></th>
                 </tr>
                 <tr th:each="appointment : ${appointments}">
                     <td th:text="${appointment.makeupArtist.accountMakeup.nameAccount}">Tên nghệ sĩ</td>
-                    <td th:text="${#numbers.formatDecimal(appointment.makeupArtist.price + appointment.service.price, 0, 'POINT', ',', '.')}">Giá</td>
-                    <td th:text="${appointment.status}">Trạng thái</td>
-                    <td th:text="${#dates.format(appointment.appointmentDate, 'dd/MM/yyyy HH:mm')}">Thời gian</td>
+                    <!-- 🔹 ĐÃ THAY ĐỔI: thêm class="price-cell" để JS xử lý -->
+                    <td class="price-cell" th:text="${(appointment.makeupArtist != null ? appointment.makeupArtist.price : 0) + (appointment.service != null ? appointment.service.price : 0)}">Giá</td>
                     <td>
-                        <form action="/customer/cancelAppointment" method="post">
-                            <input type="hidden" name="appointmentId" th:value="${appointment.id}" />
-                            <button type="submit" id="cancel">Hủy</button>
-                        </form>
+                            <span th:class="'status ' + ${appointment.status}">
+                                <span th:switch="${appointment.status}">
+                                    <span th:case="'pending'">Chờ xác nhận</span>
+                                    <span th:case="'confirmed'">Đã xác nhận</span>
+                                    <span th:case="'completed'">Hoàn thành</span>
+                                    <span th:case="'cancelled'">Đã hủy</span>
+                                    <span th:case="*">[[${appointment.status}]]</span>
+                                </span>
+                            </span>
                     </td>
+                    <td th:text="${#dates.format(appointment.appointmentDate, 'dd/MM/yyyy HH:mm')}">Thời gian</td>
+                    <td th:if="${appointment.status != 'cancelled'}">
+                        <button type="button" th:attr="onclick=|confirmCancel(${appointment.appointmentId})|">Hủy</button>
+                    </td>
+                    <td th:if="${appointment.status == 'cancelled'}">-</td>
                 </tr>
             </table>
         </div>
+
+        <div th:if="${noAppointments}">
+            <p>Bạn chưa có lịch hẹn nào.</p>
+        </div>
     </div>
 </div>
+
 <!--footer-->
 <div class="footer">
     <div class="content">
@@ -151,49 +160,9 @@
         </div>
     </div>
 </div>
-</div>
 <!--footer-->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var alertBox = document.getElementById("alertBox");
 
-        if (alertBox) {
-            // Ẩn thông báo sau 5 giây
-            setTimeout(function () {
-                alertBox.style.display = "none";
-            }, 5000);
-        }
-    });
-
-    function closeAlert() {
-        var alertBox = document.getElementById("alertBox");
-        if (alertBox) {
-            alertBox.style.display = "none";
-        }
-    }
-</script>
-<script>
-    function confirmCancel(appointmentId) {
-        if (confirm("Bạn có muốn hủy cuộc hẹn?")) {
-            fetch("/customer/update-status", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: `appointmentId=${appointmentId}&status=Cancelled`
-            })
-                .then(response => response.text())
-                .then(result => {
-                    alert(result);
-                    location.reload(); // reload lại trang để thấy thay đổi
-                })
-                .catch(error => {
-                    console.error("Lỗi:", error);
-                    alert("Hủy thất bại!");
-                });
-        }
-    }
-</script>
+<script src="/js/customer.js"></script>
 <script src="/js/script.js"></script>
 </body>
 </html>

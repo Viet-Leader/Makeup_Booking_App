@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/customer")
@@ -37,16 +38,19 @@ public class CustomerController {
             return "redirect:/login";
         }
 
-        //  Thêm đoạn này để lấy danh sách lịch hẹn
-        List<Appointment> appointments = appointmentService.getAppointmentByCustomerId(userId);
-        if (appointments == null || appointments.isEmpty()) {
+        // 👉 Lấy tất cả lịch hẹn và lọc thủ công
+        List<Appointment> allAppointments = appointmentService.getAllAppointments();
+        List<Appointment> userAppointments = allAppointments.stream()
+                .filter(app -> app.getCustomer().getUserId().equals(userId))
+                .collect(Collectors.toList());
+
+        if (userAppointments.isEmpty()) {
             model.addAttribute("noAppointments", true);
         } else {
-            model.addAttribute("appointments", appointments);
+            model.addAttribute("appointments", userAppointments);
         }
 
         model.addAttribute("loggedInAccount", loggedInAccount);
-        model.addAttribute("appointments", appointments); // Truyền danh sách xuống view
         return "customer/infor";
     }
     @PostMapping("/updateAccount")

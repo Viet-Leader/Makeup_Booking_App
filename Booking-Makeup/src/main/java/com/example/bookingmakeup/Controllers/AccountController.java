@@ -51,21 +51,27 @@ public class AccountController {
 
         if ("Đăng nhập thành công!".equals(loginMessage)) {
             Optional<Account> account = accountService.findByEmail(email);
-            session.setAttribute("userId", account.get().getUserId());
-            session.setAttribute("role",account.get().getRole());
-            session.setAttribute("user", account.get()); // Lưu vào session
+            if (account.isPresent()) {
+                session.setAttribute("userId", account.get().getUserId());
+                session.setAttribute("role", account.get().getRole());
+                session.setAttribute("user", account.get()); // Lưu vào session
 
-            Optional<Customer> customerOpt = customerService.getCustomerByUserId(account.get().getUserId());
-            if (customerOpt.isPresent()) {
-                session.setAttribute("customerId", customerOpt.get().getCustomerId());
-            } else {
-                throw new RuntimeException("Không tìm thấy Customer cho userId: " + account.get().getUserId());
+                // 🔐 Chỉ lấy customerId nếu là khách hàng
+                if ("customer".equalsIgnoreCase(account.get().getRole())) {
+                    Optional<Customer> customerOpt = customerService.getCustomerByUserId(account.get().getUserId());
+                    if (customerOpt.isPresent()) {
+                        session.setAttribute("customerId", customerOpt.get().getCustomerId());
+                    } else {
+                        // Có thể ghi log hoặc xử lý riêng nếu muốn
+                        System.out.println("Không tìm thấy Customer cho userId: " + account.get().getUserId());
+                    }
+                }
+
+                response.put("status", "success");
+                response.put("email", email);
+                response.put("role", account.get().getRole());
+                return ResponseEntity.ok(response);
             }
-
-            response.put("status", "success");
-            response.put("email", email);
-            response.put("role", account.get().getRole());
-            return ResponseEntity.ok(response);
         }
 
         response.put("status", "error");
