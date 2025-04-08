@@ -599,20 +599,11 @@ hr {
     color: white;
     text-decoration:none;
 }
-<<<<<<< Updated upstream
    /*END SEVICES*/
    /*MAKEUP-ARTIST*/
    .artists .content .content-hero{
     font-size: 30px ;
     color :rgb(246, 71, 100);
-=======
-/*END SEVICES*/
-/*MAKEUP-ARTIST*/
-/* MAKEUP-ARTIST */
-.artists .content .content-hero {
-    font-size: 30px;
-    color: rgb(246, 71, 100);
->>>>>>> Stashed changes
     background: #f4bbbb;
     padding: 10px;
     margin-bottom: 40px; /* Giảm khoảng cách xuống 40px */
@@ -1074,8 +1065,6 @@ hr {
     color: #c14096;
 }
 /* end regis.css */
-<<<<<<< Updated upstream
-=======
 /*ArtistDetails*/
 .d-sesion-1 {
     margin : 48px 0;
