@@ -91,4 +91,7 @@ public class Appointment {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public void setMakeupArtist(Account account) {
+    }
 }

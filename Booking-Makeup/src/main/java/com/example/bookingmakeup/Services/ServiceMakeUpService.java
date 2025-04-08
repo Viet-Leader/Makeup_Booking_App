@@ -42,4 +42,7 @@ public class ServiceMakeUpService implements IServiceMakeUpService {
     public void deleteService(Integer id) {
         serviceMakeUpRepositories.deleteById(id);
     }
+    public long getTotalSevice() {
+        return serviceMakeUpRepositories.count();
+    }
 }
