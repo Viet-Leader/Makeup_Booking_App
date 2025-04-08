@@ -6,6 +6,7 @@ import com.example.bookingmakeup.Services.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,4 +49,5 @@ public class AccountService implements IAccountService {
     public Optional<Account> findByEmail(String email) {
         return accountRepository.findByEmail(email);
     }
+
 }

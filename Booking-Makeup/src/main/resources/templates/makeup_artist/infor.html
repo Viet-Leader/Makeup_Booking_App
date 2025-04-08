@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/style.css"/>
-    <link rel="stylesheet" href="./assets/reset.css"/>
+    <link rel="stylesheet" th:href="@{/makeup_artist/assets/reset.css}" href="../makeup_artist/assets/reset.css"/>
+    <link rel="stylesheet" th:href="@{/makeup_artist/assets/style.css}" href="../makeup_artist/assets/style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Booking-Makeup-Admin-index</title>
+    <title>Booking-Makeup-Admin-Index</title>
 </head>
 <body>
 <div class="col_1_2">
@@ -53,76 +52,89 @@
                         <div class="container-1-1">
                             <div class="tab-1">
                                 <p class="infor-normal">Thông tin cơ bản</p>
-                                <div class="infor-normal-1">
-                                    <div class="avatar">
-                                        <img src="anh dai dien">
-                                        <h3>Mai Linh</h3>
+                                <div th:if="${artist != null}">
+                                    <div class="infor-normal-1">
+                                        <div class="avatar">
+                                            <img th:src="@{${artist.accountMakeup.avatar}}" alt="Avatar"/>
+                                            <h3 th:text="${artist.accountMakeup.nameAccount}">Mai Linh</h3>
+                                        </div>
+                                        <div class="rating">
+                                            <span class="stars" th:each="i : ${#numbers.sequence(1, 5)}">
+                                                <i class="fa-solid fa-star" th:classappend="${i <= artist.accountMakeup.rating} ? 'filled' : ''"></i>
+                                            </span>
+                                            (<span th:text="${artist.accountMakeup.rating}">4.8</span>)
+                                        </div>
                                     </div>
-                                    <div class="rating">
-                                        <span class="stars"><i class="fa-solid fa-star"></i></span> (4.8)
+                                    <div class="expertise">
+                                        <p class="specialization">Chuyên môn:</p>
+                                        <div class="specialization-tags">
+                                            <span th:each="spec : ${#strings.arraySplit(artist.specialization, ',')}" th:text="${spec}"></span>
+                                        </div>
                                     </div>
+                                    <a href="#" class="edit-link">
+                                        <i class="fa-solid fa-pen"></i> Thay đổi ảnh đại diện
+                                    </a>
                                 </div>
-                                <div class="expertise">
-                                    <p class="specialization">Chuyên môn:</p>
-                                    <div class="specialization-tags">
-                                        <span>Trang điểm cô dâu</span>
-                                        <span>Trang điểm dự tiệc</span>
-                                    </div>
+                                <div th:if="${artist == null}">
+                                    <p>Không có dữ liệu artist.</p>
                                 </div>
-                                <a href="#" class="edit-link">
-                                    <i class="fa-solid fa-pen"></i> Thay đổi ảnh đại diện
-                                </a>
                             </div>
                             <div class="tab-2">
                                 <button class="tab active" data-tab="personal-info">Thông tin cá nhân</button>
                                 <button class="tab" data-tab="expertise">Chuyên môn</button>
 
-                                <!-- Nội dung Thông tin cá nhân -->
-                                <div class="tab-content active" id="personal-info">
-                                    <div class="information">
-                                        <h2>Thông tin cá nhân</h2>
-                                        <h3>Quản lý thông tin cá nhân và chuyên môn của bạn</h3>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Họ và tên</label>
-                                        <input type="text" value="Mai Linh" readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <div class="email-input">
-                                            <span class="email-icon"><i class="fa-regular fa-envelope" style="color: #74C0FC;"></i></span>
-                                            <input type="email" value="artist1@example.com" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Số điện thoại</label>
-                                        <span class="phone-icon"><i class="fa-solid fa-phone" style="color: #cdd1d5;"></i></span>
-                                        <input type="text" value="0912345678">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Địa chỉ</label>
-                                        <span class="location-icon"><i class="fa-solid fa-location-dot" style="color: #d5d6d8;"></i></span>
-                                        <input type="text" value="Số 123 Đường ABC, Quận 1, TP.HCM">
-                                    </div>
-                                    <button type="submit" class="update-btn">Cập nhật thông tin</button>
-                                </div>
+                                <!-- Form để gửi dữ liệu -->
+                                <form action="/makeup_artist/update" method="post">
+                                    <!-- Ẩn ID để gửi về controller -->
+                                    <input type="hidden" name="id" th:value="${artist.id}"/>
 
-                                <!-- Nội dung Chuyên môn -->
-                                <div class="tab-content" id="expertise">
-                                    <div class="information">
-                                        <h2>Thông tin chuyên môn</h2>
-                                        <h3>Quản lý thông tin chuyên môn và tiêu sử của bạn</h3>
+                                    <!-- Nội dung Thông tin cá nhân -->
+                                    <div class="tab-content active" id="personal-info">
+                                        <div class="information">
+                                            <h2>Thông tin cá nhân</h2>
+                                            <h3>Quản lý thông tin cá nhân và chuyên môn của bạn</h3>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Họ và tên</label>
+                                            <input type="text" name="nameAccount" th:value="${artist.accountMakeup.nameAccount}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <div class="email-input">
+                                                <span class="email-icon"><i class="fa-regular fa-envelope" style="color: #74C0FC;"></i></span>
+                                                <input type="email" name="email" th:value="${artist.accountMakeup.email}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Số điện thoại</label>
+                                            <span class="phone-icon"><i class="fa-solid fa-phone" style="color: #cdd1d5;"></i></span>
+                                            <input type="text" name="phone" th:value="${artist.accountMakeup.phone}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Địa chỉ</label>
+                                            <span class="location-icon"><i class="fa-solid fa-location-dot" style="color: #d5d6d8;"></i></span>
+                                            <input type="text" name="address" th:value="${artist.accountMakeup.address}">
+                                        </div>
+                                        <button type="submit" class="update-btn">Cập nhật thông tin</button>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Tiêu sử</label>
-                                        <textarea readonly>Chuyên gia trang điểm với 5 năm kinh nghiệm</textarea>
+
+                                    <!-- Nội dung Chuyên môn -->
+                                    <div class="tab-content active" id="expertise">
+                                        <div class="information">
+                                            <h2>Thông tin chuyên môn</h2>
+                                            <h3>Quản lý thông tin chuyên môn và tiêu sử của bạn</h3>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tiêu sử</label>
+                                            <textarea name="describes" th:text="${artist.describes}"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mô tả chuyên môn (mỗi chuyên môn ngắn cách bởi dấu phẩy)</label>
+                                            <textarea name="specialization" th:text="${artist.specialization}"></textarea>
+                                        </div>
+                                        <button type="submit" class="update-btn">Cập nhật thông tin</button>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Mô tả chuyên môn (mỗi chuyên môn ngắn cách bởi dấu phẩy)</label>
-                                        <textarea readonly>Trang điểm cô dâu, Trang điểm dự tiệc</textarea>
-                                    </div>
-                                    <button type="submit" class="update-btn">Lưu thay đổi</button>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -131,7 +143,6 @@
         </div>
     </div>
 </div>
-<script src="./infor.js" defer></script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92c11c127a14454e',t:'MTc0Mzk0MDY2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+<script th:src="@{/makeup_artist/js/script.js}" src="../makeup_artist/js/script.js" defer></script>
 </body>
 </html>
