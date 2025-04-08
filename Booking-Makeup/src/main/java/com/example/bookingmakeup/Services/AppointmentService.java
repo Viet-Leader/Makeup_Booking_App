@@ -35,4 +35,5 @@ public class AppointmentService implements IAppointmentService {
     public long getTotalActiveAppointments() {
         return appointmentRepository.countActiveAppointments();
     }
+
 }
