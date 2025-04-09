@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/reset.css"/>
+    <link rel="stylesheet" href="/assets/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <title>Chi tiết nghệ sĩ</title>
+</head>
+<body>
+<!-- header-->
+<header th:fragment="layout_header" class="header">
+    <div class="content">
+        <div class="navbar">
+            <!--logo-->
+            <a href="/home.html">
+                <div class="logo-container">
+                    <img src="/image/logo.jpg" alt="logo" class="logo"/>
+                    <span class="brand-name">Booking-Makeup</span>
+                </div>
+            </a>
+            <!--navigation-->
+            <ul class="nav-menu">
+                <li><a href="/services">Dịch vụ</a></li>
+                <li><a href="/makeup-artists">Nghệ sĩ trang điểm</a></li>
+                <li><a href="/schedule">Đặt lịch</a></li>
+            </ul>
+
+            <!--action-->
+            <div class="action">
+                <!-- Khi chưa đăng nhập -->
+                <div id="auth-buttons">
+                    <a href="/register" class="action-link" id="register-btn">Đăng ký</a>
+                    <a href="/login" class="btn-login" id="login-btn">Đăng nhập</a>
+                </div>
+
+                <!-- Khi đã đăng nhập -->
+                <div id="user-info" class="hidden">
+                    <img src="/image/user-avatar.jpg" alt="Avatar" class="avatar">
+                    <span class="username">Xin chào, User</span>
+                    <a href="#!" id="logout-btn">Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!--header-->
+<!--content-->
+<div class = "d-sesion-1">
+    <div class = "d-container">
+        <H2>THÔNG TIN CHI TIẾT</H2>
+        <div class = "d-box-item">
+            <img th:src = "${artistDetail.accountMakeup.avatar}"/><!--lấy từ cột avatar bảng:mạkeup_artist->account_makeup-->
+            <div class ="d-box" >
+                <div class = "box-info">
+                    <p th:text="'Tên: ' + ${artistDetail.accountMakeup.nameAccount}"></p><!--lấy từ cột name_account bảng:mạkeup_artist->account_makeup-->
+                    <p th:text="'Tuổi: ' + ${artistDetail.age}"></p><!--lấy từ cột age bảng:mạkeup_artist-->
+                    <p th:text ="'Mô tả: '+ ${artistDetail.describes}"></p><!--lấy từ cột describes bảng:mạkeup_artist-->
+                    <p th:text="'Chuyên về: ' + ${artistDetail.specialization}"></p><!--lấy từ cột specialization bảng:mạkeup_artist-->
+                </div>
+                <div class = "d-box-tb">
+                    <p> Tác phẩm tiêu biểu:</p>
+                    <img class = "d-img" th:src = "${artistDetail.featureWork}"/><!--lấy từ cột feature_work bảng:mạkeup_artist-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="d-sesion-2">
+    <div class="d-container">
+        <h2>Đánh giá</h2>
+        <div class="d-box-comment">
+            <div class="d-comment">
+                <!-- Lặp qua danh sách bình luận -->
+                <th:block th:each="comment : ${comments}">
+                    <div class="u-comment">
+                        <img class="u-ava" th:src="${comment.customer?.user?.avatar} ?: '/image/default-avatar.jpg'" />
+                        <div class="ten">
+                            <p th:text="${comment.customer?.user?.nameAccount} ?: 'Ẩn danh'">Tên người dùng</p>
+                            <p th:text="${comment.cmt}">Nội dung bình luận</p>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+
+            <!-- Form nhập bình luận -->
+            <div class="m-comment">
+                <form>
+                    <input type="hidden" name="makeupArtistId" th:value="${artistDetail.makeupArtistId}" />
+                    <input type="text" name="cmt" placeholder="Viết bình luận tại đây" required />
+                    <button type="submit">Gửi</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Nút quay lại -->
+        <button class="btn-cmt">
+            <a href="/makeup-artists">Trở về</a>
+        </button>
+    </div>
+</div>
+<!--content-->
+<!--footer-->
+<div class="footer">
+    <div class="content">
+        <div class="grid__row">
+            <div class="grid__colum">
+                <div class="colum_2-4">
+                    <h1>Booking-Makeup</h1>
+                    <ul>
+                        <li>Hệ thống đặt lịch trang điểm chuyên nghiệp, giúp bạn luôn tỏa sáng trong mọi dịp đặc biệt.</li>
+                        <li><i class="fa-brands fa-facebook"></i>
+                            <i class="fa-brands fa-square-instagram"></i>
+                            <i class="fa-brands fa-facebook-messenger"></i></li>
+                    </ul>
+
+                </div>
+                <div class="colum_2-4">
+                    <h1>Dịch vụ</h1>
+                    <ul>
+                        <li>Trang điểm dự tiệc</li>
+                        <li>Trang điểm cô dâu</li>
+                        <li>Trang điểm nhẹ nhà</li>
+                        <li>Xem tất cả dịch vụ</li>
+                    </ul>
+                </div>
+                <div class="colum_2-4">
+                    <h1>Liên kết</h1>
+                    <ul>
+                        <li>Về chúng tôi</li>
+                        <li>Chi nhánh</li>
+                        <li>Nghệ sĩ trang điểm</li>
+                        <li>Đặt lịch</li>
+                        <li>Liên hệ</li>
+                    </ul>
+                </div>
+                <div class="colum_2-4">
+                    <h1>Liên hệ</h1>
+                    <ul>
+                        <li><i class="fa-solid fa-location-pin"></i> 123 Lê Lợi, Quận 1, TP.HCM</li>
+                        <li><i class="fa-solid fa-phone"></i> 028-1234-5678</li>
+                        <li><i class="fa-solid fa-envelope"></i> contact@glamschedule.com</li>
+                        <li><i class="fa-solid fa-calendar-days"></i> Thứ 2 - Chủ nhật</li>
+                        <li><i class="fa-solid fa-clock"></i> 09:00 - 20:00</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="grid__row">
+            <hr/>
+            <p>© 2025 Booking-Makeup. Bản quyền thuộc về chúng tôi.</p>
+        </div>
+    </div>
+</div>
+<!--footer-->
+<script src="/js/script.js"></script>
+<script src = "/js/artist.js"></script>
+</body>
+</html>

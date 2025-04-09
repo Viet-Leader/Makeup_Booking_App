@@ -1,7 +1,9 @@
 package com.example.bookingmakeup.Controllers;
 
 import com.example.bookingmakeup.Models.Account;
+import com.example.bookingmakeup.Models.Customer;
 import com.example.bookingmakeup.Services.IAccountService;
+import com.example.bookingmakeup.Services.ICustomerService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +20,10 @@ public class AccountController {
 
     @Autowired
     private IAccountService accountService;
+    @Autowired
+    private ICustomerService customerService;
 
-    // ✅ Kiểm tra trạng thái đăng nhập
+    // Kiểm tra trạng thái đăng nhập
     @GetMapping("/status")
     public ResponseEntity<Map<String, String>> checkLoginStatus(HttpSession session) {
         Map<String, String> response = new HashMap<>();
@@ -35,7 +39,7 @@ public class AccountController {
         return ResponseEntity.ok(response);
     }
 
-    // ✅ Xử lý đăng nhập
+    // Xử lý đăng nhập
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(
             @RequestParam String email,
@@ -47,11 +51,27 @@ public class AccountController {
 
         if ("Đăng nhập thành công!".equals(loginMessage)) {
             Optional<Account> account = accountService.findByEmail(email);
-            session.setAttribute("user", account.get()); // Lưu vào session
+            if (account.isPresent()) {
+                session.setAttribute("userId", account.get().getUserId());
+                session.setAttribute("role", account.get().getRole());
+                session.setAttribute("user", account.get()); // Lưu vào session
 
-            response.put("status", "success");
-            response.put("email", email);
-            return ResponseEntity.ok(response);
+                // 🔐 Chỉ lấy customerId nếu là khách hàng
+                if ("customer".equalsIgnoreCase(account.get().getRole())) {
+                    Optional<Customer> customerOpt = customerService.getCustomerByUserId(account.get().getUserId());
+                    if (customerOpt.isPresent()) {
+                        session.setAttribute("customerId", customerOpt.get().getCustomerId());
+                    } else {
+                        // Có thể ghi log hoặc xử lý riêng nếu muốn
+                        System.out.println("Không tìm thấy Customer cho userId: " + account.get().getUserId());
+                    }
+                }
+
+                response.put("status", "success");
+                response.put("email", email);
+                response.put("role", account.get().getRole());
+                return ResponseEntity.ok(response);
+            }
         }
 
         response.put("status", "error");
@@ -59,7 +79,7 @@ public class AccountController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 
-    // ✅ Xử lý đăng ký
+    //  Xử lý đăng ký
     @PostMapping("/register")
     public ResponseEntity<Map<String, String>> register(@RequestBody Account account) {
         if (account.getRole() == null || account.getRole().isEmpty()) {
@@ -79,7 +99,7 @@ public class AccountController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
-    // ✅ Xử lý đăng xuất
+    //  Xử lý đăng xuất
     @PostMapping("/logout")
     public ResponseEntity<Map<String, String>> logout(HttpSession session) {
         session.invalidate(); // Xóa session

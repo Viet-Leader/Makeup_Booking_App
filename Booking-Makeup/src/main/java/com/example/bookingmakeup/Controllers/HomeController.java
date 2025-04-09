@@ -13,28 +13,35 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/home.html")
-    public String homePage() {
-        return "home"; // Trả về trang home.html
+    @GetMapping("/home")
+    public String homePage(HttpSession session, Model model) {
+        String message = (String) session.getAttribute("accessDeniedMessage");
+
+        if (message != null) {
+            model.addAttribute("accessDeniedMessage", message);
+            session.removeAttribute("accessDeniedMessage"); // Xóa sau khi hiển thị
+        }
+
+        return "home";
     }
 
 
-    @GetMapping("/schedule.html")
+    @GetMapping("/schedule")
     public ModelAndView schedulePage(HttpSession session) {
         // Kiểm tra xem session có chứa thông tin đăng nhập không
         if (session.getAttribute("user") == null) {
-            return new ModelAndView("redirect:/login.html"); // Chuyển hướng nếu chưa đăng nhập
+            return new ModelAndView("redirect:/login"); // Chuyển hướng nếu chưa đăng nhập
         }
         return new ModelAndView("redirect:/schedule.html/new"); // Hiển thị trang nếu đã đăng nhập
     }
 
 
-    @GetMapping("/register.html")
+    @GetMapping("/register")
     public String registerPage() {
         return "register"; // Trả về trang register.html
     }
 
-    @GetMapping("/login.html")
+    @GetMapping("/login")
     public String loginPage() {
         return "login"; // Trả về trang login.html
     }

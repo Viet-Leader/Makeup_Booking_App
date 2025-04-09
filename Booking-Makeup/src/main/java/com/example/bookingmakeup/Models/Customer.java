@@ -6,28 +6,29 @@ import jakarta.persistence.*;
 @Table(name = "customers")
 public class Customer {
     @Id
-    @Column(name = "user_id", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customer_id", nullable = false)
+    private Long customerId;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private Account accountMakeup;
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    private Account user;
 
-    public Integer getId() {
-        return id;
+    public Customer() {}
+
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
-    public Account getAccountMakeup() {
-        return accountMakeup;
+    public Account getUser() {
+        return user;
     }
 
-    public void setAccountMakeup(Account accountMakeup) {
-        this.accountMakeup = accountMakeup;
+    public void setUser(Account user) {
+        this.user = user;
     }
-
 }

@@ -10,6 +10,9 @@ public interface IAccountService {
     String login(String email, String password);
 
     Optional<Account> findByEmail(String email);
-
-
+    List<Account> getAllAccounts();
+    Optional<Account> findById(Long userId);
+    void update(Account account);
+    List<Account> getAccountsByBranch(Long userId);
+    long countStaffByBranch(Long branchId);
 }

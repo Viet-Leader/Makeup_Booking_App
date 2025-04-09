@@ -2,13 +2,15 @@ package com.example.bookingmakeup.Models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalTime;
+
 @Entity
 @Table(name = "branches")
 public class Branch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "branch_id", nullable = false)
-    private Integer id;
+    private Long branchId;
 
     @Column(name = "name")
     private String name;
@@ -20,16 +22,34 @@ public class Branch {
     @Column(name = "phone", length = 20)
     private String phone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manager_id")
-    private Account manager;
+    @Column(name = "opening_hours")
+    private LocalTime openingHours;
 
-    public Integer getId() {
-        return id;
+    @Column(name = "closing_time")
+    private LocalTime closingTime;
+
+    public LocalTime getClosingTime() {
+        return closingTime;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setClosingTime(LocalTime closingTime) {
+        this.closingTime = closingTime;
+    }
+
+    public LocalTime getOpeningHours() {
+        return openingHours;
+    }
+
+    public void setOpeningHours(LocalTime openingHours) {
+        this.openingHours = openingHours;
+    }
+
+    public Long getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(Long branchId) {
+        this.branchId = branchId;
     }
 
     public String getName() {
@@ -54,14 +74,6 @@ public class Branch {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Account getManager() {
-        return manager;
-    }
-
-    public void setManager(Account manager) {
-        this.manager = manager;
     }
 
 }
