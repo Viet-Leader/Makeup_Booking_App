@@ -64,7 +64,7 @@
                         </td>
                         <td>
                             <button th:id="'btn-' + ${appointment.appointmentId}"
-                                    th:disabled="${appointment.status == 'CHECKED_IN'}"
+                                    th:disabled="${appointment.status == 'Confirm'}"
                                     th:onclick="|checkInAppointment(${appointment.appointmentId})|"
                                     class="btn-checkin">
                                 <span th:text="${appointment.status == 'Đã Check-In' ? 'Đã Check-In' : 'Check-In'}"></span>
