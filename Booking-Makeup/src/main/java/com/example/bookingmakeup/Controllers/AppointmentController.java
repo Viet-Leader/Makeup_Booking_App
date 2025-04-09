@@ -74,6 +74,6 @@ public class AppointmentController {
 
 
         appointmentRepository.save(appointment);
-        return "redirect:/schedule?success";
+        return "schedule";
     }
 }
