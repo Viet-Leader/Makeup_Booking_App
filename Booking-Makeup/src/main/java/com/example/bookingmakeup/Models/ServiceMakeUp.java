@@ -27,7 +27,7 @@ public class ServiceMakeUp {
     private String image;
 
     public ServiceMakeUp() {}
-    public ServiceMakeUp(Long serviceId, String name, String description, Double price, Integer duration, String image) {
+    public ServiceMakeUp(long serviceId, String name, String description, Double price, Integer duration, String image) {
         this.serviceId = serviceId;
         this.name = name;
         this.description = description;
@@ -35,10 +35,10 @@ public class ServiceMakeUp {
         this.duration = duration;
         this.image = image;
     }
-    public Long getServiceId() {
+    public long getServiceId() {
         return serviceId;
     }
-    public void setServiceId(Long serviceId) {
+    public void setServiceId(long serviceId) {
         this.serviceId = serviceId;
     }
     public String getName() {

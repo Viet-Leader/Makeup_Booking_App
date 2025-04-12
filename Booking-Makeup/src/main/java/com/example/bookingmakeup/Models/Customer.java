@@ -10,7 +10,7 @@ public class Customer {
     @Column(name = "customer_id", nullable = false)
     private Long customerId;
 
-    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
     private Account user;
 
