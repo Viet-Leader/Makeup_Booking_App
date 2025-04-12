@@ -9,7 +9,7 @@ public class ServiceMakeUp {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column (name = "service_id")
-    private Integer serviceId;
+    private Long serviceId;
 
     @Column (name = "name_service")
     private String name;
@@ -27,7 +27,7 @@ public class ServiceMakeUp {
     private String image;
 
     public ServiceMakeUp() {}
-    public ServiceMakeUp(Integer serviceId, String name, String description, Double price, Integer duration, String image) {
+    public ServiceMakeUp(long serviceId, String name, String description, Double price, Integer duration, String image) {
         this.serviceId = serviceId;
         this.name = name;
         this.description = description;
@@ -35,10 +35,10 @@ public class ServiceMakeUp {
         this.duration = duration;
         this.image = image;
     }
-    public Integer getServiceId() {
+    public long getServiceId() {
         return serviceId;
     }
-    public void setServiceId(Integer serviceId) {
+    public void setServiceId(long serviceId) {
         this.serviceId = serviceId;
     }
     public String getName() {

@@ -1,31 +1,22 @@
 package com.example.bookingmakeup.Controllers;
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
+import com.example.bookingmakeup.Models.*;
 import com.example.bookingmakeup.Services.*;
-import com.example.bookingmakeup.Models.BranchStaff;
-import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> Stashed changes
-=======
-import com.example.bookingmakeup.Models.Branch;
-import com.example.bookingmakeup.Services.*;
-import com.example.bookingmakeup.Models.BranchStaff;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
->>>>>>> Stashed changes
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-<<<<<<< Updated upstream
-=======
+
     @Autowired
     private IBranchStaffService branchStaffService;
     @Autowired
@@ -37,8 +28,6 @@ public class AdminController {
     @Autowired
     private IAppointmentService appointmentService;
 
->>>>>>> Stashed changes
-
     @GetMapping("")
     public String adminHome() {
         return "admin/index";
@@ -46,17 +35,14 @@ public class AdminController {
 
     @GetMapping("/index.html")
     public String showAdminDashboard(Model model) {
-        // Fetch total counts
-        long totalStaff= branchStaffService.getTotalBranchesStaff();
+        long totalStaff = branchStaffService.getTotalBranchesStaff();
         long totalBranches = branchService.getTotalBranches();
         long totalServices = serviceMakeUpService.getTotalSevice();
         long totalAppointments = appointmentService.getTotalActiveAppointments();
 
-        // Fetch lists for branches and services
         var branches = branchService.getAllBranches();
         var services = serviceMakeUpService.getAllServices();
 
-        // Add data to the model
         model.addAttribute("totalStaff", totalStaff);
         model.addAttribute("totalBranches", totalBranches);
         model.addAttribute("totalServices", totalServices);
@@ -68,8 +54,42 @@ public class AdminController {
     }
 
     @GetMapping("/appointment.html")
-    public String appointmentManagement() {
+    public String appointmentManagement(Model model) {
+        List<Appointment> appointments = appointmentService.getAllAppointments();
+        appointments.forEach(appointment -> {
+            Hibernate.initialize(appointment.getMakeupArtist());
+            Hibernate.initialize(appointment.getService());
+            Hibernate.initialize(appointment.getCustomer());
+            Hibernate.initialize(appointment.getBranch());
+        });
+        model.addAttribute("appointments", appointments);
         return "admin/appointment";
+    }
+
+    @PostMapping("/update-status")
+    @ResponseBody
+    public String updateAppointmentStatus(@RequestParam Long appointmentId, @RequestParam String status) {
+        List<String> validStatuses = List.of("pending", "confirmed", "completed", "cancelled");
+        if (!validStatuses.contains(status.toLowerCase())) {
+            return "Trạng thái không hợp lệ!";
+        }
+
+        boolean updated = appointmentService.updateAppointmentStatus(appointmentId, status.toLowerCase());
+        return updated ? "Cập nhật trạng thái thành công!" : "Cuộc hẹn không tồn tại!";
+    }
+
+    @GetMapping("/appointment/{appointmentId}")
+    @ResponseBody
+    public ResponseEntity<Appointment> getAppointmentById(@PathVariable Long appointmentId) {
+        Appointment appointment = appointmentService.findAppointmentById(appointmentId);
+        if (appointment != null) {
+            Hibernate.initialize(appointment.getCustomer());
+            Hibernate.initialize(appointment.getService());
+            Hibernate.initialize(appointment.getBranch());
+            Hibernate.initialize(appointment.getMakeupArtist());
+            return ResponseEntity.ok(appointment);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/branch.html")
@@ -79,7 +99,6 @@ public class AdminController {
         return "admin/branch";
     }
 
-    // Lấy thông tin chi nhánh theo ID (cho chức năng chỉnh sửa)
     @GetMapping("/branch/{branchId}")
     @ResponseBody
     public ResponseEntity<Branch> getBranch(@PathVariable Long branchId) {
@@ -90,7 +109,6 @@ public class AdminController {
         return ResponseEntity.notFound().build();
     }
 
-    // Thêm chi nhánh mới
     @PostMapping("/branch")
     @ResponseBody
     public ResponseEntity<Void> addBranch(@RequestBody Branch branch) {
@@ -98,16 +116,14 @@ public class AdminController {
         return ResponseEntity.ok().build();
     }
 
-    // Cập nhật chi nhánh
     @PutMapping("/branch/{branchId}")
     @ResponseBody
     public ResponseEntity<Void> updateBranch(@PathVariable Long branchId, @RequestBody Branch branch) {
-        branch.setBranchId(branchId); // Đảm bảo ID khớp
+        branch.setBranchId(branchId);
         branchService.saveBranch(branch);
         return ResponseEntity.ok().build();
     }
 
-    // Xóa chi nhánh
     @DeleteMapping("/branch/{branchId}")
     @ResponseBody
     public ResponseEntity<Void> deleteBranch(@PathVariable Long branchId) {
@@ -116,8 +132,42 @@ public class AdminController {
     }
 
     @GetMapping("/service.html")
-    public String serviceManagement() {
+    public String serviceManagement(Model model) {
+        var services = serviceMakeUpService.getAllServices();
+        model.addAttribute("services", services);
         return "admin/service";
+    }
+
+    @GetMapping("/service/{serviceId}")
+    @ResponseBody
+    public ResponseEntity<Optional<ServiceMakeUp>> getService(@PathVariable Long serviceId) {
+        Optional<ServiceMakeUp> service = serviceMakeUpService.getServiceById(serviceId);
+        if (service.isPresent()) {
+            return ResponseEntity.ok(service);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/service")
+    @ResponseBody
+    public ResponseEntity<Void> addService(@RequestBody ServiceMakeUp service) {
+        serviceMakeUpService.saveService(service);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/service/{serviceId}")
+    @ResponseBody
+    public ResponseEntity<Void> updateService(@PathVariable Long serviceId, @RequestBody ServiceMakeUp service) {
+        service.setServiceId(serviceId);
+        serviceMakeUpService.saveService(service);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/service/{serviceId}")
+    @ResponseBody
+    public ResponseEntity<Void> deleteService(@PathVariable Long serviceId) {
+        serviceMakeUpService.deleteService(serviceId);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/setting.html")

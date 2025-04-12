@@ -48,7 +48,7 @@
                 <div class="content">
                     <div class="box_add">
                         <h1>Quản Lý Dịch Vụ</h1>
-                        <button class="btn btn-primary" onclick="showForm()" style="width: 144px;">+ Thêm chi nhánh</button>
+                        <button class="btn btn-primary" onclick="showForm('service')"style="width: 144px;">+ Thêm dịch vụ</button>
                     </div>
                 </div>
                 <div class="content">
@@ -64,36 +64,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><strong>Trang điểm dự tiệc</strong></td>
-                                    <td>Trang điểm chuyên nghiệp cho các dịp đặc biệt</td>
-                                    <td><i class="far fa-clock"></i> 60 phút</td>
-                                    <td>500.000 đ</td>
-                                    <td>
-                                        <button class="edit-btn">Sửa</button>
-                                        <button class="delete-btn">Xóa</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Trang điểm dự tiệc</strong></td>
-                                    <td>Trang điểm chuyên nghiệp cho các dịp đặc biệt</td>
-                                    <td><i class="far fa-clock"></i> 60 phút</td>
-                                    <td>500.000 đ</td>
-                                    <td>
-                                        <button class="edit-btn">Sửa</button>
-                                        <button class="delete-btn">Xóa</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Trang điểm dự tiệc</strong></td>
-                                    <td>Trang điểm chuyên nghiệp cho các dịp đặc biệt</td>
-                                    <td><i class="far fa-clock"></i> 60 phút</td>
-                                    <td>500.000 đ</td>
-                                    <td>
-                                        <button class="edit-btn">Sửa</button>
-                                        <button class="delete-btn">Xóa</button>
-                                    </td>
-                                </tr>
+                            <tr th:each="service : ${services}">
+                                <td><strong th:text="${service.name}">Tên dịch vụ</strong></td>
+                                <td th:text="${service.description}">Mô tả</td>
+                                <td><i class="far fa-clock"></i> <span th:text="${service.duration}">Thời gian</span> phút</td>
+                                <td th:text="${#numbers.formatDecimal(service.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá</td>
+                                <td>
+                                    <button class="edit-btn" th:onclick="|editService(${service.serviceId})|">Sửa</button>
+                                    <button class="delete-btn" th:onclick="|deleteService(${service.serviceId})|">Xóa</button>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -102,17 +82,13 @@
         </div>
     </div>
     <div id="formPopup" class="form-popup hidden">
-        <h2>Thêm chi nhánh</h2>
-        <label>Tên dịch vụ:</label>
-        <input type="text" id="serviceName"><br>
-        <label>Mô tả:</label>
-        <input type="text" id="serviceDescription"><br>
-        <label>Thời gian:</label>
-        <input type="text" id="serviceTime"><br>
-        <label>Giá:</label>
-        <input type="text" id="servicePrice"><br>
-        <button class="btn btn-primary" onclick="addService()">Thêm</button>
-        <button class="btn btn-danger" onclick="closeForm()">Hủy</button>
+        <h2>Thêm Dịch Vụ</h2>
+        <input type="text" id="serviceName" placeholder="Tên dịch vụ">
+        <input type="text" id="serviceDescription" placeholder="Mô tả">
+        <input type="text" id="serviceDuration" placeholder="Thời gian">
+        <input type="text" id="servicePrice" placeholder="Giá">
+        <button onclick="addservice()">Lưu</button>
+        <button onclick="closeForm()">Đóng</button>
     </div>
     <script src="/admin/js/script.js" defer></script>
 </body>

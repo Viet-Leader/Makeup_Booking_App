@@ -6,86 +6,119 @@
     <link rel="stylesheet" href="/admin/assets/style.css"/>
     <link rel="stylesheet" href="/admin/assets/reset.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
-    <title>Booking-Makeup-Admin-staff</title>
+    <title>Booking-Makeup-Admin-Appointment</title>
 </head>
 <body>
-    <div class="col_1_2">
-        <div class="box_1">
-            <div class="box_1_1">
-                <div class="banner">
-                    <h2>
-                        Admin panel
-                    </h2>
-                    <p>Admin user</p>
-                </div>
-            </div>
-            <div class="box_1_2">
-                <div class="nav_menu">
-                    <ul>
-                        <li><div class="box_1_2_1"><a th:href="@{/admin/index.html}"><i class="fa-solid fa-table-columns"></i> Tổng Quan</a></div></li>
-                        <li><div class="box_1_2_1"><a th:href="@{/admin/staff.html}"><i class="fa-regular fa-user"></i> Nhân viên</a></div></li>
-                        <li><div class="box_1_2_1"><a th:href="@{/admin/branch.html}"><i class="fa-solid fa-store"></i> Chi Nhánh</a></div></li>
-                        <li><div class="box_1_2_1"><a th:href="@{/admin/service.html}"><i class="fa-solid fa-server"></i> Dịch Vụ</a></div></li>
-                        <li><div class="box_1_2_1"><a th:href="@{/admin/appointment.html}"><i class="fa-solid fa-calendar"></i> Đặt Lịch</a></div></li>
-                        <li><div class="box_1_2_1"><a th:href="@{/admin/setting.html}"><i class="fa-solid fa-gear"></i> Cài Đặt</a></div></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="box_1_3">
-                <button class="btn-logout">
-                    <a href="#!">Đăng xuất</a>
-                </button>
+<div class="col_1_2">
+    <div class="box_1">
+        <div class="box_1_1">
+            <div class="banner">
+                <h2>Admin Panel</h2>
+                <p>Admin User</p>
             </div>
         </div>
-        <!--Box 2-->
-        <div class="box_2">
-            <div class="box_2_1">
-                <div class="header_row">
-                    <h1>Admin Dashboard</h1>
-                </div>
+        <div class="box_1_2">
+            <div class="nav_menu">
+                <ul>
+                    <li><div class="box_1_2_1"><a th:href="@{/admin/index.html}"><i class="fa-solid fa-table-columns"></i> Tổng Quan</a></div></li>
+                    <li><div class="box_1_2_1"><a th:href="@{/admin/staff.html}"><i class="fa-regular fa-user"></i> Nhân viên</a></div></li>
+                    <li><div class="box_1_2_1"><a th:href="@{/admin/branch.html}"><i class="fa-solid fa-store"></i> Chi Nhánh</a></div></li>
+                    <li><div class="box_1_2_1"><a th:href="@{/admin/service.html}"><i class="fa-solid fa-server"></i> Dịch Vụ</a></div></li>
+                    <li><div class="box_1_2_1"><a th:href="@{/admin/appointment.html}"><i class="fa-solid fa-calendar"></i> Đặt Lịch</a></div></li>
+                    <li><div class="box_1_2_1"><a th:href="@{/admin/setting.html}"><i class="fa-solid fa-gear"></i> Cài Đặt</a></div></li>
+                </ul>
             </div>
-            <div class="box_2_2">
-                <div class="content">
+        </div>
+        <div class="box_1_3">
+            <button class="btn-logout">
+                <a href="/home">Đăng xuất</a>
+            </button>
+        </div>
+    </div>
+    <!--Box 2-->
+    <div class="box_2">
+        <div class="box_2_1">
+            <div class="header_row">
+                <h1>Admin Dashboard</h1>
+            </div>
+        </div>
+        <div class="box_2_2">
+            <div class="content">
+                <div class="box_add">
                     <h1>Quản Lý Đặt Lịch</h1>
                 </div>
-                <div class="content">
-                    <table class="staff-table">
-                        <thead>
-                            <tr>
-                                <th>Khách hàng</th>
-                                <th>Dịch vụ</th>
-                                <th>Chuyên viên</th>
-                                <th>Chi nhánh</th>
-                                <th>Ngày & giờ</th>
-                                <th>Trạng thái</th>
-                                <th>Giá</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Thu Thủy</td>
-                                <td>Trang điểm dự tiệc</td>
-                                <td>Mai Linh</td>
-                                <td>Chi nhánh Quận 1</td>
-                                <td>15/07/2023 10:00 - 11:00</td>
-                                <td><span class="role manager">Hoàn thành</span></td>
-                                <td>500.000 đ</td>
-                            </tr>
-                            <tr>
-                                <td>Khánh Dương</td>
-                                <td>Trang điểm dự tiệc</td>
-                                <td>Mai Linh</td>
-                                <td>Chi nhánh Quận 1</td>
-                                <td>15/07/2023 10:00 - 11:00</td>
-                                <td><span class="role receptionist">Hoàn thành</span></td>
-                                <td>500.000 đ</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            </div>
+            <div class="content">
+                <table class="staff-table">
+                    <thead>
+                    <tr>
+                        <th>Khách hàng</th>
+                        <th>Dịch vụ</th>
+                        <th>Chuyên viên</th>
+                        <th>Chi nhánh</th>
+                        <th>Ngày & Giờ</th>
+                        <th>Trạng thái</th>
+                        <th>Giá</th>
+                        <th>Hành động</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="appointment : ${appointments}">
+                        <td><strong th:text="${appointment.customer?.nameAccount} ?: 'Không có thông tin'"></strong></td>
+                        <td><span th:text="${appointment.service?.name} ?: 'Không có thông tin'"></span></td>
+                        <td><span th:text="${appointment.makeupArtist?.accountMakeup?.nameAccount} ?: 'Không có thông tin'"></span></td>
+                        <td><span th:text="${appointment.branch?.name} ?: 'Không có thông tin'"></span></td>
+                        <td th:text="${#temporals.format(appointment.appointmentDate, 'dd/MM/yyyy - HH:mm')} ?: 'Không có thông tin'"></td>
+                        <td>
+                            <span th:class="'status ' + ${appointment.status}">
+                                <span th:switch="${appointment.status}">
+                                    <span th:case="'pending'">Chờ xác nhận</span>
+                                    <span th:case="'confirmed'">Đã xác nhận</span>
+                                    <span th:case="'completed'">Hoàn thành</span>
+                                    <span th:case="'cancelled'">Đã hủy</span>
+                                    <span th:case="*">[[${appointment.status}]]</span>
+                                </span>
+                            </span>
+                        </td>
+                        <td><span th:text="${appointment.service?.price?.toString() + ' VNĐ'} ?: '0 VNĐ'"></span></td>
+                        <td>
+                            <button class="detail"
+                                    th:data-id="${appointment.appointmentId}"
+                                    th:data-makeupartist="${appointment.makeupArtist?.accountMakeup?.nameAccount} ?: 'Chưa cập nhật'"
+                                    th:data-service-price="${appointment.service?.price} ?: 0"
+                                    th:data-makeupartist-price="${appointment.makeupArtist?.price} ?: 0">
+                                Chi tiết
+                            </button>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(appointments)}">
+                        <td colspan="8">Không có lịch hẹn nào để hiển thị.</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div id="appointmentDetailForm" class="form-box hidden">
+                    <h2>Chi tiết lịch hẹn</h2>
+                    <p>Ngày & Giờ: <span id="appointmentDateTime"></span></p>
+                    <p>Chi nhánh: <span id="appointmentBranch"></span></p>
+                    <p>Dịch vụ: <span id="appointmentService"></span></p>
+                    <p>Chuyên viên: <span id="appointmentStaff"></span></p>
+                    <p>Giá: <span id="appointmentPrice"></span></p>
+                    <p>Trạng thái: <span id="appointmentStatus"></span></p>
+
+                    <div id="formActions">
+                        <button id="confirmBtn" class="hidden">Xác nhận</button>
+                        <button id="completeBtn" class="hidden">Hoàn thành</button>
+                        <button id="cancelBtn" class="hidden">Hủy</button>
+                        <button id="closeDetailBtn">Đóng</button>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
-    <script src="/admin/js/script.js" defer></script>
+</div>
+<script src="/admin/js/script.js" defer></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92ebb7f9adf48e02',t:'MTc0NDM4NzQ1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>

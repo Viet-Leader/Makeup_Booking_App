@@ -1,5 +1,6 @@
 package com.example.bookingmakeup.Services;
 
+import com.example.bookingmakeup.Models.Branch;
 import com.example.bookingmakeup.Models.ServiceMakeUp;
 import com.example.bookingmakeup.Repositories.IServiceMakeUpRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class ServiceMakeUpService implements IServiceMakeUpService {
     }
 
     @Override
-    public Optional<ServiceMakeUp> getServiceById(Integer id) {
+    public Optional<ServiceMakeUp> getServiceById(long id) {
         return serviceMakeUpRepositories.findById(id);
     }
 
@@ -30,7 +31,7 @@ public class ServiceMakeUpService implements IServiceMakeUpService {
     }
 
     @Override
-    public ServiceMakeUp updateService(Integer id, ServiceMakeUp service) {
+    public ServiceMakeUp updateService(long id, ServiceMakeUp service) {
         if(serviceMakeUpRepositories.existsById(id)) {
             service.setServiceId(id);
             return serviceMakeUpRepositories.save(service);
@@ -39,13 +40,16 @@ public class ServiceMakeUpService implements IServiceMakeUpService {
     }
 
     @Override
-    public void deleteService(Integer id) {
+    public void deleteService(long id) {
         serviceMakeUpRepositories.deleteById(id);
     }
-<<<<<<< HEAD
+
+    @Override
+    public ServiceMakeUp saveService(ServiceMakeUp service) {
+        return serviceMakeUpRepositories.save(service);
+    }
     public long getTotalSevice() {
         return serviceMakeUpRepositories.count();
     }
-=======
->>>>>>> origin/master
+
 }
