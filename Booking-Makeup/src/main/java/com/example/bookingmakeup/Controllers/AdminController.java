@@ -1,11 +1,12 @@
 package com.example.bookingmakeup.Controllers;
 
-<<<<<<< Updated upstream
-=======
+
+import com.example.bookingmakeup.Models.Branch;
 import com.example.bookingmakeup.Services.*;
 import com.example.bookingmakeup.Models.BranchStaff;
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> Stashed changes
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

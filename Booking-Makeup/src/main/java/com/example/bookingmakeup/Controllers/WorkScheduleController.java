@@ -12,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
+import java.time.chrono.ChronoLocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 @Controller
 @RequestMapping("/makeup_artist")
@@ -27,19 +29,13 @@ public class WorkScheduleController {
     @Autowired
     private MakeupArtistService makeupArtistService;
     @GetMapping("/work_schedule.html")
-    public String ViewCalendar (Model model) {
-        // Giả sử makeup artist hiện tại có ID là 1 (có thể lấy từ session hoặc authentication)
-        Integer makeupArtistId = 1;
-
-        // Lấy tất cả lịch hẹn của makeup artist
-        List<Appointment> appointments = appointmentService.getAllAppointments()
-                .stream()
-                .filter(appointment -> appointment.getMakeupArtist().getId().equals(makeupArtistId))
-                .collect(Collectors.toList());
-
-        // Truyền dữ liệu vào model
-        model.addAttribute("appointments", appointments);
-
+    public String ViewCalendar (Model model)   {
+        try{
+        List<Appointment> allAppointments = appointmentService.getAllAppointmentsWithDetails();
+            model.addAttribute("appointments", allAppointments);}
+        catch(Exception e){
+            model.addAttribute("errorMessage", "Không thể tải danh sách cuộc hẹn. Chi tiết lỗi: " + e.getMessage());
+        }
         return "makeup_artist/work_schedule";
     }
 }

@@ -122,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+
     // Hàm lọc "Sắp tới" và "Tất cả"
     function filterAppointments(filterType) {
         const rows = document.querySelectorAll("tbody tr");

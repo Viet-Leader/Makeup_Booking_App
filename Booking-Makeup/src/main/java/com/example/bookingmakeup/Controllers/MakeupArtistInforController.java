@@ -39,7 +39,7 @@ public class MakeupArtistInforController {
     // Xử lý cập nhật thông tin
     @PostMapping("/update")
     public String updateArtistInfo(
-            @RequestParam("id") Integer id,
+            @RequestParam("id") Long makeupArtistId,
             @RequestParam("nameAccount") String nameAccount,
             @RequestParam("phone") String phone,
             @RequestParam("address") String address,
@@ -48,7 +48,7 @@ public class MakeupArtistInforController {
 
         // Tìm MakeupArtist theo ID
         MakeupArtist artist = makeupArtistService.getAllMakeupArtists().stream()
-                .filter(a -> a.getId().equals(id))
+                .filter(a -> a.getMakeupArtistId().equals(makeupArtistId))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Artist not found"));
 

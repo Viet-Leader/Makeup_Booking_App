@@ -2,11 +2,9 @@ package com.example.bookingmakeup.Services;
 
 import com.example.bookingmakeup.Models.Appointment;
 import com.example.bookingmakeup.Repositories.IAppointmentRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +32,11 @@ public class AppointmentService implements IAppointmentService {
     @Override
     public long getTotalActiveAppointments() {
         return appointmentRepository.countActiveAppointments();
+    }
+
+    @Override
+    public List<Appointment> getAllAppointmentsWithDetails() {
+        return appointmentRepository.findAllWithDetails();
     }
 
 }
