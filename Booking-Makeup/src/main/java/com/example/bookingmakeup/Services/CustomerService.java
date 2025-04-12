@@ -5,6 +5,7 @@ import com.example.bookingmakeup.Repositories.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,4 +33,10 @@ public class CustomerService implements ICustomerService {
     public void deleteCustomer(Long customerId) {
         customerRepository.deleteById(customerId);
     }
+
+    @Override
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll(); // ✅ Lấy tất cả khách hàng từ DB
+    }
+
 }

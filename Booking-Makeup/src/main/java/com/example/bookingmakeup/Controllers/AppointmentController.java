@@ -72,9 +72,6 @@ public class AppointmentController {
         appointment.setAppointmentDate(instant);
         appointment.setStatus("PENDING");
 
-        // Set relationships
-        appointment.setCustomer(accountRepository.findById(customerId).orElse(null));
-        appointment.setMakeupArtist(accountRepository.findById(artistId.longValue()).orElse(null));
 
         appointmentRepository.save(appointment);
         return "redirect:/schedule?success";

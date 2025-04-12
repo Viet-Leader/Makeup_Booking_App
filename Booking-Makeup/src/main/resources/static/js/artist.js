@@ -40,33 +40,17 @@ document.addEventListener("DOMContentLoaded", function () {
         })
             .then((response) => {
                 if (!response.ok) {
-                    return response.json().then((errorData) => {
-                        throw new Error(errorData.message || "Lỗi không xác định từ server");
+                    return response.text().then((errorMessage) => {
+                        throw new Error(errorMessage || "Lỗi không xác định từ server");
                     });
                 }
-                return response.json();
+                return response.text(); // Sử dụng .text() để nhận thông báo từ backend
             })
-            .then((comment) => {
-                if (comment && comment.cmt) {
-                    const commentList = document.querySelector(".d-comment");
-                    if (!commentList) {
-                        console.error("Không tìm thấy danh sách bình luận .d-comment");
-                        return;
-                    }
-                    const newComment = document.createElement("div");
-                    newComment.classList.add("u-comment");
-                    newComment.innerHTML = `
-                        <img class="u-ava" src="${comment.customer?.user?.avatar || '/image/default-avatar.jpg'}" alt="Avatar" />
-                        <div class="ten">
-                            <p>${comment.customer?.user?.nameAccount || "Ẩn danh"}</p>
-                            <p>${comment.cmt}</p>
-                        </div>
-                    `;
-                    commentList.appendChild(newComment);
-                    commentInput.value = "";
-                } else {
-                    alert("Dữ liệu trả về không hợp lệ, vui lòng thử lại!");
-                }
+            .then((message) => {
+                alert(message); // Hiển thị thông báo từ backend
+
+                // Tự động reload lại trang sau khi bình luận thành công
+                location.reload(); // Tải lại trang
             })
             .catch((error) => {
                 console.error("Lỗi chi tiết khi gửi bình luận:", error);

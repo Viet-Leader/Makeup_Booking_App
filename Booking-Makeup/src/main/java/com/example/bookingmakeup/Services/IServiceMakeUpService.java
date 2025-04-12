@@ -14,4 +14,5 @@ public interface IServiceMakeUpService {
     ServiceMakeUp saveService(ServiceMakeUp service);
     long getTotalSevice();
 
+
 }

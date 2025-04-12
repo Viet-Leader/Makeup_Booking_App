@@ -17,6 +17,7 @@ import java.util.Optional;
 @RequestMapping("/admin")
 public class AdminController {
 
+
     @Autowired
     private IBranchStaffService branchStaffService;
     @Autowired
@@ -35,6 +36,7 @@ public class AdminController {
 
     @GetMapping("/index.html")
     public String showAdminDashboard(Model model) {
+        long totalStaff = branchStaffService.getTotalBranchesStaff();
         long totalStaff = branchStaffService.getTotalBranchesStaff();
         long totalBranches = branchService.getTotalBranches();
         long totalServices = serviceMakeUpService.getTotalSevice();

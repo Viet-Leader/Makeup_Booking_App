@@ -28,10 +28,10 @@ public class AccountService implements IAccountService {
             return "Email đã tồn tại!";
         }
 
-        // ✅ Lưu tài khoản vào bảng account trước
+        // Lưu tài khoản vào bảng account trước
         account = accountRepository.save(account);
 
-        // ✅ Nếu tài khoản có role "customer", kiểm tra trong bảng customers
+        // Nếu tài khoản có role "customer", kiểm tra trong bảng customers
         if ("customer".equalsIgnoreCase(account.getRole())) {
             // 🔹 Truy vấn theo user_id thay vì account object
             Optional<Customer> existingCustomer = customerRepository.findById(account.getUserId());
