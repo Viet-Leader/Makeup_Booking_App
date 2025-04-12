@@ -28,6 +28,34 @@
                 <li><a href="./makeup-artist.html">Nghệ sĩ trang điểm</a></li>
                 <li><a href="./schedule.html">Đặt lịch</a></li>
             </ul>
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./assets/reset.css"/>
+        <link rel="stylesheet" href="./assets/style.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+        <title>Đặt lịch</title>
+    </head>
+    <body>
+    <!-- header-->
+    <header th:fragment="layout_header" class="header">
+        <div class="content">
+            <div class="navbar">
+                <!--logo-->
+                <a href="/home">
+                    <div class="logo-container">
+                        <img src="/image/logo.jpg" alt="logo" class="logo"/>
+                        <span class="brand-name">Booking-Makeup</span>
+                    </div>
+                </a>
+                <!--navigation-->
+                <ul class="nav-menu">
+                    <li><a href="/services">Dịch vụ</a></li>
+                    <li><a href="/makeup-artists">Nghệ sĩ trang điểm</a></li>
+                    <li><a href="/schedule">Đặt lịch</a></li>
+                </ul>
 
             <!--action-->
             <div class="action">
@@ -163,6 +191,106 @@
                     </table>
                     <div class="box-cld-btn">
                         <button class="box-cld-btn-1" type="submit">Đặt lịch</button>
+    <!--Hero-->
+    <!--content-->
+    <div class = "cld">
+        <div class = "container">
+            <div class = "wallpaper">
+                <div class = "box-cld">
+                    <div class = "box-cld-1">
+                        <h1>Booking-Makup</h1>
+                    </div>
+                    <div class = "box-cld-2">
+                        <h2>Đặt lịch</h2>
+                    </div>
+                    <div id="confirmModal" style="display: none; position: fixed; background-color: rgba(0,0,0,0.5); top: 0; left: 0; width: 100%; height: 100%; z-index: 999;">
+                        <div style="background: white; padding: 20px; margin: 20% auto; width: 300px; text-align: center; border-radius: 10px;">
+                            <p>Bạn có chắc chắn muốn đặt lịch không?</p>
+                            <button onclick="submitForm()" style="margin-right: 10px;">Xác nhận</button>
+                            <button onclick="cancelForm()">Không</button>
+                        </div>
+                    </div>
+
+                    <!-- Thông báo -->
+                    <div th:if="${param.success}" class="alert alert-success" style="color: green; text-align: center; font-weight: bold;">
+                        Đặt lịch thành công!
+                    </div>
+                    <div th:if="${param.error}" class="alert alert-danger" style="color: red; text-align: center; font-weight: bold;">
+                        <p th:if="${param.error == 'pastDate'}">Không thể đặt lịch cho ngày trong quá khứ!</p>
+                    </div>
+
+                    <form action="/schedule/save" method="post" onsubmit="return confirmBooking(event)">
+                    <div class = "box-cld-3-display">
+
+                        <table class = "tb-1">
+                            <tr>
+                                <th> </th>
+                                <th> </th>
+                            </tr>
+                            <tr>
+                                <td><span>Chi nhánh<p>:</p></span></td><!--appointment.branch.name-->
+                                <td>
+                                    <select class="chs-box" id = "branch" name="branchId">
+                                        <option value="">--Chọn chi nhánh--</option>
+                                        <option th:each="branch : ${branches}"
+                                                th:value="${branch.branchId}"
+                                                th:text="${branch.name}">
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>Nghệ sĩ trang điểm<P>:</P> </span></td><!--appointment.makeupArtist.accountMakeup.nameAccount-->
+                                <td>
+                                    <select class="chs-box" id = "makeupArtist" name="makeupArtistId">
+                                        <option value="">--Chọn nghệ sĩ--</option>
+                                        <option th:each="makeupArtists : ${makeupArtists}"
+                                                th:value="${makeupArtists.makeupArtistId}"
+                                                th:text="${makeupArtists.accountMakeup.nameAccount}">
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>Loại dịch vụ<P>:</P></span><!--appointment.service.name-->
+                                </td>
+                                <td>
+                                    <select class="chs-box" id = "service" name="serviceId">
+                                        <option value="">--Chọn dịch vụ--</option>
+                                        <option th:each="serviceMakeUps : ${serviceMakeUps}"
+                                                th:value="${serviceMakeUps.serviceId}"
+                                                th:text="${serviceMakeUps.name}">
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class = "tb-1">
+                            <tr>
+                                <th> </th>
+                                <th> </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Số điện thoại liên hệ<P>:</P></span>
+                                </td>
+                                <td>
+                                    <div class = "input-box">
+                                        <input type = "text" name = "phone" placeholder = "nhập số điện thoại liên hệ"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Ngày bắt đầu trang điểm<P>:</P></span>
+                                </td>
+                                <td>
+                                    <div class = "input-box">
+                                        <input type = "datetime-local" name = "appointmentDate" placeholder = "mm/dd/yyyy 00:00"/>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </form>
             </div>
@@ -183,6 +311,28 @@
                             <i class="fa-brands fa-square-instagram"></i>
                             <i class="fa-brands fa-facebook-messenger"></i></li>
                     </ul>
+                    <div class = "box-cld-btn">
+                        <button class = "box-cld-btn-1" type="submit" id = "box-cld-btn-1"><a>Đặt lịch</a></button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end content-->
+    <!--footer-->
+    <div class="footer">
+        <div class="content">
+            <div class="grid__row">
+                <div class="grid__colum">
+                    <div class="colum_2-4">
+                        <h1>Booking-Makeup</h1>
+                        <ul>
+                            <li>Hệ thống đặt lịch trang điểm chuyên nghiệp, giúp bạn luôn tỏa sáng trong mọi dịp đặc biệt.</li>
+                            <li><i class="fa-brands fa-facebook"></i>
+                                <i class="fa-brands fa-square-instagram"></i>
+                                <i class="fa-brands fa-facebook-messenger"></i></li>
+                        </ul>
 
                 </div>
                 <div class="colum_2-4">
@@ -225,3 +375,46 @@
 <!--footer-->
 </body>
 </html>
+                    </div>
+                    <div class="colum_2-4">
+                        <h1>Dịch vụ</h1>
+                        <ul>
+                            <li>Trang điểm dự tiệc</li>
+                            <li>Trang điểm cô dâu</li>
+                            <li>Trang điểm nhẹ nhà</li>
+                            <li>Xem tất cả dịch vụ</li>
+                        </ul>
+                    </div>
+                    <div class="colum_2-4">
+                        <h1>Liên kết</h1>
+                        <ul>
+                            <li>Về chúng tôi</li>
+                            <li>Chi nhánh</li>
+                            <li>Nghệ sĩ trang điểm</li>
+                            <li>Đặt lịch</li>
+                            <li>Liên hệ</li>
+                        </ul>
+                    </div>
+                    <div class="colum_2-4">
+                        <h1>Liên hệ</h1>
+                        <ul>
+                            <li><i class="fa-solid fa-location-pin"></i> 123 Lê Lợi, Quận 1, TP.HCM</li>
+                            <li><i class="fa-solid fa-phone"></i> 028-1234-5678</li>
+                            <li><i class="fa-solid fa-envelope"></i> contact@glamschedule.com</li>
+                            <li><i class="fa-solid fa-calendar-days"></i> Thứ 2 - Chủ nhật</li>
+                            <li><i class="fa-solid fa-clock"></i> 09:00 - 20:00</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="grid__row">
+                <hr/>
+                <p>© 2025 Booking-Makeup. Bản quyền thuộc về chúng tôi.</p>
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <script src = "/js/script.js"></script>
+    <script src = "/js/schedule.js"></script>
+    </body>
+    </html>

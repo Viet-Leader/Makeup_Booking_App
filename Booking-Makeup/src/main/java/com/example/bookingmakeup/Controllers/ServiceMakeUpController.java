@@ -32,7 +32,7 @@ public class ServiceMakeUpController {
 
     @GetMapping("/api/{id}")
     @ResponseBody
-    public Optional<ServiceMakeUp> getServiceById(@PathVariable Integer id) {
+    public Optional<ServiceMakeUp> getServiceById(@PathVariable Long id) {
         return serviceMakeUpService.getServiceById(id);
     }
 
@@ -44,13 +44,13 @@ public class ServiceMakeUpController {
 
     @PutMapping("/api/{id}")
     @ResponseBody
-    public Optional<ServiceMakeUp> updateService(@PathVariable Integer id, @RequestBody ServiceMakeUp service) {
+    public Optional<ServiceMakeUp> updateService(@PathVariable Long id, @RequestBody ServiceMakeUp service) {
         return Optional.ofNullable(serviceMakeUpService.updateService(id, service));
     }
 
     @DeleteMapping("/api/{id}")
     @ResponseBody
-    public void deleteService(@PathVariable Integer id) {
+    public void deleteService(@PathVariable Long id) {
         serviceMakeUpService.deleteService(id);
     }
 }

@@ -11,6 +11,8 @@ public interface IAppointmentService {
     boolean updateAppointmentStatus(Long appointmentId, String newStatus);
 
     long getTotalActiveAppointments();
+    void save(Appointment appointment);
+    List<Appointment> getAppointmentsByBranch(Long branchId);
 }
 
 
