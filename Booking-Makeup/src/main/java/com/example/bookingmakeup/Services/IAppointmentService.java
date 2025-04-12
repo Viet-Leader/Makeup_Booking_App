@@ -11,7 +11,6 @@ public interface IAppointmentService {
     boolean updateAppointmentStatus(Long appointmentId, String newStatus);
 
     long getTotalActiveAppointments();
-    List<Appointment> getAllAppointmentsWithDetails();
 }
 
 

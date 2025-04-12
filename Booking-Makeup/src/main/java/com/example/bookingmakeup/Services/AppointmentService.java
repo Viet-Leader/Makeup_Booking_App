@@ -2,6 +2,8 @@ package com.example.bookingmakeup.Services;
 
 import com.example.bookingmakeup.Models.Appointment;
 import com.example.bookingmakeup.Repositories.IAppointmentRepository;
+import jakarta.transaction.Transactional;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +14,6 @@ import java.util.Optional;
 public class AppointmentService implements IAppointmentService {
     @Autowired
     private IAppointmentRepository appointmentRepository;
-    @Override
-    public List<Appointment> getAllAppointments() {
-        return appointmentRepository.findAll();
-    }
 
     @Override
     public boolean updateAppointmentStatus(Long appointmentId, String newStatus) {
@@ -33,10 +31,34 @@ public class AppointmentService implements IAppointmentService {
     public long getTotalActiveAppointments() {
         return appointmentRepository.countActiveAppointments();
     }
-
     @Override
-    public List<Appointment> getAllAppointmentsWithDetails() {
-        return appointmentRepository.findAllWithDetails();
+    public Appointment findAppointmentById(Long id) {
+        Optional<Appointment> appointmentOpt = appointmentRepository.findById(id);
+        if (appointmentOpt.isPresent()) {
+            Appointment appointment = appointmentOpt.get();
+            Hibernate.initialize(appointment.getCustomer());
+            Hibernate.initialize(appointment.getMakeupArtist());
+            Hibernate.initialize(appointment.getBranch());
+            Hibernate.initialize(appointment.getService());
+            return appointment;
+        }
+        return null;
     }
 
+    @Override
+    public List<Appointment> getAllAppointments() {
+        List<Appointment> appointments = appointmentRepository.findAll();
+        appointments.forEach(appointment -> {
+            Hibernate.initialize(appointment.getCustomer());
+            Hibernate.initialize(appointment.getMakeupArtist());
+            Hibernate.initialize(appointment.getBranch());
+            Hibernate.initialize(appointment.getService());
+        });
+        return appointments;
+    }
+
+    @Override
+    public void saveAppointment(Appointment appointment) {
+        appointmentRepository.save(appointment);
+    }
 }
