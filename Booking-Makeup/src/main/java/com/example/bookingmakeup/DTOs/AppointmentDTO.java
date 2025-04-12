@@ -1,5 +1,7 @@
 package DTOs;
 
+import com.example.bookingmakeup.Models.Appointment;
+
 import java.time.Instant;
 
 public class AppointmentDTO {
@@ -9,6 +11,9 @@ public class AppointmentDTO {
     private Integer serviceId;
     private Instant appointmentDate;
     private String status;
+
+    public AppointmentDTO(Appointment appointment) {
+    }
 
     // Getters and Setters
     public Long getCustomerId() {

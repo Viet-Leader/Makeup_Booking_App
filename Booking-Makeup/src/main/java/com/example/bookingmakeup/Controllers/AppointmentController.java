@@ -23,7 +23,7 @@ public class AppointmentController {
     private IAppointmentRepository appointmentRepository;
 
     @Autowired
-    private IBranchRepository branchRepository;
+    private IBranchesRepository branchRepository;
 
     @Autowired
     private IMakeupArtistRepository makeupArtistRepository;
