@@ -14,17 +14,17 @@
         <div class="content">
             <div class="navbar">
                 <!--logo-->
-                <a href="./index.html">
+                <a href="/home">
                     <div class="logo-container">
-                        <img src="./image/logo.png" alt="logo" class="logo"/>
+                        <img src="/image/logo.jpg" alt="logo" class="logo"/>
                         <span class="brand-name">Booking-Makeup</span>
                     </div>
                 </a>
                 <!--navigation-->
                 <ul class="nav-menu">
-                    <li><a href="./sevices.html">Dịch vụ</a></li>
-                    <li><a href="./makeup-artist.html">Nghệ sĩ trang điểm</a></li>
-                    <li><a href="./schedule.html">Đặt lịch</a></li>
+                    <li><a href="/services">Dịch vụ</a></li>
+                    <li><a href="/makeup-artists">Nghệ sĩ trang điểm</a></li>
+                    <li><a href="/schedule">Đặt lịch</a></li>
                 </ul>
 
                 <!--action-->
@@ -80,46 +80,64 @@
                     <div class = "box-cld-2">
                         <h2>Đặt lịch</h2>
                     </div>
+                    <div id="confirmModal" style="display: none; position: fixed; background-color: rgba(0,0,0,0.5); top: 0; left: 0; width: 100%; height: 100%; z-index: 999;">
+                        <div style="background: white; padding: 20px; margin: 20% auto; width: 300px; text-align: center; border-radius: 10px;">
+                            <p>Bạn có chắc chắn muốn đặt lịch không?</p>
+                            <button onclick="submitForm()" style="margin-right: 10px;">Xác nhận</button>
+                            <button onclick="cancelForm()">Không</button>
+                        </div>
+                    </div>
+
+                    <!-- Thông báo -->
+                    <div th:if="${param.success}" class="alert alert-success" style="color: green; text-align: center; font-weight: bold;">
+                        Đặt lịch thành công!
+                    </div>
+                    <div th:if="${param.error}" class="alert alert-danger" style="color: red; text-align: center; font-weight: bold;">
+                        <p th:if="${param.error == 'pastDate'}">Không thể đặt lịch cho ngày trong quá khứ!</p>
+                    </div>
+
+                    <form action="/schedule/save" method="post" onsubmit="return confirmBooking(event)">
                     <div class = "box-cld-3-display">
+
                         <table class = "tb-1">
                             <tr>
                                 <th> </th>
                                 <th> </th>
                             </tr>
                             <tr>
-                                <td><span>Chi nhánh<p>:</p></span></td>
+                                <td><span>Chi nhánh<p>:</p></span></td><!--appointment.branch.name-->
                                 <td>
-                                    <select id="chs-box" name="chs-box">
+                                    <select class="chs-box" id = "branch" name="branchId">
                                         <option value="">--Chọn chi nhánh--</option>
-                                        <option value="q">Quận 12</option>
-                                        <option value="q">Quận Thủ Đức</option>
-                                        <option value="q">Đại học Nông Lâm</option>
+                                        <option th:each="branch : ${branches}"
+                                                th:value="${branch.branchId}"
+                                                th:text="${branch.name}">
+                                        </option>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
-                                <td><span>Nghệ sĩ trang điểm<P>:</P> </span></td>
+                                <td><span>Nghệ sĩ trang điểm<P>:</P> </span></td><!--appointment.makeupArtist.accountMakeup.nameAccount-->
                                 <td>
-                                    <select class="chs-box" name="chs-box">
+                                    <select class="chs-box" id = "makeupArtist" name="makeupArtistId">
                                         <option value="">--Chọn nghệ sĩ--</option>
-                                        <option value="ng">Trần Quốc Việt</option>
-                                        <option value="ng">Nguyễn Khánh Dương</option>
-                                        <option value="ng">Mai Huy Hoàng</option>
+                                        <option th:each="makeupArtists : ${makeupArtists}"
+                                                th:value="${makeupArtists.makeupArtistId}"
+                                                th:text="${makeupArtists.accountMakeup.nameAccount}">
+                                        </option>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
-                                <td><span>Loại dịch vụ<P>:</P></span>
+                                <td><span>Loại dịch vụ<P>:</P></span><!--appointment.service.name-->
                                 </td>
                                 <td>
-                                    <select class="chs-box" name="chs-box">
+                                    <select class="chs-box" id = "service" name="serviceId">
                                         <option value="">--Chọn dịch vụ--</option>
-                                        <option value="dv">Trang điểm cô dâu</option>
-                                        <option value="dv">Trang điểm dự tiệc</option>
-                                        <option value="dv">Trang điểm nhẹ nhàng</option>
-                                        <option value="dv">Trang điểm biểu diễn</option>
-                                        <option value="dv">Trang điểm kỷ yếu</option>
-                                        <option value="dv">Trang điểm nhóm múa hát</option>
+                                        <option th:each="serviceMakeUps : ${serviceMakeUps}"
+                                                th:value="${serviceMakeUps.serviceId}"
+                                                th:text="${serviceMakeUps.name}">
+                                        </option>
                                     </select>
                                 </td>
                             </tr>
@@ -135,7 +153,7 @@
                                 </td>
                                 <td>
                                     <div class = "input-box">
-                                        <input type = "text" placeholder = "nhập số điện thoại liên hệ"/>
+                                        <input type = "text" name = "phone" placeholder = "nhập số điện thoại liên hệ"/>
                                     </div>
                                 </td>
                             </tr>
@@ -145,25 +163,16 @@
                                 </td>
                                 <td>
                                     <div class = "input-box">
-                                        <input type = "date" placeholder = "mm/dd/yyyy"/>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span>Thời gian bắt đầu trang điểm<P>:</P></span>
-                                </td>
-                                <td>
-                                    <div class = "input-box">
-                                        <input type = "time" placeholder = "00:00"/>
+                                        <input type = "datetime-local" name = "appointmentDate" placeholder = "mm/dd/yyyy 00:00"/>
                                     </div>
                                 </td>
                             </tr>
                         </table>
                     </div>
                     <div class = "box-cld-btn">
-                        <button class = "box-cld-btn-1" type="submit" id = "box-cld-btn-1"><a href = "#!">Đặt lịch</a></button>
+                        <button class = "box-cld-btn-1" type="submit" id = "box-cld-btn-1"><a>Đặt lịch</a></button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -222,5 +231,7 @@
         </div>
     </div>
     <!--footer-->
+    <script src = "/js/script.js"></script>
+    <script src = "/js/schedule.js"></script>
     </body>
     </html>

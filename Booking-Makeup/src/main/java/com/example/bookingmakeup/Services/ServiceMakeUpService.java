@@ -20,7 +20,7 @@ public class ServiceMakeUpService implements IServiceMakeUpService {
     }
 
     @Override
-    public Optional<ServiceMakeUp> getServiceById(Integer id) {
+    public Optional<ServiceMakeUp> getServiceById(Long id) {
         return serviceMakeUpRepositories.findById(id);
     }
 
@@ -30,7 +30,7 @@ public class ServiceMakeUpService implements IServiceMakeUpService {
     }
 
     @Override
-    public ServiceMakeUp updateService(Integer id, ServiceMakeUp service) {
+    public ServiceMakeUp updateService(Long id, ServiceMakeUp service) {
         if(serviceMakeUpRepositories.existsById(id)) {
             service.setServiceId(id);
             return serviceMakeUpRepositories.save(service);
@@ -39,7 +39,7 @@ public class ServiceMakeUpService implements IServiceMakeUpService {
     }
 
     @Override
-    public void deleteService(Integer id) {
+    public void deleteService(Long id) {
         serviceMakeUpRepositories.deleteById(id);
     }
 }

@@ -80,7 +80,7 @@
                 </tr>
                 <tr th:each="appointment : ${appointments}">
                     <td th:text="${appointment.makeupArtist.accountMakeup.nameAccount}">Tên nghệ sĩ</td>
-                    <!-- 🔹 ĐÃ THAY ĐỔI: thêm class="price-cell" để JS xử lý -->
+
                     <td class="price-cell" th:text="${(appointment.makeupArtist != null ? appointment.makeupArtist.price : 0) + (appointment.service != null ? appointment.service.price : 0)}">Giá</td>
                     <td>
                             <span th:class="'status ' + ${appointment.status}">

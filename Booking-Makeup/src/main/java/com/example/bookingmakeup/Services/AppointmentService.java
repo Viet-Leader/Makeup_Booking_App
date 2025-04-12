@@ -36,4 +36,13 @@ public class AppointmentService implements IAppointmentService {
         return appointmentRepository.countActiveAppointments();
     }
 
+    @Override
+    public void save(Appointment appointment) {
+        appointmentRepository.save(appointment);
+    }
+    @Override
+    public List<Appointment> getAppointmentsByBranch(Long branchId) {
+        return appointmentRepository.findByBranch_BranchId(branchId);
+    }
+
 }

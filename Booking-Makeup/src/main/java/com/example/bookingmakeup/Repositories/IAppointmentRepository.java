@@ -15,4 +15,5 @@ public interface IAppointmentRepository extends JpaRepository<Appointment, Long>
     List<Appointment> findAll();
     @Query("SELECT COUNT(a) FROM Appointment a WHERE a.status <> 'cancelled'")
     long countActiveAppointments();
+    List<Appointment> findByBranch_BranchId(Long branchId);
 }

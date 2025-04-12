@@ -76,16 +76,33 @@ public class ManagerController {
     @GetMapping("/appointment")
     public String appointmentPage(Model model, HttpSession session) {
         if (!hasPermission(session)) {
-            return "redirect:/home"; // ⬅ Chuyển hướng về /home nếu không có quyền
+            return "redirect:/home";
         }
-        List<Appointment> appointments = appointmentService.getAllAppointments();
+
+        // Lấy userId từ session
+        Long userId = (Long) session.getAttribute("userId");
+
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        // Lấy thông tin tài khoản
+        Account loggedInAccount = accountService.findById(userId).orElse(null);
+
+        if (loggedInAccount == null || loggedInAccount.getBranch() == null) {
+            return "redirect:/login";
+        }
+
+        Long branchId = loggedInAccount.getBranch().getBranchId();
+
+        // Lấy danh sách lịch hẹn theo chi nhánh
+        List<Appointment> appointments = appointmentService.getAppointmentsByBranch(branchId);
+
         appointments.forEach(appointment -> {
             Hibernate.initialize(appointment.getMakeupArtist());
             Hibernate.initialize(appointment.getService());
-            System.out.println("MakeupArtist: " + appointment.getMakeupArtist());
-            System.out.println("Service: " + appointment.getService());
         });
-        System.out.println("Appointments: " + appointments);
+
         model.addAttribute("appointments", appointments);
         return "manager/appointment";
     }

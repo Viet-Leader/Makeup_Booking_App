@@ -25,17 +25,6 @@ public class HomeController {
         return "home";
     }
 
-
-    @GetMapping("/schedule")
-    public ModelAndView schedulePage(HttpSession session) {
-        // Kiểm tra xem session có chứa thông tin đăng nhập không
-        if (session.getAttribute("user") == null) {
-            return new ModelAndView("redirect:/login"); // Chuyển hướng nếu chưa đăng nhập
-        }
-        return new ModelAndView("schedule"); // Hiển thị trang nếu đã đăng nhập
-    }
-
-
     @GetMapping("/register")
     public String registerPage() {
         return "register"; // Trả về trang register.html

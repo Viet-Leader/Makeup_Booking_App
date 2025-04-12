@@ -34,6 +34,9 @@ public class Appointment {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "phone")
+    private String phone;
+
     // Getters and setters
 
     public Long getAppointmentId() {
@@ -90,5 +93,11 @@ public class Appointment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getPhone() {
+        return phone;
+    };
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

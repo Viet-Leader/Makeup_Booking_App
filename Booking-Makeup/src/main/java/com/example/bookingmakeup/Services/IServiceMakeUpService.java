@@ -6,8 +6,8 @@ import java.util.Optional;
 
 public interface IServiceMakeUpService {
     List<ServiceMakeUp> getAllServices();
-    Optional<ServiceMakeUp> getServiceById(Integer id);
+    Optional<ServiceMakeUp> getServiceById(Long id);
     ServiceMakeUp createService(ServiceMakeUp service);
-    ServiceMakeUp updateService(Integer id, ServiceMakeUp service);
-    void deleteService(Integer id);
+    ServiceMakeUp updateService(Long id, ServiceMakeUp service);
+    void deleteService(Long id);
 }

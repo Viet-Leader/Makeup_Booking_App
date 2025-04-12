@@ -8,4 +8,6 @@ public interface IAppointmentService {
     List<Appointment> getAllAppointments();
     boolean updateAppointmentStatus(Long appointmentId, String newStatus);
     long getTotalActiveAppointments();
+    void save(Appointment appointment);
+    List<Appointment> getAppointmentsByBranch(Long branchId);
 }
