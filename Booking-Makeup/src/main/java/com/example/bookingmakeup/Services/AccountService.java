@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,10 +28,10 @@ public class AccountService implements IAccountService {
             return "Email đã tồn tại!";
         }
 
-        // ✅ Lưu tài khoản vào bảng account trước
+        // Lưu tài khoản vào bảng account trước
         account = accountRepository.save(account);
 
-        // ✅ Nếu tài khoản có role "customer", kiểm tra trong bảng customers
+        // Nếu tài khoản có role "customer", kiểm tra trong bảng customers
         if ("customer".equalsIgnoreCase(account.getRole())) {
             // 🔹 Truy vấn theo user_id thay vì account object
             Optional<Customer> existingCustomer = customerRepository.findById(account.getUserId());
@@ -74,8 +75,32 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public List<Account> getAllCustomers() {
-        return accountRepository.findAllCustomers();
+    public List<Account> getAllAccounts() {
+        List<Account> accounts = accountRepository.findAll();
+        return accounts;
+    }
+    @Override
+    public Optional<Account> findById(Long userId) {
+        return accountRepository.findById(userId);
     }
 
+    @Override
+    public void update(Account account) {
+        accountRepository.save(account); // Cập nhật thông tin
+    }
+
+    @Override
+    public List<Account> getAccountsByBranch(Long userId) {
+        Optional<Account> account = accountRepository.findById(userId);
+        if (account.isPresent() && account.get().getBranch() != null) {
+            Long branchId = account.get().getBranch().getBranchId();
+            return accountRepository.findByBranch_BranchId(branchId);
+        }
+        return Collections.emptyList();
+    }
+
+    @Override
+    public long countStaffByBranch(Long branchId) {
+        return accountRepository.countStaffByBranch(branchId);
+    }
 }

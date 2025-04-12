@@ -34,6 +34,10 @@ public class Account {
     @Column (name = "avatar", unique = true)
     private String avatar;
 
+    @ManyToOne
+    @JoinColumn(name = "branch_id", referencedColumnName = "branch_id", foreignKey = @ForeignKey(name = "fk_branch"))
+    private Branch branch;
+
     public Account() {
     }
 
@@ -49,10 +53,11 @@ public class Account {
         this.address = address;
         this.rating = rating;
         this.avatar = avatar;
+        this.branch = branch;
     }
 
     // 🔹 Constructor đơn giản - Để đăng ký tài khoản với giá trị mặc định
-    public Account(String email, String password, String nameAccount) {
+    public Account(String email, String password, String nameAccount, Branch branch) {
         this.email = email;
         this.password = password;
         this.nameAccount = nameAccount;
@@ -61,6 +66,7 @@ public class Account {
         this.address = ""; // Trống để user tự điền sau
         this.rating = 0.0; // Mặc định
         this.avatar = "default.png"; // Mặc định
+        this.branch = branch;
     }
 
 
@@ -135,5 +141,13 @@ public class Account {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 }

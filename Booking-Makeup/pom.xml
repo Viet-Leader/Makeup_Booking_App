@@ -64,10 +64,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.crac</groupId>
-            <artifactId>crac</artifactId>
-            <version>1.5.0</version>  <!-- Kiểm tra phiên bản mới nhất -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>

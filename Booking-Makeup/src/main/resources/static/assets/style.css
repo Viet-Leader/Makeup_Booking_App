@@ -61,8 +61,8 @@ body {
     border-radius: 5px;
     font-weight: bold;
     transition: 0.3s;
-    
-    
+
+
 }
 .navbar .btn-login{
     min-width: 95px;
@@ -179,7 +179,7 @@ hr {
 }
 .hero .box-3{
     display: flex;
-    
+
 }
 .hero .box-3 .hero-btn {
     display: flex;
@@ -236,7 +236,7 @@ hr {
 .section-1 .body-1 h2 {
     color:#09090B;
     margin-left: auto;
-    margin-right: auto; 
+    margin-right: auto;
     margin-bottom: 40px;
     text-align: center;
     font-size: 40px;
@@ -263,12 +263,12 @@ hr {
 .section-1 .item-1 h3{
     font-size:20px;
     margin: 0 0 8px;
-} 
+}
 .section-1 .item-1 p{
     font-size: 16px;
     color: #4B5563;
 }
-.section-1 .body-2 .display-item { 
+.section-1 .body-2 .display-item {
     display: flex;
     margin-left: auto;
     margin-right: auto;
@@ -282,11 +282,11 @@ hr {
     gap:20px;
     margin-left: auto;
     margin-right: auto;
-    overflow: hidden; 
+    overflow: hidden;
 }
 .section-1 {
-     padding-top: 50px;
-     padding-bottom: 0;
+    padding-top: 50px;
+    padding-bottom: 0;
 }
 .section-1 .body-2 .ctn {
     display: flex;
@@ -296,7 +296,7 @@ hr {
     margin-top: 0;
 }
 .section-1 .ctn h2{
-    color:#09090B; 
+    color:#09090B;
     margin-bottom: 40px;
     font-size: 40px;
     font-weight: bold;
@@ -384,7 +384,7 @@ hr {
     font-weight: 60;
     font-size: 14px;
 }
-.section-1 .body-3 .display-item { 
+.section-1 .body-3 .display-item {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 cột có kích thước bằng nhau */
     grid-template-rows: repeat(2, auto);  /* 2 hàng có chiều cao tự động */
@@ -397,7 +397,7 @@ hr {
     padding: 0 0 32px;
     margin-top: auto;}
 .section-1 .body-3 .ctn-1 h2{
-    color:#09090B; 
+    color:#09090B;
     margin-bottom: 40px;
     font-size: 40px;
     font-weight: bold;
@@ -493,7 +493,7 @@ hr {
     background:#FFFF;
     border: 2px solid rgba(255,255,255, .2);
     box-shadow: 0 0 10px rgba(0,0,0, .2);
-} 
+}
 .section-2 .box-text .box-btn a {
     color: #5d4037 !important;
     text-decoration: none; /* Bỏ gạch chân nếu cần */
@@ -601,10 +601,9 @@ hr {
 }
    /*END SEVICES*/
    /*MAKEUP-ARTIST*/
-/* MAKEUP-ARTIST */
-.artists .content .content-hero {
-    font-size: 30px;
-    color: rgb(246, 71, 100);
+   .artists .content .content-hero{
+    font-size: 30px ;
+    color :rgb(246, 71, 100);
     background: #f4bbbb;
     padding: 10px;
     margin-bottom: 40px; /* Giảm khoảng cách xuống 40px */
@@ -740,7 +739,7 @@ hr {
     outline:none;
     margin: 30px 0;
 }
-.cld .container .wallpaper .box-cld {  
+.cld .container .wallpaper .box-cld {
     display:block;
     background: transparent;
     border: 2px solid rgba(255,255,255, .2);
@@ -779,7 +778,7 @@ hr {
     font-family:'Times New Roman', Times, serif;
 }
 .cld .container .wallpaper .box-cld .box-cld-3-display .tb-1 select {
-   width:100%; 
+    width:100%;
 }
 .cld .container .wallpaper .box-cld .box-cld-btn-1 {
     align-items: center;
@@ -806,8 +805,8 @@ hr {
 }
 .cld .container .wallpaper .box-cld .box-cld-btn button:hover{
     box-shadow: 10px 10px 5px 0 rgba(182,201,104,0.75);
--webkit-box-shadow: 10px 10px 5px 0 rgba(182,201,104,0.75);
--moz-box-shadow: 10px 10px 5px 0 rgba(182,201,104,0.75);
+    -webkit-box-shadow: 10px 10px 5px 0 rgba(182,201,104,0.75);
+    -moz-box-shadow: 10px 10px 5px 0 rgba(182,201,104,0.75);
 }
 /* End Đặt lịch*/
 /* login css */
@@ -1184,3 +1183,98 @@ hr {
     padding: 10px 30px;
 }
 /*ArtistDetails*/
+/* User Dropdown Styles */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.user-avatar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.user-info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 600;
+    margin: 0;
+    font-size: 14px;
+}
+
+.user-email {
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+}
+
+.dropdown-arrow {
+    font-size: 12px;
+    color: #666;
+    transition: transform 0.3s;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    min-width: 220px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    z-index: 1000;
+    padding: 8px 0;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.dropdown-item i {
+    width: 20px;
+    text-align: center;
+    color: #666;
+}
+
+.dropdown-item:hover {
+    background-color: #f5f5f5;
+    color: #000;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 8px 0;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.arrow-rotate {
+    transform: rotate(180deg);
+}
+>>>>>>> Stashed changes

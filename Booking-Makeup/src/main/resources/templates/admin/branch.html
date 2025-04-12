@@ -54,7 +54,7 @@
                 </div>
                 <div class="content">
                     <div class="branch-container">
-                        <table>
+                        <table id="branchTable">
                             <thead>
                                 <tr>
                                     <th>Tên chi nhánh</th>
@@ -64,36 +64,20 @@
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Chi nhánh Quận 1</strong></td>
-                                    <td><i class="fas fa-map-marker-alt"></i> 123 Lê Lợi, Q1, TP.HCM</td>
-                                    <td><i class="fas fa-phone"></i> 028-1234-5678</td>
-                                    <td><i class="far fa-clock"></i> 09:00 - 20:00</td>
+                                <tbody>
+                                <!-- Dynamically populate branches from the model -->
+                                <tr th:each="branch : ${branches}">
+                                    <td><strong th:text="${branch.name}"></strong></td>
+                                    <td><i class="fas fa-map-marker-alt"></i> <span th:text="${branch.address}"></span></td>
+                                    <td><i class="fas fa-phone"></i> <span th:text="${branch.phone}"></span></td>
+                                    <td><i class="far fa-clock"></i> <span th:text="${branch.openingHours}"></span> - <span th:text="${branch.closingTime}"></span></td>
                                     <td>
-                                        <button class="edit-btn">Sửa</button>
-                                        <button class="delete-btn">Xóa</button>
+                                        <button class="edit-btn" th:onclick="|editBranch(${branch.branchId})|">Sửa</button>
+                                        <button class="delete-btn" th:onclick="|deleteBranch(${branch.branchId})|">Xóa</button>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Chi nhánh Quận 3</strong></td>
-                                    <td><i class="fas fa-map-marker-alt"></i> 456 Võ Văn Tần, Q3, TP.HCM</td>
-                                    <td><i class="fas fa-phone"></i> 028-8765-4321</td>
-                                    <td><i class="far fa-clock"></i> 09:00 - 20:00</td>
-                                    <td>
-                                        <button class="edit-btn">Sửa</button>
-                                        <button class="delete-btn">Xóa</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Chi nhánh Quận 7</strong></td>
-                                    <td><i class="fas fa-map-marker-alt"></i> 789 Nguyễn Thị Thập, Q7, TP.HCM</td>
-                                    <td><i class="fas fa-phone"></i> 028-2468-1357</td>
-                                    <td><i class="far fa-clock"></i> 09:00 - 20:00</td>
-                                    <td>
-                                        <button class="edit-btn">Sửa</button>
-                                        <button class="delete-btn">Xóa</button>
-                                    </td>
+
+                                <tr th:if="${#lists.isEmpty(branches)}">
+                                    <td colspan="5">Không có chi nhánh nào để hiển thị.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -104,16 +88,12 @@
     </div>
     <div id="formPopup" class="form-popup hidden">
         <h2>Thêm chi nhánh</h2>
-        <label>Tên chi nhánh:</label>
-        <input type="text" id="branchName"><br>
-        <label>Địa chỉ:</label>
-        <input type="text" id="branchAddress"><br>
-        <label>Số điện thoại:</label>
-        <input type="text" id="branchPhone"><br>
-        <label>Giờ hoạt động:</label>
-        <input type="text" id="branchHours" value="09:00 - 20:00"><br>
-        <button class="btn btn-primary" onclick="addBranch()">Thêm</button>
-        <button class="btn btn-danger" onclick="closeForm()">Hủy</button>
+        <input type="text" id="branchName" placeholder="Tên chi nhánh">
+        <input type="text" id="branchAddress" placeholder="Địa chỉ">
+        <input type="text" id="branchPhone" placeholder="Số điện thoại">
+        <input type="text" id="branchHours" value="09:00 - 20:00" placeholder="Giờ mở cửa - đóng cửa">
+        <button onclick="addBranch()">Lưu</button>
+        <button onclick="closeForm()">Đóng</button>
     </div>
     <script src="/admin/js/script.js" defer></script>
 </body>

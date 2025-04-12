@@ -11,7 +11,7 @@ public class MakeupArtist {
     private Long makeupArtistId;
 
     @MapsId
-    @OneToOne(fetch = FetchType.EAGER, optional = false) // Đổi LAZY thành EAGER
+    @OneToOne(fetch = FetchType.LAZY, optional = false) // Đổi LAZY thành EAGER
     @JoinColumn(name = "user_id", nullable = false)
     private Account accountMakeup;
 
