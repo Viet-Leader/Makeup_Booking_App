@@ -21,11 +21,9 @@
             <div class="nav_menu">
                 <ul>
                     <li><div class="box_1_2_1"><a href="./#!"><i class="fa-solid fa-table-columns"></i> Tổng Quan</a></div></li>
-                    <li><div class="box_1_2_1"><a href="./staff.html"><i class="fa-regular fa-user"></i> Nhân viên</a></div></li>
-                    <li><div class="box_1_2_1"><a href="./branch.html"><i class="fa-solid fa-store"></i> Chi Nhánh</a></div></li>
-                    <li><div class="box_1_2_1"><a href="./service.html"><i class="fa-solid fa-server"></i> Dịch Vụ</a></div></li>
-                    <li><div class="box_1_2_1"><a href="./appointment.html"><i class="fa-solid fa-calendar"></i> Đặt Lịch</a></div></li>
-                    <li><div class="box_1_2_1"><a href="./setting.html"><i class="fa-solid fa-gear"></i> Cài Đặt</a></div></li>
+                    <li><div class="box_1_2_1"><a href="./index.html"><i class="fa-regular fa-user"></i> Trang Chủ</a></div></li>
+                    <li><div class="box_1_2_1"><a href="./infor.html"><i class="fa-solid fa-store"></i> Thông Tin Cá Nhân</a></div></li>
+                    <li><div class="box_1_2_1"><a href="./work_schedule.html"><i class="fa-solid fa-server"></i> Lịch Hẹn</a></div></li>
                 </ul>
             </div>
         </div>
@@ -55,7 +53,7 @@
                                 <div th:if="${artist != null}">
                                     <div class="infor-normal-1">
                                         <div class="avatar">
-                                            <img th:src="@{${artist.accountMakeup.avatar}}" alt="Avatar"/>
+                                            <img th:src="${artist.accountMakeup.avatar}" alt="Avatar"/>
                                             <h3 th:text="${artist.accountMakeup.nameAccount}">Mai Linh</h3>
                                         </div>
                                         <div class="rating">
@@ -86,7 +84,7 @@
                                 <!-- Form để gửi dữ liệu -->
                                 <form action="/makeup_artist/update" method="post">
                                     <!-- Ẩn ID để gửi về controller -->
-                                    <input type="hidden" name="id" th:value="${artist.id}"/>
+                                    <input type="hidden" name="id" th:value="${artist.makeupArtistId}"/>
 
                                     <!-- Nội dung Thông tin cá nhân -->
                                     <div class="tab-content active" id="personal-info">
