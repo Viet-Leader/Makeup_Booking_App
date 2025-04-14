@@ -9,10 +9,11 @@ public interface IAppointmentService {
     List<Appointment> getAllAppointments();
 
     boolean updateAppointmentStatus(Long appointmentId, String newStatus);
-
+    Appointment findAppointmentById(Long id);
     long getTotalActiveAppointments();
     void save(Appointment appointment);
     List<Appointment> getAppointmentsByBranch(Long branchId);
+
 }
 
 

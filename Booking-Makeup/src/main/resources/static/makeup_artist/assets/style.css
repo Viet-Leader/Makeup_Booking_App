@@ -60,10 +60,13 @@ body {
     text-align: center;
 }
 .btn-logout {
+    position: fixed; /* Cố định vị trí */
+    bottom: 8px; /* Khoảng cách từ dưới cùng */
+    left: 8px; /* Khoảng cách từ bên trái, điều chỉnh theo chiều rộng sidebar */
     width: 224px;
     height: 40px;
     border-radius: 7px;
-    padding:0px;
+    padding: 0px;
 }
 .btn-logout a {
     padding:10px 80px;

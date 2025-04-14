@@ -1,0 +1,9 @@
+<!-- File: admin/fragments/footer.html -->
+<div th:fragment="footer">
+    <footer class="admin-footer">
+        <div class="footer-content">
+            <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span> Booking Makeup Admin. All rights reserved.</p>
+            <p>Thiết kế bởi <strong>Nhóm T1</strong></p>
+        </div>
+    </footer>
+</div>

@@ -21,19 +21,14 @@ public class HomeController {
             model.addAttribute("accessDeniedMessage", message);
             session.removeAttribute("accessDeniedMessage"); // Xóa sau khi hiển thị
         }
-
+        // Truyền user từ session vào model
+        Object user = session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
         return "home";
     }
 
-
-    @GetMapping("/schedule")
-    public ModelAndView schedulePage(HttpSession session) {
-        // Kiểm tra xem session có chứa thông tin đăng nhập không
-        if (session.getAttribute("user") == null) {
-            return new ModelAndView("redirect:/login"); // Chuyển hướng nếu chưa đăng nhập
-        }
-        return new ModelAndView("redirect:/schedule.html/new"); // Hiển thị trang nếu đã đăng nhập
-    }
 
 
     @GetMapping("/register")

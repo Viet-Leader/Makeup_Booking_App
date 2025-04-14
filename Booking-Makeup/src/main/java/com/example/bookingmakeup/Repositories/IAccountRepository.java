@@ -15,4 +15,6 @@ public interface IAccountRepository extends JpaRepository<Account, Long> {
     List<Account> findByBranch_BranchId(Long branchId);
     @Query("SELECT COUNT(a) FROM Account a WHERE a.branch.branchId = :branchId AND a.role NOT IN ('OWNER', 'BRANCH_MANAGER')")
     Long countStaffByBranch(@Param("branchId") Long branchId);
+    @Query("SELECT a FROM Account a WHERE a.role = 'customer'")
+    List<Account> findAllCustomers();
 }

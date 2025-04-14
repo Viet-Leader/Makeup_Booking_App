@@ -1,0 +1,86 @@
+<header class="header" th:fragment="header">
+    <div class="content">
+        <div class="navbar">
+            <!--logo-->
+            <a href="/home">
+                <div class="logo-container">
+                    <img src="/image/logo.jpg" alt="logo" class="logo"/>
+                    <span class="brand-name">Booking-Makeup</span>
+                </div>
+            </a>
+            <!--navigation-->
+            <ul class="nav-menu">
+                <li><a href="/services">Dịch vụ</a></li>
+                <li><a href="/makeup-artists">Nghệ sĩ trang điểm</a></li>
+                <li><a href="/schedule">Đặt lịch</a></li>
+            </ul>
+
+            <!--action-->
+            <div class="action">
+                <!-- Khi chưa đăng nhập -->
+                <div id="auth-buttons" th:if="${session.user == null}">
+                    <a href="/register" class="action-link" id="register-btn">Đăng ký</a>
+                    <a href="/login" class="btn-login" id="login-btn">Đăng nhập</a>
+                </div>
+
+                <!-- Khi đã đăng nhập -->
+                <div id="user-info" th:if="${session.user != null}">
+                    <div class="user-dropdown">
+                        <div class="user-avatar-container" id="dropdown-toggle">
+                            <img th:src="${session.user.avatar}" alt="Avatar" class="avatar">
+                            <div class="user-info-text">
+                                <p class="user-name" th:text="${session.user.nameAccount}">Tên người dùng</p>
+                                <p class="user-email" th:text="${session.user.email}">Email</p>
+                            </div>
+                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                        <div class="dropdown-content" id="dropdown-content">
+                            <a th:if="${session.role == 'owner'}" th:href="@{/admin/index.html}" class="dropdown-item">
+                                <i class="fa-solid fa-gear"></i> Quản lý hệ thống
+                            </a>
+                            <a th:if="${session.role == 'branch_manager'}" th:href="@{/manager/index}" class="dropdown-item">
+                                <i class="fa-solid fa-gear"></i> Quản lý hệ thống
+                            </a>
+                            <a th:if="${session.role == 'makeup_artist'}" th:href="@{/makeup_artist/index.html}" class="dropdown-item">
+                                <i class="fa-solid fa-gear"></i> Quản lý hệ thống
+                            </a>
+                            <a th:if="${session.role == 'receptionist'}" th:href="@{/receptionist/home.html}" class="dropdown-item">
+                                <i class="fa-solid fa-gear"></i> Quản lý hệ thống
+                            </a>
+                            <a th:if="${session.role == 'customer'}" th:href="@{/customer/infor}" class="dropdown-item">
+                                <i class="fa-solid fa-user"></i> Thông tin cá nhân
+                            </a>
+
+                            <div class="dropdown-divider"></div>
+                            <a href="#!" id="logout-btn" class="dropdown-item">
+                                <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- section-->
+<div class="hero" th:fragment="section">
+    <div class="container">
+        <div class="box-0">
+            <div class="box-1">
+                <h1>Tỏa sáng cùng dịch vụ trang điểm chuyên nghiệp</h1>
+            </div>
+            <div class="box-2">
+                <p>Đặt lịch ngay hôm nay để trải nghiệm các chuyên gia trang điểm hàng đầu</p>
+            </div>
+            <div class="box-3">
+                <button class="hero-btn">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <a href="#">Đặt lịch ngay</a>
+                </button>
+                <button class="hero-btn-1">
+                    <a href="#">Xem dịch vụ</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
