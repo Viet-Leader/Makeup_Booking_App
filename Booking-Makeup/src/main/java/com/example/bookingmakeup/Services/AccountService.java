@@ -103,4 +103,8 @@ public class AccountService implements IAccountService {
     public long countStaffByBranch(Long branchId) {
         return accountRepository.countStaffByBranch(branchId);
     }
+    @Override
+    public List<Account> getAllCustomers() {
+        return accountRepository.findAllCustomers();
+    }
 }

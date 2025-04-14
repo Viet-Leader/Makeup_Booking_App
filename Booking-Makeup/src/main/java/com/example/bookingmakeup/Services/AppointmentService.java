@@ -31,6 +31,17 @@ public class AppointmentService implements IAppointmentService {
     public long getTotalActiveAppointments() {
         return appointmentRepository.countActiveAppointments();
     }
+
+    @Override
+    public void save(Appointment appointment) {
+
+    }
+
+    @Override
+    public List<Appointment> getAppointmentsByBranch(Long branchId) {
+        return List.of();
+    }
+
     @Override
     public Appointment findAppointmentById(Long id) {
         Optional<Appointment> appointmentOpt = appointmentRepository.findById(id);
@@ -57,8 +68,7 @@ public class AppointmentService implements IAppointmentService {
         return appointments;
     }
 
-    @Override
-    public void saveAppointment(Appointment appointment) {
-        appointmentRepository.save(appointment);
+    public List<Appointment> getAllAppointmentsWithDetails() {
+        return appointmentRepository.findAllWithDetails();
     }
 }

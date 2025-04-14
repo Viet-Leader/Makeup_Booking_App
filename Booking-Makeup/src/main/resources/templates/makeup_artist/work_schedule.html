@@ -1,39 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/reset.css"/>
-    <link rel="stylesheet" href="./assets/style.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Booking-Makeup-Admin-index</title>
+<head th:replace="/makeup_artist/fragments/head :: head">
 </head>
 <body>
 <div class="col_1_2">
-    <div class="box_1">
-        <div class="box_1_1">
-            <div class="banner">
-                <h2>GlamSchedule</h2>
-                <p>Admin user</p>
-            </div>
-        </div>
-        <div class="box_1_2">
-            <div class="nav_menu">
-                <ul>
-                    <li><div class="box_1_2_1"><a href="./#!"><i class="fa-solid fa-table-columns"></i> Tổng Quan</a></div></li>
-                    <li><div class="box_1_2_1"><a href="./index.html"><i class="fa-regular fa-user"></i> Trang Chủ</a></div></li>
-                    <li><div class="box_1_2_1"><a href="./infor.html"><i class="fa-solid fa-store"></i> Thông Tin Cá Nhân</a></div></li>
-                    <li><div class="box_1_2_1"><a href="./work_schedule.html"><i class="fa-solid fa-server"></i> Lịch Hẹn</a></div></li>
-                </ul>
-            </div>
-        </div>
-        <div class="box_1_3">
-            <button class="btn-logout">
-                <a href="#!">Đăng xuất</a>
-            </button>
-        </div>
-    </div>
+    <div th:replace="/makeup_artist/fragments/header :: header"></div>
 
     <!-- Box 2 -->
     <div class="box_2">
@@ -60,42 +31,40 @@
                                 <div class="day" data-date="2025-04-07">
                                     <p class="day-name">Thứ Hai</p>
                                     <p class="date">07</p>
-                                    <p class="status">Không có lịch</p>
+                                    <p class="appointment">Không có lịch</p>
                                 </div>
                                 <div class="day" data-date="2025-04-08">
                                     <p class="day-name">Thứ Ba</p>
                                     <p class="date">08</p>
-                                    <p class="status">Không có lịch</p>
+                                    <p class="appointment">Không có lịch</p>
                                 </div>
-                                <div class="day active" data-date="2025-04-09">
+                                <div class="day" data-date="2025-04-09">
                                     <p class="day-name">Thứ Tư</p>
                                     <p class="date">09</p>
-                                    <p class="time">09:00 - 17:00</p>
                                     <p class="appointment">0 lịch hẹn</p>
                                 </div>
                                 <div class="day" data-date="2025-04-10">
                                     <p class="day-name">Thứ Năm</p>
                                     <p class="date">10</p>
-                                    <p class="time">09:00 - 15:00</p>
                                     <p class="appointment">0 lịch hẹn</p>
                                 </div>
                                 <div class="day" data-date="2025-04-11">
                                     <p class="day-name">Thứ Sáu</p>
                                     <p class="date">11</p>
-                                    <p class="time">09:00 - 15:00</p>
                                     <p class="appointment">0 lịch hẹn</p>
                                 </div>
                                 <div class="day" data-date="2025-04-12">
                                     <p class="day-name">Thứ Bảy</p>
                                     <p class="date">12</p>
-                                    <p class="status">Không có lịch</p>
+                                    <p class="appointment">Không có lịch</p>
                                 </div>
                                 <div class="day" data-date="2025-04-13">
                                     <p class="day-name">Chủ Nhật</p>
                                     <p class="date">13</p>
-                                    <p class="status">Không có lịch</p>
+                                    <p class="appointment">Không có lịch</p>
                                 </div>
                             </div>
+
                             <!-- Chi tiết lịch hẹn -->
                             <div class="details">
                                 <table>
@@ -109,7 +78,8 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="appointment : ${appointments}">
+                                    <tr th:each="appointment : ${appointments}"
+                                        th:attr="data-date=${#dates.format(appointment.appointmentDate, 'yyyy-MM-dd')}">
                                         <td th:text="${appointment.customer.nameAccount}">Tên khách</td>
                                         <td th:text="${appointment.service.name}">Dịch vụ</td>
                                         <td th:text="${appointment.branch.name}">Chi nhánh</td>
@@ -117,7 +87,6 @@
                                             th:attr="data-date=${#dates.format(appointment.appointmentDate, 'yyyy-MM-dd')}">
                                             Ngày & giờ
                                         </td>
-
                                         <td th:text="${appointment.status}">Trạng thái</td>
                                     </tr>
                                     <tr th:if="${#lists.isEmpty(appointments)}">
@@ -135,7 +104,5 @@
 </div>
 
 <script src="./js/script.js" defer></script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92db90c88e55b001',t:'MTc0NDIxODA3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-
 </body>
 </html>

@@ -37,7 +37,6 @@ public class AdminController {
     @GetMapping("/index.html")
     public String showAdminDashboard(Model model) {
         long totalStaff = branchStaffService.getTotalBranchesStaff();
-        long totalStaff = branchStaffService.getTotalBranchesStaff();
         long totalBranches = branchService.getTotalBranches();
         long totalServices = serviceMakeUpService.getTotalSevice();
         long totalAppointments = appointmentService.getTotalActiveAppointments();
