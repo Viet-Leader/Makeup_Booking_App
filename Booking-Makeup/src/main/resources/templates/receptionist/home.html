@@ -1,39 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/receptionist/assets/style.css"/>
-    <link rel="stylesheet" href="/receptionist/assets/reset.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
-    <title>Booking-Makeup-Receptionist-index</title>
-</head>
+<head th:replace="receptionist/fragments/head :: head(Booking-Makeup-Admin-index)">
 <body>
 <div class="col_1_2">
     <!-- Sidebar -->
-    <div class="box_1">
-        <div class="box_1_1">
-            <div class="banner">
-                <h2>Receptionist panel</h2>
-                <p>Receptionist user</p>
-            </div>
-        </div>
-        <div class="box_1_2">
-            <div class="nav_menu">
-                <ul>
-                    <li><div class="box_1_2_1"><a th:href="@{/receptionist/home.html}"><i class="fa-solid fa-table-columns"></i> Tổng Quan</a></div></li>
-                    <li><div class="box_1_2_1"><a th:href="@{/receptionist/customer.html}"><i class="fa-regular fa-user"></i> Khách Hàng</a></div></li>
-                    <li><div class="box_1_2_1"><a th:href="@{/receptionist/checkin.html}"><i class="fa-solid fa-store"></i> Check-In</a></div></li>
-                    <li><div class="box_1_2_1"><a th:href="@{/receptionist/appointment.html}"><i class="fa-solid fa-calendar"></i> Đặt Lịch</a></div></li>
-                </ul>
-            </div>
-        </div>
-        <div class="box_1_3">
-            <button class="btn-logout">
-                <a href="#!">Đăng xuất</a>
-            </button>
-        </div>
-    </div>
+    <div th:replace="receptionist/fragments/header :: header"></div>
 
     <!-- Nội dung chính -->
     <div class="box_2">
@@ -118,12 +89,18 @@
                                   th:text="${#temporals.format(appt.appointmentDate.atZone(T(java.time.ZoneId).systemDefault()).plusHours(1), 'HH:mm')}"></span>
                         </td>
                         <td th:text="${appt.status}">Trạng thái</td>
-                        <td th:text="${appt.service.price + appt.makeupArtist.price}"></td>
+                        <td class="price-cell"
+                            th:text="${#numbers.formatDecimal(
+                                        (appt.makeupArtist != null ? appt.makeupArtist.price : 0) +
+                                        (appt.service != null ? appt.service.price : 0),
+                                        0, 'COMMA', 0, 'POINT')}">
+                        </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <div th:replace="receptionist/fragments/footer :: footer"></div>
     </div>
 </div>
 <script src="/admin/js/script.js" defer></script>

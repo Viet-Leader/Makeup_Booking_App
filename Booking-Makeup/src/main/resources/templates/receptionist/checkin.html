@@ -1,48 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/style.css"/>
-    <link rel="stylesheet" href="./assets/reset.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
-    <title>Check-In Khách Hàng</title>
-</head>
+<head th:replace="receptionist/fragments/head :: head(Booking-Makeup-Admin-index)">
 <body>
 <div class="col_1_2">
     <!-- Sidebar -->
-    <div class="box_1">
-            <div class="box_1_1">
-                <div class="banner">
-                    <h2>Receptionist panel</h2>
-                    <p>Receptionist user</p>
-                </div>
-            </div>
-            <div class="box_1_2">
-                <div class="nav_menu">
-                    <ul>
-                        <li><div class="box_1_2_1"><a href="home.html"><i class="fa-solid fa-table-columns"></i> Tổng Quan</a></div></li>
-                        <li><div class="box_1_2_1"><a href="customer.html"><i class="fa-regular fa-user"></i> Khách Hàng</a></div></li>
-                        <li><div class="box_1_2_1 active"><a href="checkin.html"><i class="fa-solid fa-store"></i> Check-In</a></div></li>
-                        <li><div class="box_1_2_1"><a href="./appointment.html"><i class="fa-solid fa-calendar"></i> Đặt Lịch</a></div></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="box_1_3">
-                <button class="btn-logout">
-                    <a href="#!">Đăng xuất</a>
-                </button>
-            </div>
-    </div>
+    <div th:replace="receptionist/fragments/header :: header"></div>
 
     <!-- Nội dung Check-In -->
     <div class="box_2">
         <div class="box_2_1">
             <div class="header_row">
-                <h1>Danh sách Check-In</h1>
+                <h1>Receptionist Dashboard</h1>
             </div>
         </div>
         <div class="box_2_2">
+            <div class="content">
+                <h1>Danh Sách Check-In</h1>
+            </div>
             <div class="content">
                 <table class="customer-table">
                     <thead>
@@ -55,26 +29,36 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="appointment : ${appointments}">
+                    <tr th:each="appointment : ${appointments}" th:data-date="${appointment.appointmentDate}">
                         <td th:text="${appointment.customer.nameAccount}"></td>
                         <td th:text="${appointment.customer.phone}"></td>
-                        <td th:text="${appointment.appointmentDate}"></td>
+                        <td th:text="${#temporals.format(appointment.appointmentDate, 'dd/MM/yyyy - HH:mm')}"></td>
                         <td>
-                            <span th:id="'status-' + ${appointment.appointmentId}" th:text="${appointment.status}">STATUS</span>
+                            <span th:class="'status ' + ${appointment.status}">
+                                <span th:switch="${appointment.status}">
+                                    <span th:case="'pending'">Chờ xác nhận</span>
+                                    <span th:case="'confirmed'">Đã xác nhận</span>
+                                    <span th:case="'completed'">Hoàn thành</span>
+                                    <span th:case="'cancelled'">Đã hủy</span>
+                                    <span th:case="*">[[${appointment.status}]]</span>
+                                </span>
+                            </span>
                         </td>
                         <td>
                             <button th:id="'btn-' + ${appointment.appointmentId}"
-                                    th:disabled="${appointment.status == 'Confirm'}"
+                                    th:disabled="${appointment.status == 'confirmed'}"
                                     th:onclick="|checkInAppointment(${appointment.appointmentId})|"
                                     class="btn-checkin">
                                 <span th:text="${appointment.status == 'Đã Check-In' ? 'Đã Check-In' : 'Check-In'}"></span>
                             </button>
                         </td>
+
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <div th:replace="receptionist/fragments/footer :: footer"></div>
     </div>
 </div>
 
@@ -86,15 +70,15 @@
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: `appointmentId=${appointmentId}&status=Confirm`
+            body: `appointmentId=${appointmentId}&status=confirmed`
         })
             .then(response => response.text())
             .then(message => {
                 alert(message);
-                document.getElementById(`status-${appointmentId}`).innerText = 'Confirm';
+                document.getElementById(`status-${appointmentId}`).innerText = 'confirmed';
                 const button = document.getElementById(`btn-${appointmentId}`);
                 button.disabled = true;
-                button.innerHTML = 'Confirm';
+                button.innerHTML = 'confirmed';
             })
             .catch(err => {
                 console.error('Lỗi:', err);
