@@ -53,7 +53,8 @@
                 <p th:text="${loggedInAccount.nameAccount}"></p>
             </div>
             <div class="info">
-                <form id="if" action="/customer/updateAccount" method="post">
+                <form id="if" action="/customer/updateAccount" method="post"
+                      onsubmit="return confirm('Bạn có chắc chắn muốn cập nhật thông tin không?');">
                     <input type="hidden" name="userId" th:value="${loggedInAccount.userId}">
                     <p>Email</p>
                     <input id="email" type="text" placeholder="email" th:value="${loggedInAccount.email}" readonly />
@@ -94,10 +95,11 @@
                             </span>
                     </td>
                     <td th:text="${#dates.format(appointment.appointmentDate, 'dd/MM/yyyy HH:mm')}">Thời gian</td>
-                    <td th:if="${appointment.status != 'cancelled'}">
+                    <td th:if="${appointment.status != 'cancelled' and appointment.status != 'completed'}">
                         <button type="button" th:attr="onclick=|confirmCancel(${appointment.appointmentId})|">Hủy</button>
                     </td>
-                    <td th:if="${appointment.status == 'cancelled'}">-</td>
+
+                    <td th:if="${appointment.status == 'cancelled' or appointment.status == 'completed'}">-</td>
                 </tr>
             </table>
         </div>

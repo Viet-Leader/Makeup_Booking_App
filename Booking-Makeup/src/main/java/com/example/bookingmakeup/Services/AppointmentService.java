@@ -39,7 +39,7 @@ public class AppointmentService implements IAppointmentService {
 
     @Override
     public List<Appointment> getAppointmentsByBranch(Long branchId) {
-        return List.of();
+        return appointmentRepository.findByBranch_BranchId(branchId);
     }
 
     @Override
