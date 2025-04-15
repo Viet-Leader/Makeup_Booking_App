@@ -44,7 +44,7 @@ public class ReceptionistController {
 
         // Đã Check-In
         long checkedInCount = appointments.stream()
-                .filter(a -> a.getStatus().equalsIgnoreCase("Confirm") || a.getStatus().equalsIgnoreCase("Đã Check-In"))
+                .filter(a -> a.getStatus().equalsIgnoreCase("confirmed") || a.getStatus().equalsIgnoreCase("Đã Check-In"))
                 .count();
         model.addAttribute("checkedInCount", checkedInCount);
 
