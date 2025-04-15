@@ -20,4 +20,5 @@ public interface IAppointmentRepository extends JpaRepository<Appointment, Long>
             "JOIN FETCH a.service " +
             "JOIN FETCH a.branch")
     List<Appointment> findAllWithDetails();
+    List<Appointment> findByBranch_BranchId(Long branchId);
 }

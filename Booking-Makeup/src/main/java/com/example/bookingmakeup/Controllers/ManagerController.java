@@ -2,7 +2,6 @@ package com.example.bookingmakeup.Controllers;
 
 import com.example.bookingmakeup.Models.Account;
 import com.example.bookingmakeup.Models.Appointment;
-import com.example.bookingmakeup.Models.MakeupArtist;
 import com.example.bookingmakeup.Services.IAccountService;
 import com.example.bookingmakeup.Services.IAppointmentService;
 import jakarta.servlet.http.HttpSession;
@@ -12,72 +11,46 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
+
 @Controller
 @RequestMapping("/manager")
 public class ManagerController {
+
     @Autowired
     private IAccountService accountService;
+
     @Autowired
     private IAppointmentService appointmentService;
 
-    private boolean hasPermission(HttpSession session) {
-        String role = (String) session.getAttribute("role");
-
-        if (role != null) {
-            boolean hasAccess = "owner".equals(role) || "branch_manager".equals(role);
-            if (!hasAccess) {
-                session.setAttribute("accessDeniedMessage", "Bạn không có quyền truy cập vào trang này!");
-            }
-            return hasAccess;
-        }
-
-        return false; // Nếu không có role, từ chối quyền truy cập
-    }
-
     @GetMapping("")
-    public String mainPage(HttpSession session) {
-        if (!hasPermission(session)) {
-            return "redirect:/home"; // ⬅ Chuyển hướng về /home nếu không có quyền
-        }
-
+    public String mainPage() {
         return "manager/index";
     }
 
     @GetMapping("/index")
     public String indexPage(Model model, HttpSession session) {
-        if (!hasPermission(session)) {
-            return "redirect:/home"; // ⬅ Chuyển hướng về /home nếu không có quyền
-        }
-        // Lấy userId từ session
         Long userId = (Long) session.getAttribute("userId");
-
         if (userId == null) {
-            return "redirect:/login"; // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            return "redirect:/login";
         }
 
-        // Lấy thông tin tài khoản từ userId
         Account account = accountService.findById(userId).orElse(null);
 
         if (account == null || account.getBranch() == null) {
             model.addAttribute("totalStaffs", 0);
         } else {
             Long branchId = account.getBranch().getBranchId();
-            System.out.println("Branch ID: " + branchId); // Kiểm tra branchId
-            model.addAttribute("totalStaffs", accountService.countStaffByBranch(branchId)); // Đếm nhân viên
+            model.addAttribute("totalStaffs", accountService.countStaffByBranch(branchId));
         }
 
-        // Lấy tổng số lịch hẹn
         model.addAttribute("totalAppointments", appointmentService.getTotalActiveAppointments());
-
-        return "manager/index"; // Trả về trang Thymeleaf
+        return "manager/index";
     }
+
     @GetMapping("/appointment")
     public String appointmentPage(Model model, HttpSession session) {
-        if (!hasPermission(session)) {
-            return "redirect:/home";
-        }
+
 
         // Lấy userId từ session
         Long userId = (Long) session.getAttribute("userId");
@@ -102,66 +75,43 @@ public class ManagerController {
             Hibernate.initialize(appointment.getMakeupArtist());
             Hibernate.initialize(appointment.getService());
         });
-
+        System.out.println(appointments.size());
         model.addAttribute("appointments", appointments);
         return "manager/appointment";
     }
+
     @GetMapping("/staff")
     public String staffPage(Model model, HttpSession session) {
-        if (!hasPermission(session)) {
-            return "redirect:/home"; // ⬅ Chuyển hướng về /home nếu không có quyền
-        }
-        // Lấy userId từ session
         Long userId = (Long) session.getAttribute("userId");
-
         if (userId == null) {
-            return "redirect:/login"; // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            return "redirect:/login";
         }
 
-        // Lấy thông tin tài khoản đăng nhập
         Account loggedInAccount = accountService.findById(userId).orElse(null);
-
         if (loggedInAccount == null || loggedInAccount.getBranch() == null) {
-            return "redirect:/login"; // Nếu không tìm thấy tài khoản hoặc không có branch_id
+            return "redirect:/login";
         }
 
-        // Lấy danh sách nhân viên cùng chi nhánh
         List<Account> staffList = accountService.getAccountsByBranch(userId);
-
-        // Thêm danh sách nhân viên vào model để hiển thị trên trang staff.html
         model.addAttribute("staffList", staffList);
-
         return "manager/staff";
     }
 
     @GetMapping("/infor")
     public String getManagerInfor(Model model, HttpSession session) {
-        if (!hasPermission(session)) {
-            return "redirect:/home"; // ⬅ Chuyển hướng về /home nếu không có quyền
-        }
-        // Lấy userId từ session
         Long userId = (Long) session.getAttribute("userId");
-        System.out.println("DEBUG - userId trong session: " + userId);
-
         if (userId == null) {
-            System.out.println(" Không tìm thấy userId, chuyển về login!");
-            return "redirect:/login"; // Nếu chưa đăng nhập, yêu cầu đăng nhập lại
+            return "redirect:/login";
         }
 
-        // Tìm kiếm tài khoản theo userId
         Account loggedInAccount = accountService.findById(userId).orElse(null);
-        System.out.println(" DEBUG - Tài khoản tìm thấy: " + loggedInAccount);
-
         if (loggedInAccount == null) {
-            System.out.println(" Không tìm thấy tài khoản với userId = " + userId);
-            return "redirect:/login"; // Nếu tài khoản không tồn tại, quay về login
+            return "redirect:/login";
         }
 
         model.addAttribute("loggedInAccount", loggedInAccount);
         return "manager/infor";
     }
-
-    //  Xử lý cập nhật tài khoản
 
     @PostMapping("/updateAccount")
     public String updateAccount(@RequestParam Long userId,
@@ -170,16 +120,17 @@ public class ManagerController {
                                 @RequestParam String address) {
         Account account = accountService.findById(userId).orElse(null);
         if (account == null) {
-            return "redirect:/manager/infor"; // Không tìm thấy tài khoản
+            return "redirect:/manager/infor";
         }
 
         account.setNameAccount(nameAccount);
         account.setPhone(phone);
         account.setAddress(address);
-        accountService.update(account); // Cập nhật tài khoản
+        accountService.update(account);
 
-        return "redirect:/manager/infor?success=true"; // Quay lại trang với thông báo thành công
+        return "redirect:/manager/infor?success=true";
     }
+
     @PostMapping("/update-status")
     @ResponseBody
     public String updateAppointmentStatus(@RequestParam Long appointmentId, @RequestParam String status) {

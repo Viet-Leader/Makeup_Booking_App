@@ -178,14 +178,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Gắn sự kiện cho các nút trong modal
     confirmBtn.addEventListener("click", function() {
+        const confirmed = confirm("Bạn có chắc chắn muốn xác nhận lịch hẹn này?");
+        if (!confirmed) return;
         updateAppointmentStatus("confirmed"); // Chuyển sang "Đã xác nhận"
     });
 
     cancelBtn.addEventListener("click", function() {
+        const confirmed = confirm("Bạn có chắc chắn muốn hủy lịch hẹn này?");
+        if (!confirmed) return;
         updateAppointmentStatus("cancelled"); // Chuyển sang "Đã hủy"
     });
 
     completeBtn.addEventListener("click", function() {
+        const confirmed = confirm("Bạn có chắc chắn muốn đánh dấu lịch hẹn là hoàn thành?");
+        if (!confirmed) return;
         updateAppointmentStatus("completed"); // Chuyển sang "Hoàn thành"
     });
 });
